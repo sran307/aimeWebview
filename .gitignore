@@ -1,0 +1,81 @@
+# ===================================
+# Python
+# ===================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ===================================
+# Django
+# ===================================
+# SQLite database
+db.sqlite3
+# Django static and media (collected files)
+staticfiles/
+media/
+
+# Secret or local settings
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.mo
+local_settings.py
+settings_local.py
+
+# ===================================
+# IDE / Editor
+# ===================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# ===================================
+# OS-specific
+# ===================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.nfs*
+
+# ===================================
+# Node / Frontend
+# (if you use npm/yarn for frontend assets)
+# ===================================
+node_modules/
+dist/
+build/
+
+# ===================================
+# Pytest / Coverage / Build
+# ===================================
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+pytest_cache/
+__pypackages__/

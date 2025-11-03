@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development settings
+*.sqlite3
+*.db
+
+# Django migration files
+*.pyc
+*.pyo
+__pycache__
+db.sqlite3
+db.sqlite3-journal
+*.pyc
+*.pyo
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Virtual environment
+venv/
+env/
+/.venv/
+/.env/
+
+# IDE files
+*.idea/
+.vscode/
+
+# Compiled Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore pipenv virtual environment
+Pipfile
+Pipfile.lock
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+
+# Ignore test database
+*.db
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore credentials
+*.secret
+
+# Ignore configuration files
+*.cfg
+
+# Ignore system files
+.DS_Store
+Thumbs.db

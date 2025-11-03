@@ -1,0 +1,1435 @@
+{
+    "props": {
+        "pageProps": {
+            "topMktCap": [
+                {
+                    "name": "Reliance Industries Ltd",
+                    "ticker": "RELIANCE",
+                    "sid": "RELI",
+                    "slug": "/stocks/reliance-industries-RELI",
+                    "marketCap": 2002982.9969958
+                },
+                {
+                    "name": "Tata Consultancy Services Ltd",
+                    "ticker": "TCS",
+                    "sid": "TCS",
+                    "slug": "/stocks/tata-consultancy-services-TCS",
+                    "marketCap": 1392782.7900541
+                },
+                {
+                    "name": "HDFC Bank Ltd",
+                    "ticker": "HDFCBANK",
+                    "sid": "HDBK",
+                    "slug": "/stocks/hdfc-bank-HDBK",
+                    "marketCap": 1153545.7023080802
+                },
+                {
+                    "name": "Bharti Airtel Ltd",
+                    "ticker": "BHARTIARTL",
+                    "sid": "BRTI",
+                    "slug": "/stocks/bharti-airtel-BRTI",
+                    "marketCap": 826210.6976987099
+                }
+            ],
+            "performers": {
+                "top": [
+                    {
+                        "sid": "MUSI",
+                        "returns": 478.85714285714283,
+                        "lp": 101.3,
+                        "slug": "/stocks/music-broadcast-MUSI",
+                        "ticker": "RADIOCITY",
+                        "name": "Music Broadcast Ltd"
+                    },
+                    {
+                        "sid": "INTEA",
+                        "returns": 58.26957033549149,
+                        "lp": 26.89,
+                        "slug": "/stocks/intec-capital-INTEA",
+                        "ticker": "INTECCAP",
+                        "name": "Intec Capital Ltd"
+                    },
+                    {
+                        "sid": "CORA",
+                        "returns": 37.38342309207936,
+                        "lp": 522.95,
+                        "slug": "/stocks/coral-laboratories-CORA",
+                        "ticker": "CORALAB",
+                        "name": "Coral Laboratories Ltd"
+                    },
+                    {
+                        "sid": "INDU",
+                        "returns": 33.03834808259588,
+                        "lp": 22.55,
+                        "slug": "/stocks/indus-finance-INDU",
+                        "ticker": "INDUSFINL",
+                        "name": "Indus Finance Ltd"
+                    }
+                ],
+                "bottom": [
+                    {
+                        "sid": "AARU",
+                        "returns": -70.4968944099379,
+                        "lp": 199.5,
+                        "slug": "/stocks/aarti-surfactants-AARU",
+                        "ticker": "AARTISURF",
+                        "name": "Aarti Surfactants Ltd"
+                    },
+                    {
+                        "sid": "AMK",
+                        "returns": -26.36412749864937,
+                        "lp": 68.15,
+                        "slug": "/stocks/amkay-products-AMK",
+                        "ticker": "AMKAY",
+                        "name": "Amkay Products Ltd"
+                    },
+                    {
+                        "sid": "SSI",
+                        "returns": -25.08613835144447,
+                        "lp": 56.53,
+                        "slug": "/stocks/sai-swami-metals-and-alloys-SSI",
+                        "ticker": "SAI",
+                        "name": "Sai Swami Metals and Alloys Ltd"
+                    },
+                    {
+                        "sid": "TECHK",
+                        "returns": -19.650735294117645,
+                        "lp": 218.55,
+                        "slug": "/stocks/techknowgreen-solutions-TECHK",
+                        "ticker": "TECHKGREEN",
+                        "name": "Techknowgreen Solutions Ltd"
+                    }
+                ]
+            },
+            "index": [
+                {
+                    "name": "ABB India Ltd",
+                    "ticker": "ABB",
+                    "sid": "ABB",
+                    "slug": "/stocks/abb-india-ABB"
+                },
+                {
+                    "name": "Adani Energy Solutions Ltd",
+                    "ticker": "ADANIENSOL",
+                    "sid": "ADAI",
+                    "slug": "/stocks/adani-transmission-ADAI"
+                },
+                {
+                    "name": "Adani Enterprises Ltd",
+                    "ticker": "ADANIENT",
+                    "sid": "ADEL",
+                    "slug": "/stocks/adani-enterprises-ADEL"
+                },
+                {
+                    "name": "Adani Green Energy Ltd",
+                    "ticker": "ADANIGREEN",
+                    "sid": "ADNA",
+                    "slug": "/stocks/adani-green-energy-ADNA"
+                },
+                {
+                    "name": "Adani Ports and Special Economic Zone Ltd",
+                    "ticker": "ADANIPORTS",
+                    "sid": "APSE",
+                    "slug": "/stocks/adani-ports-and-special-economic-zone-APSE"
+                },
+                {
+                    "name": "Adani Power Ltd",
+                    "ticker": "ADANIPOWER",
+                    "sid": "ADAN",
+                    "slug": "/stocks/adani-power-ADAN"
+                },
+                {
+                    "name": "Adani Total Gas Ltd",
+                    "ticker": "ATGL",
+                    "sid": "ADAG",
+                    "slug": "/stocks/adani-gas-ADAG"
+                },
+                {
+                    "name": "Ambuja Cements Ltd",
+                    "ticker": "AMBUJACEM",
+                    "sid": "ABUJ",
+                    "slug": "/stocks/ambuja-cements-ABUJ"
+                },
+                {
+                    "name": "Asian Paints Ltd",
+                    "ticker": "ASIANPAINT",
+                    "sid": "ASPN",
+                    "slug": "/stocks/asian-paints-ASPN"
+                },
+                {
+                    "name": "Avenue Supermarts Ltd",
+                    "ticker": "DMART",
+                    "sid": "AVEU",
+                    "slug": "/stocks/avenue-supermarts-AVEU"
+                },
+                {
+                    "name": "Axis Bank Ltd",
+                    "ticker": "AXISBANK",
+                    "sid": "AXBK",
+                    "slug": "/stocks/axis-bank-AXBK"
+                },
+                {
+                    "name": "Bajaj Auto Ltd",
+                    "ticker": "BAJAJ-AUTO",
+                    "sid": "BAJA",
+                    "slug": "/stocks/bajaj-auto-BAJA"
+                },
+                {
+                    "name": "Bajaj Finance Ltd",
+                    "ticker": "BAJFINANCE",
+                    "sid": "BJFN",
+                    "slug": "/stocks/bajaj-finance-BJFN"
+                },
+                {
+                    "name": "Bajaj Finserv Ltd",
+                    "ticker": "BAJAJFINSV",
+                    "sid": "BJFS",
+                    "slug": "/stocks/bajaj-finserv-BJFS"
+                },
+                {
+                    "name": "Bank of Baroda Ltd",
+                    "ticker": "BANKBARODA",
+                    "sid": "BOB",
+                    "slug": "/stocks/bank-of-baroda-BOB"
+                },
+                {
+                    "name": "Bharat Electronics Ltd",
+                    "ticker": "BEL",
+                    "sid": "BAJE",
+                    "slug": "/stocks/bharat-electronics-BAJE"
+                },
+                {
+                    "name": "Bharat Heavy Electricals Ltd",
+                    "ticker": "BHEL",
+                    "sid": "BHEL",
+                    "slug": "/stocks/bharat-heavy-electricals-BHEL"
+                },
+                {
+                    "name": "Bharat Petroleum Corporation Ltd",
+                    "ticker": "BPCL",
+                    "sid": "BPCL",
+                    "slug": "/stocks/bharat-petroleum-corporation-BPCL"
+                },
+                {
+                    "name": "Bharti Airtel Ltd",
+                    "ticker": "BHARTIARTL",
+                    "sid": "BRTI",
+                    "slug": "/stocks/bharti-airtel-BRTI"
+                },
+                {
+                    "name": "Bosch Ltd",
+                    "ticker": "BOSCHLTD",
+                    "sid": "BOSH",
+                    "slug": "/stocks/bosch-BOSH"
+                },
+                {
+                    "name": "Britannia Industries Ltd",
+                    "ticker": "BRITANNIA",
+                    "sid": "BRIT",
+                    "slug": "/stocks/britannia-industries-BRIT"
+                },
+                {
+                    "name": "CG Power and Industrial Solutions Ltd",
+                    "ticker": "CGPOWER",
+                    "sid": "CGPO",
+                    "slug": "/stocks/cg-power-and-industrial-solutions-CGPO"
+                },
+                {
+                    "name": "Canara Bank Ltd",
+                    "ticker": "CANBK",
+                    "sid": "CNBK",
+                    "slug": "/stocks/canara-bank-CNBK"
+                },
+                {
+                    "name": "Cholamandalam Investment and Finance Company Ltd",
+                    "ticker": "CHOLAFIN",
+                    "sid": "CHLA",
+                    "slug": "/stocks/cholamandalam-investment-and-finance-company-CHLA"
+                },
+                {
+                    "name": "Cipla Ltd",
+                    "ticker": "CIPLA",
+                    "sid": "CIPL",
+                    "slug": "/stocks/cipla-CIPL"
+                },
+                {
+                    "name": "Coal India Ltd",
+                    "ticker": "COALINDIA",
+                    "sid": "COAL",
+                    "slug": "/stocks/coal-india-COAL"
+                },
+                {
+                    "name": "Cummins India Ltd",
+                    "ticker": "CUMMINSIND",
+                    "sid": "CUMM",
+                    "slug": "/stocks/cummins-india-CUMM"
+                },
+                {
+                    "name": "DLF Ltd",
+                    "ticker": "DLF",
+                    "sid": "DLF",
+                    "slug": "/stocks/dlf-DLF"
+                },
+                {
+                    "name": "Dabur India Ltd",
+                    "ticker": "DABUR",
+                    "sid": "DABU",
+                    "slug": "/stocks/dabur-india-DABU"
+                },
+                {
+                    "name": "Divi"s Laboratories Ltd", "ticker": "DIVISLAB", "sid": "DIVI", "slug": "/stocks/divis-laboratories-DIVI"}, {"name": "Dr Reddy"s Laboratories Ltd",
+                    "ticker": "DRREDDY",
+                    "sid": "REDY",
+                    "slug": "/stocks/drreddys-laboratories-REDY"
+                },
+                {
+                    "name": "Eicher Motors Ltd",
+                    "ticker": "EICHERMOT",
+                    "sid": "EICH",
+                    "slug": "/stocks/eicher-motors-EICH"
+                },
+                {
+                    "name": "Gail (India) Ltd",
+                    "ticker": "GAIL",
+                    "sid": "GAIL",
+                    "slug": "/stocks/gail-india-GAIL"
+                },
+                {
+                    "name": "Godrej Consumer Products Ltd",
+                    "ticker": "GODREJCP",
+                    "sid": "GOCP",
+                    "slug": "/stocks/godrej-consumer-products-GOCP"
+                },
+                {
+                    "name": "Grasim Industries Ltd",
+                    "ticker": "GRASIM",
+                    "sid": "GRAS",
+                    "slug": "/stocks/grasim-industries-GRAS"
+                },
+                {
+                    "name": "HCL Technologies Ltd",
+                    "ticker": "HCLTECH",
+                    "sid": "HCLT",
+                    "slug": "/stocks/hcl-technologies-HCLT"
+                },
+                {
+                    "name": "HDFC Bank Ltd",
+                    "ticker": "HDFCBANK",
+                    "sid": "HDBK",
+                    "slug": "/stocks/hdfc-bank-HDBK"
+                },
+                {
+                    "name": "HDFC Life Insurance Company Ltd",
+                    "ticker": "HDFCLIFE",
+                    "sid": "HDFL",
+                    "slug": "/stocks/hdfc-life-insurance-company-HDFL"
+                },
+                {
+                    "name": "Havells India Ltd",
+                    "ticker": "HAVELLS",
+                    "sid": "HVEL",
+                    "slug": "/stocks/havells-india-HVEL"
+                },
+                {
+                    "name": "Hero MotoCorp Ltd",
+                    "ticker": "HEROMOTOCO",
+                    "sid": "HROM",
+                    "slug": "/stocks/hero-motocorp-HROM"
+                },
+                {
+                    "name": "Hindalco Industries Ltd",
+                    "ticker": "HINDALCO",
+                    "sid": "HALC",
+                    "slug": "/stocks/hindalco-industries-HALC"
+                },
+                {
+                    "name": "Hindustan Aeronautics Ltd",
+                    "ticker": "HAL",
+                    "sid": "HIAE",
+                    "slug": "/stocks/hindustan-aeronautics-HIAE"
+                },
+                {
+                    "name": "Hindustan Unilever Ltd",
+                    "ticker": "HINDUNILVR",
+                    "sid": "HLL",
+                    "slug": "/stocks/hindustan-unilever-HLL"
+                },
+                {
+                    "name": "Hindustan Zinc Ltd",
+                    "ticker": "HINDZINC",
+                    "sid": "HZNC",
+                    "slug": "/stocks/hindustan-zinc-HZNC"
+                },
+                {
+                    "name": "ICICI Bank Ltd",
+                    "ticker": "ICICIBANK",
+                    "sid": "ICBK",
+                    "slug": "/stocks/icici-bank-ICBK"
+                },
+                {
+                    "name": "IDBI Bank Ltd",
+                    "ticker": "IDBI",
+                    "sid": "IDBI",
+                    "slug": "/stocks/idbi-bank-IDBI"
+                },
+                {
+                    "name": "ITC Ltd",
+                    "ticker": "ITC",
+                    "sid": "ITC",
+                    "slug": "/stocks/itc-ITC"
+                },
+                {
+                    "name": "Indian Oil Corporation Ltd",
+                    "ticker": "IOC",
+                    "sid": "IOC",
+                    "slug": "/stocks/indian-oil-corporation-IOC"
+                },
+                {
+                    "name": "Indian Overseas Bank",
+                    "ticker": "IOB",
+                    "sid": "IOBK",
+                    "slug": "/stocks/indian-overseas-bank-IOBK"
+                },
+                {
+                    "name": "Indian Railway Finance Corp Ltd",
+                    "ticker": "IRFC",
+                    "sid": "IRF",
+                    "slug": "/stocks/indian-railway-finance-corporation-IRF"
+                },
+                {
+                    "name": "Indus Towers Ltd",
+                    "ticker": "INDUSTOWER",
+                    "sid": "BHRI",
+                    "slug": "/stocks/bharti-infratel-BHRI"
+                },
+                {
+                    "name": "Indusind Bank Ltd",
+                    "ticker": "INDUSINDBK",
+                    "sid": "INBK",
+                    "slug": "/stocks/indusind-bank-INBK"
+                },
+                {
+                    "name": "Infosys Ltd",
+                    "ticker": "INFY",
+                    "sid": "INFY",
+                    "slug": "/stocks/infosys-INFY"
+                },
+                {
+                    "name": "Interglobe Aviation Ltd",
+                    "ticker": "INDIGO",
+                    "sid": "INGL",
+                    "slug": "/stocks/interglobe-aviation-INGL"
+                },
+                {
+                    "name": "JSW Energy Ltd",
+                    "ticker": "JSWENERGY",
+                    "sid": "JSWE",
+                    "slug": "/stocks/jsw-energy-JSWE"
+                },
+                {
+                    "name": "JSW Steel Ltd",
+                    "ticker": "JSWSTEEL",
+                    "sid": "JSTL",
+                    "slug": "/stocks/jsw-steel-JSTL"
+                },
+                {
+                    "name": "Jindal Steel And Power Ltd",
+                    "ticker": "JINDALSTEL",
+                    "sid": "JNSP",
+                    "slug": "/stocks/jindal-steel-and-power-JNSP"
+                },
+                {
+                    "name": "Jio Financial Services Ltd",
+                    "ticker": "JIOFIN",
+                    "sid": "JIO",
+                    "slug": "/stocks/jio-financial-services-JIO"
+                },
+                {
+                    "name": "Kotak Mahindra Bank Ltd",
+                    "ticker": "KOTAKBANK",
+                    "sid": "KTKM",
+                    "slug": "/stocks/kotak-mahindra-bank-KTKM"
+                },
+                {
+                    "name": "LTIMindtree Ltd",
+                    "ticker": "LTIM",
+                    "sid": "LRTI",
+                    "slug": "/stocks/larsen-and-toubro-infotech-LRTI"
+                },
+                {
+                    "name": "Larsen and Toubro Ltd",
+                    "ticker": "LT",
+                    "sid": "LART",
+                    "slug": "/stocks/larsen-and-toubro-LART"
+                },
+                {
+                    "name": "Life Insurance Corporation Of India",
+                    "ticker": "LICI",
+                    "sid": "LIC",
+                    "slug": "/stocks/life-insurance-corporation-of-india-LIC"
+                },
+                {
+                    "name": "Macrotech Developers Ltd",
+                    "ticker": "LODHA",
+                    "sid": "LOD",
+                    "slug": "/stocks/macrotech-developers-LOD"
+                },
+                {
+                    "name": "Mahindra and Mahindra Ltd",
+                    "ticker": "M&M",
+                    "sid": "MAHM",
+                    "slug": "/stocks/mahindra-and-mahindra-MAHM"
+                },
+                {
+                    "name": "Maruti Suzuki India Ltd",
+                    "ticker": "MARUTI",
+                    "sid": "MRTI",
+                    "slug": "/stocks/maruti-suzuki-india-MRTI"
+                },
+                {
+                    "name": "NHPC Ltd",
+                    "ticker": "NHPC",
+                    "sid": "NHPC",
+                    "slug": "/stocks/nhpc-NHPC"
+                },
+                {
+                    "name": "NTPC Ltd",
+                    "ticker": "NTPC",
+                    "sid": "NTPC",
+                    "slug": "/stocks/ntpc-NTPC"
+                },
+                {
+                    "name": "Nestle India Ltd",
+                    "ticker": "NESTLEIND",
+                    "sid": "NEST",
+                    "slug": "/stocks/nestle-india-NEST"
+                },
+                {
+                    "name": "Oil and Natural Gas Corporation Ltd",
+                    "ticker": "ONGC",
+                    "sid": "ONGC",
+                    "slug": "/stocks/oil-and-natural-gas-corporation-ONGC"
+                },
+                {
+                    "name": "Pidilite Industries Ltd",
+                    "ticker": "PIDILITIND",
+                    "sid": "PIDI",
+                    "slug": "/stocks/pidilite-industries-PIDI"
+                },
+                {
+                    "name": "Polycab India Ltd",
+                    "ticker": "POLYCAB",
+                    "sid": "POLC",
+                    "slug": "/stocks/polycab-india-POLC"
+                },
+                {
+                    "name": "Power Finance Corporation Ltd",
+                    "ticker": "PFC",
+                    "sid": "PWFC",
+                    "slug": "/stocks/power-finance-corporation-PWFC"
+                },
+                {
+                    "name": "Power Grid Corporation of India Ltd",
+                    "ticker": "POWERGRID",
+                    "sid": "PGRD",
+                    "slug": "/stocks/power-grid-corporation-of-india-PGRD"
+                },
+                {
+                    "name": "Punjab National Bank",
+                    "ticker": "PNB",
+                    "sid": "PNBK",
+                    "slug": "/stocks/punjab-national-bank-PNBK"
+                },
+                {
+                    "name": "REC Limited",
+                    "ticker": "RECLTD",
+                    "sid": "RECM",
+                    "slug": "/stocks/rec-RECM"
+                },
+                {
+                    "name": "Reliance Industries Ltd",
+                    "ticker": "RELIANCE",
+                    "sid": "RELI",
+                    "slug": "/stocks/reliance-industries-RELI"
+                },
+                {
+                    "name": "SBI Life Insurance Company Ltd",
+                    "ticker": "SBILIFE",
+                    "sid": "SBIL",
+                    "slug": "/stocks/sbi-life-insurance-company-SBIL"
+                },
+                {
+                    "name": "Samvardhana Motherson International Ltd",
+                    "ticker": "MOTHERSON",
+                    "sid": "MOSS",
+                    "slug": "/stocks/motherson-sumi-systems-MOSS"
+                },
+                {
+                    "name": "Shree Cement Ltd",
+                    "ticker": "SHREECEM",
+                    "sid": "SHCM",
+                    "slug": "/stocks/shree-cement-SHCM"
+                },
+                {
+                    "name": "Siemens Ltd",
+                    "ticker": "SIEMENS",
+                    "sid": "SIEM",
+                    "slug": "/stocks/siemens-SIEM"
+                },
+                {
+                    "name": "State Bank of India",
+                    "ticker": "SBIN",
+                    "sid": "SBI",
+                    "slug": "/stocks/state-bank-of-india-SBI"
+                },
+                {
+                    "name": "Sun Pharmaceutical Industries Ltd",
+                    "ticker": "SUNPHARMA",
+                    "sid": "SUN",
+                    "slug": "/stocks/sun-pharmaceutical-industries-SUN"
+                },
+                {
+                    "name": "TVS Motor Company Ltd",
+                    "ticker": "TVSMOTOR",
+                    "sid": "TVSM",
+                    "slug": "/stocks/tvs-motor-company-TVSM"
+                },
+                {
+                    "name": "Tata Consultancy Services Ltd",
+                    "ticker": "TCS",
+                    "sid": "TCS",
+                    "slug": "/stocks/tata-consultancy-services-TCS"
+                },
+                {
+                    "name": "Tata Consumer Products Ltd",
+                    "ticker": "TATACONSUM",
+                    "sid": "TACN",
+                    "slug": "/stocks/tata-consumer-products-TACN"
+                },
+                {
+                    "name": "Tata Motors Ltd",
+                    "ticker": "TATAMOTORS",
+                    "sid": "TAMO",
+                    "slug": "/stocks/tata-motors-TAMO"
+                },
+                {
+                    "name": "Tata Motors Ltd",
+                    "ticker": "TATAMTRDVR",
+                    "sid": "TAMdv",
+                    "slug": "/stocks/tata-motors---dvr-TAMdv"
+                },
+                {
+                    "name": "Tata Power Company Ltd",
+                    "ticker": "TATAPOWER",
+                    "sid": "TTPW",
+                    "slug": "/stocks/tata-power-company-TTPW"
+                },
+                {
+                    "name": "Tata Steel Ltd",
+                    "ticker": "TATASTEEL",
+                    "sid": "TISC",
+                    "slug": "/stocks/tata-steel-TISC"
+                },
+                {
+                    "name": "Tech Mahindra Ltd",
+                    "ticker": "TECHM",
+                    "sid": "TEML",
+                    "slug": "/stocks/tech-mahindra-TEML"
+                },
+                {
+                    "name": "Titan Company Ltd",
+                    "ticker": "TITAN",
+                    "sid": "TITN",
+                    "slug": "/stocks/titan-company-TITN"
+                },
+                {
+                    "name": "Trent Ltd",
+                    "ticker": "TRENT",
+                    "sid": "TREN",
+                    "slug": "/stocks/trent-TREN"
+                },
+                {
+                    "name": "UltraTech Cement Ltd",
+                    "ticker": "ULTRACEMCO",
+                    "sid": "ULTC",
+                    "slug": "/stocks/ultratech-cement-ULTC"
+                },
+                {
+                    "name": "Union Bank of India Ltd",
+                    "ticker": "UNIONBANK",
+                    "sid": "UNBK",
+                    "slug": "/stocks/union-bank-of-india-UNBK"
+                },
+                {
+                    "name": "Varun Beverages Ltd",
+                    "ticker": "VBL",
+                    "sid": "VARB",
+                    "slug": "/stocks/varun-beverages-VARB"
+                },
+                {
+                    "name": "Vedanta Ltd",
+                    "ticker": "VEDL",
+                    "sid": "VDAN",
+                    "slug": "/stocks/vedanta-VDAN"
+                },
+                {
+                    "name": "Vodafone Idea Ltd",
+                    "ticker": "IDEA",
+                    "sid": "VODA",
+                    "slug": "/stocks/vodafone-idea-VODA"
+                },
+                {
+                    "name": "Wipro Ltd",
+                    "ticker": "WIPRO",
+                    "sid": "WIPR",
+                    "slug": "/stocks/wipro-WIPR"
+                },
+                {
+                    "name": "Zomato Ltd",
+                    "ticker": "ZOMATO",
+                    "sid": "ZOM",
+                    "slug": "/stocks/zomato-ZOM"
+                },
+                {
+                    "name": "Zydus Lifesciences Ltd",
+                    "ticker": "ZYDUSLIFE",
+                    "sid": "CADI",
+                    "slug": "/stocks/cadila-healthcare-CADI"
+                }
+            ],
+            "query": {}
+        },
+        "brokerConfig": {
+            "ttBrokersList": [
+                {
+                    "broker": "kite",
+                    "brokerDisplayName": "Zerodha",
+                    "brokerShortName": "Zerodha",
+                    "platformURL": "https://smallcase.zerodha.com",
+                    "baseLoginURL": "https://kite.zerodha.com/connect/login?api_key=12hpqpbfwnxyvud8",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "groww",
+                    "brokerDisplayName": "Groww",
+                    "brokerShortName": "Groww",
+                    "platformURL": "https://smallcases.groww.in",
+                    "baseLoginURL": "https://groww.in/onix/login?referrer=d74c98cffd7948ca9ffca352294b0226",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "upstox",
+                    "brokerDisplayName": "Upstox",
+                    "brokerShortName": "Upstox",
+                    "platformURL": "https://smallcases.upstox.com",
+                    "baseLoginURL": "https://smallcases.upstox.com/login?autoLogin=true",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "angelbroking",
+                    "brokerDisplayName": "Angel One",
+                    "brokerShortName": "Angel One",
+                    "platformURL": "https://smallcases.angelbroking.com",
+                    "baseLoginURL": "https://login.angelbroking.com/sc?redirect=https://smallcases.angelbroking.com%2FbrokerLogin?request_token=",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "fivepaisa",
+                    "brokerDisplayName": "5paisa",
+                    "brokerShortName": "5paisa",
+                    "platformURL": "https://smallcases.5paisa.com",
+                    "baseLoginURL": "https://www.5paisa.com/vlogin-page?vid=smcs",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "hdfc",
+                    "brokerDisplayName": "HDFC Securities",
+                    "brokerShortName": "HDFC Sec",
+                    "platformURL": "https://deepors.hdfcsec.com/Smallcase/Index",
+                    "baseLoginURL": "https://deepors.hdfcsec.com/smallcase/index?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": False
+                },
+                {
+                    "broker": "icici",
+                    "brokerDisplayName": "ICICIdirect",
+                    "brokerShortName": "ICICIdirect",
+                    "platformURL": "https://smallcases.icicidirect.com",
+                    "baseLoginURL": "https://smallcases.icicidirect.com/login?autoLogin=true",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "iifl",
+                    "brokerDisplayName": "IIFL Securities",
+                    "brokerShortName": "IIFL Sec",
+                    "platformURL": "https://smallcases.indiainfoline.com",
+                    "baseLoginURL": "https://ttweb.indiainfoline.com/Trade/Login.aspx?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "motilal",
+                    "brokerDisplayName": "Motilal Oswal",
+                    "brokerShortName": "Motilal Oswal",
+                    "platformURL": "https://smallcases.motilaloswal.com",
+                    "baseLoginURL": "https://prd.motilaloswal.com/MOSLLogin/login.aspx?vendorid=v1",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "dhan",
+                    "brokerDisplayName": "Dhan",
+                    "brokerShortName": "Dhan",
+                    "platformURL": "https://smallcases.dhan.co",
+                    "baseLoginURL": "https://auth.dhan.co/partner/smallcase/auth?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "aliceblue",
+                    "brokerDisplayName": "Alice Blue",
+                    "brokerShortName": "Alice Blue",
+                    "platformURL": "https://smallcases.aliceblueonline.com",
+                    "baseLoginURL": "https://ant.aliceblueonline.com/oauth2/auth?client_id=SMALLCASE&redirect_uri=https%3A%2F%2Fsmallcases.aliceblueonline.com%2FbrokerLogin&response_type=code",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "kotak",
+                    "brokerDisplayName": "Kotak Securities",
+                    "brokerShortName": "Kotak Sec",
+                    "platformURL": "https://smallcase.kotaksecurities.com",
+                    "baseLoginURL": "https://www.kotaksecurities.com/itrade/user/marketing.exe?action=redsc",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "axis",
+                    "brokerDisplayName": "AxisDirect",
+                    "brokerShortName": "AxisDirect",
+                    "platformURL": "https://simplehai.axisdirect.in/app/index.php/smallcase/redirect",
+                    "baseLoginURL": "https://simplehai.axisdirect.in/app/index.php/smallcase/redirect?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": False
+                },
+                {
+                    "broker": "trustline",
+                    "brokerDisplayName": "Trustline",
+                    "brokerShortName": "Trustline",
+                    "platformURL": "https://smallcases.trustline.in",
+                    "baseLoginURL": "https://itrade-beta.trustline.in/oauth2/auth?scope=orders%20holdings&client_id=SMALLCASE&redirect_uri=https%3A%2F%2Fsmallcases.trustline.in%2FbrokerLogin&response_type=code",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "fisdom",
+                    "brokerDisplayName": "Fisdom",
+                    "brokerShortName": "Fisdom",
+                    "platformURL": "https://smallcases.fisdom.com",
+                    "baseLoginURL": "https://my.fisdom.com/page/equity/smallcase/login?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "fundzbazar",
+                    "brokerDisplayName": "FundzBazar",
+                    "brokerShortName": "FundzBazar",
+                    "platformURL": "https://smallcases.fundzbazar.com",
+                    "baseLoginURL": "https://www.fundzbazar.com/FBBrokingLogin?",
+                    "disabledInTickertape": False,
+                    "allowSessionExtension": True
+                },
+                {
+                    "broker": "edelweiss",
+                    "brokerDisplayName": "Edelweiss",
+                    "brokerShortName": "Edelweiss",
+                    "platformURL": "https://edelweiss.smallcase.com",
+                    "baseLoginURL": "https://www.edelweiss.in/vlogin/smallcase?",
+                    "disabledInTickertape": True,
+                    "allowSessionExtension": True
+                }
+            ],
+            "widgetBrokersList": [
+                "fivepaisa",
+                "aliceblue",
+                "kotak",
+                "kite",
+                "trustline",
+                "iifl",
+                "mastertrust",
+                "msfl",
+                "rudrashares",
+                "stockants",
+                "Confluence-Doc",
+                "moneyphi",
+                "marwadi",
+                "flattrade",
+                "nuuu",
+                "pacefin",
+                "stockdaddy",
+                "stocks.zerodha.com"
+            ]
+        },
+        "initialReduxState": {
+            "userInfo": {
+                "userAuth": {
+                    "loginStatus": False,
+                    "isLoggingIn": True,
+                    "access": 1,
+                    "userLevel": "visitor",
+                    "verified": False
+                },
+                "userProfile": {
+                    "isFetched": False
+                },
+                "userSubscription": {
+                    "isFetched": False
+                },
+                "userInvoices": {
+                    "isFetched": False
+                }
+            },
+            "appData": {
+                "tickertapeAppData": {
+                    "allPlans": {
+                        "isFetched": False
+                    },
+                    "bannerConfig": {
+                        "isFetched": False
+                    },
+                    "allRewards": {
+                        "isFetched": False
+                    },
+                    "marketingBannerConfig": {
+                        "isFetched": False
+                    }
+                },
+                "stockInfoStore": {},
+                "assetSecuritiesPageAppData": {},
+                "screenerAppData": {
+                    "appStockUniverse": {
+                        "equity": {
+                            "isFetched": False,
+                            "isClienSideFetched": False,
+                            "universeArr": [],
+                            "universeObj": {}
+                        },
+                        "mutual-fund": {
+                            "isFetched": False,
+                            "isClienSideFetched": False,
+                            "universeArr": [],
+                            "universeObj": {}
+                        }
+                    },
+                    "appFilters": {
+                        "equity": {
+                            "filters": {},
+                            "labelToFilters": {},
+                            "nonClearFilters": [],
+                            "parentFilterOrder": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        },
+                        "mutual-fund": {
+                            "filters": {},
+                            "labelToFilters": {},
+                            "nonClearFilters": [],
+                            "parentFilterOrder": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        }
+                    },
+                    "appPreBuiltScreens": {
+                        "equity": {
+                            "basic": [],
+                            "premium": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        },
+                        "mutual-fund": {
+                            "basic": [],
+                            "premium": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        }
+                    },
+                    "appPreBuiltScreensV2": {
+                        "equity": {
+                            "allScreens": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        },
+                        "mutual-fund": {
+                            "allScreens": [],
+                            "isFetched": False,
+                            "isClienSideFetched": False
+                        }
+                    },
+                    "appDefaultState": {
+                        "equity": {
+                            "isFetched": False,
+                            "isDefaultScreenFetched": False
+                        },
+                        "mutual-fund": {
+                            "isFetched": False,
+                            "isDefaultScreenFetched": False
+                        }
+                    },
+                    "selectedScreenerSegment": "equity",
+                    "isScreenerSegmentSwitcherOpen": False
+                },
+                "portfolioAppData": {
+                    "isPortfolioSwitcherOpen": False,
+                    "triggeredAsset": None,
+                    "triggeredFrom": None,
+                    "accessedFrom": None
+                },
+                "smallcaseAppData": {
+                    "txnId": ""
+                }
+            },
+            "communityUserData": {
+                "profileData": None,
+                "userSpaces": None,
+                "isCommunityUserDataFetched": False
+            },
+            "userData": {
+                "snackbarInfo": {},
+                "userWatchlists": {
+                    "watchlists": {},
+                    "constituents": [],
+                    "watchlistType": {},
+                    "selectedWatchlist": None,
+                    "isFetched": False,
+                    "isWatchlistNotFound": False
+                },
+                "userBasket": {
+                    "basket": [],
+                    "basketConstituent": [],
+                    "isFetched": False
+                },
+                "savedScreens": {
+                    "equity": {
+                        "screens": [],
+                        "isFetched": False,
+                        "isLoading": False
+                    },
+                    "mutual-fund": {
+                        "screens": [],
+                        "isFetched": False,
+                        "isLoading": False
+                    }
+                },
+                "userFilters": {
+                    "equity": {
+                        "filters": {},
+                        "labelToFilters": {},
+                        "nonClearFilters": [],
+                        "parentFilterOrder": [
+                            "Your Filters"
+                        ],
+                        "creationAllowed": False,
+                        "isFetched": False
+                    },
+                    "mutual-fund": {
+                        "filters": {},
+                        "labelToFilters": {},
+                        "nonClearFilters": [],
+                        "parentFilterOrder": [
+                            "Your Filters"
+                        ],
+                        "creationAllowed": False,
+                        "isFetched": False
+                    }
+                },
+                "exportConfig": {
+                    "equity": {
+                        "isFetched": False
+                    },
+                    "mutual-fund": {
+                        "isFetched": False
+                    }
+                },
+                "userUniverses": {
+                    "isFetched": False,
+                    "equity": {
+                        "userUniverseArr": [],
+                        "userUniverseObj": {},
+                        "maxLimit": 0
+                    },
+                    "mutual-fund": {
+                        "userUniverseArr": [],
+                        "userUniverseObj": {},
+                        "maxLimit": 0
+                    }
+                }
+            },
+            "loginData": {
+                "isBrokerMismatch": False,
+                "isMobileFBLogin": False,
+                "isSignup": False,
+                "isBrokerConnected": False,
+                "errorInOfferAvail": False,
+                "authData": {},
+                "jwtData": {},
+                "loginVia": "N/A"
+            },
+            "globalComponents": {
+                "premiumModal": {},
+                "snackbar": {},
+                "basketOrder": {},
+                "agent": "browser",
+                "txnInfo": {},
+                "search": {
+                    "showModal": False,
+                    "searchProductTags": []
+                },
+                "infoModal": None,
+                "popupType": None,
+                "showLoginModal": False,
+                "recaptchaSupportAvailable": False,
+                "lamfModal": {
+                    "show": False,
+                    "sectionTag": None
+                },
+                "stockWidgetState": None,
+                "redirectionPayload": None
+            },
+            "trackingReducer": {
+                "accessedFrom": ""
+            },
+            "screenerSessionData": {
+                "paginationInfo": {
+                    "offset": 0,
+                    "count": 20
+                },
+                "sortDetails": {
+                    "sortOrder": 1,
+                    "sortBy": ""
+                },
+                "screenedResults": {},
+                "appliedFilters": {},
+                "project": [],
+                "selectedFilters": [],
+                "stats": {},
+                "metaScreenInfo": {},
+                "loadingState": False,
+                "isPageFetched": False,
+                "isFiltersRefreshed": False,
+                "openScreenManager": False,
+                "defaultScreenManagerTab": "Basic",
+                "shakePremiumModal": False,
+                "appliedUniverse": {},
+                "assetBasket": [],
+                "assetBasketInfoMap": {},
+                "indexForResults": True,
+                "isSessionMaintained": False,
+                "scrollPos": {},
+                "screenSegment": None
+            },
+            "communityAppData": {
+                "topicsData": None,
+                "reportReasons": None,
+                "isCommunityAppDataFetched": False
+            },
+            "subscriptionData": None,
+            "remoteConfig": {
+                "featureFlags": {
+                    "digitalGoldLandingPage": True,
+                    "digitalGoldSIP": True,
+                    "lamfWidget": True,
+                    "alerts": False
+                },
+                "digitalGoldLearnMore": {
+                    "sectionTitle": "Learn more",
+                    "data": [
+                        {
+                            "url": "https://www.youtube.com/watch?v=KMM0Ur9mQ4k",
+                            "title": "How to invest in Digital Gold",
+                            "dateOfPublish": "2023-10-04",
+                            "readTimeMin": 1,
+                            "videoTag": "Tickertape",
+                            "isVideo": True
+                        },
+                        {
+                            "url": "https://www.tickertape.in/blog/5-reasons-to-invest-in-digital-gold/",
+                            "title": "5 reasons to invest in Digital Gold",
+                            "dateOfPublish": "2023-10-05",
+                            "readTimeMin": 3,
+                            "videoTag": "",
+                            "isVideo": False
+                        },
+                        {
+                            "url": "https://www.tickertape.in/blog/myths-vs-reality-about-investing-in-digital-gold/",
+                            "title": "Myths vs reality about investing in Digital Gold",
+                            "dateOfPublish": "2023-10-05",
+                            "readTimeMin": 3,
+                            "videoTag": "",
+                            "isVideo": False
+                        },
+                        {
+                            "url": "https://www.tickertape.in/blog/how-can-digital-gold-act-as-a-financial-cushion/",
+                            "title": "How can Digital Gold act as a financial cushion",
+                            "dateOfPublish": "2023-10-05",
+                            "readTimeMin": 4,
+                            "videoTag": "",
+                            "isVideo": False
+                        },
+                        {
+                            "url": "https://www.tickertape.in/blog/balance-risk-diversify-your-portfolio-with-digital-gold/",
+                            "title": "Balance & Risk - Diversify your portfolio with Digital Gold",
+                            "dateOfPublish": "2023-10-05",
+                            "readTimeMin": 3,
+                            "videoTag": "",
+                            "isVideo": False
+                        }
+                    ]
+                },
+                "desktopToastUnit": {
+                    "title": "Why sell Mutual Funds for quick cash?",
+                    "description": "Allow your MFs to grow, get a loan against them starting @ 10.75% p.a.",
+                    "cta": "Connect MF Portfolio Now",
+                    "ctaLink": "https://www.tickertape.in/portfolio/mutualfunds?utm_source=desktop_unit&utm_campaign=mfsync",
+                    "timeinSec": 300,
+                    "version": 1,
+                    "hide": False
+                },
+                "alertsConfig": {
+                    "proList": [
+                        {
+                            "id": 1,
+                            "text": "Live SMA crossovers"
+                        },
+                        {
+                            "id": 2,
+                            "text": "52 Week highs & lows"
+                        },
+                        {
+                            "id": 3,
+                            "text": "Earnings announcements & corp actions"
+                        },
+                        {
+                            "id": 4,
+                            "text": "Live alerts on WhatsApp & much more"
+                        }
+                    ],
+                    "basicList": [
+                        {
+                            "id": 1,
+                            "text": "NIFTY & SENSEX changes"
+                        },
+                        {
+                            "id": 2,
+                            "text": "End of the day portfolio summary"
+                        },
+                        {
+                            "id": 3,
+                            "text": "Live >5% changes in price"
+                        },
+                        {
+                            "id": 4,
+                            "text": "Dividends & other updates"
+                        }
+                    ]
+                },
+                "digitalGoldSipTimeout": 10,
+                "displayedNavConfig": {
+                    "products": [
+                        {
+                            "label": "Gold",
+                            "icon": "https://assets.tickertape.in/logo/gold.svg",
+                            "type": "link",
+                            "id": "gold",
+                            "link": "/digital-gold",
+                            "name": "digi_gold"
+                        },
+                        {
+                            "label": "Screener",
+                            "icon": "https://assets.tickertape.in/logo/screener.svg",
+                            "type": "dynamic",
+                            "id": "screener",
+                            "link": "/screener/home/equity",
+                            "name": "screeener_equity"
+                        }
+                    ]
+                },
+                "productSwitcherWeb": {
+                    "logo": "nav-logos/profile/tickertape_logo.svg",
+                    "sections": [
+                        {
+                            "title": "Products",
+                            "id": "assets",
+                            "products": [
+                                {
+                                    "label": "Stocks",
+                                    "id": "stock",
+                                    "logo": "nav-logos/assets/stock.svg",
+                                    "type": "asset",
+                                    "description": "All about stocks fundamentals in one place"
+                                },
+                                {
+                                    "label": "ETFs",
+                                    "id": "etf",
+                                    "logo": "nav-logos/assets/etf.svg",
+                                    "type": "asset",
+                                    "description": "All about ETFs fundamentals in one place"
+                                },
+                                {
+                                    "label": "Indices",
+                                    "id": "indices",
+                                    "logo": "nav-logos/assets/index.svg",
+                                    "type": "asset",
+                                    "description": "All about indices fundamentals in one place"
+                                },
+                                {
+                                    "label": "MFs",
+                                    "id": "mutualfund",
+                                    "logo": "nav-logos/assets/mutualfund.svg",
+                                    "type": "asset",
+                                    "description": "Explore and analyze a wide range of funds"
+                                },
+                                {
+                                    "label": "smallcases",
+                                    "id": "smallcase",
+                                    "logo": "nav-logos/assets/smallcase.svg",
+                                    "type": "product",
+                                    "description": "Explore and analyze a wide range of funds",
+                                    "link": "/smallcase"
+                                },
+                                {
+                                    "label": "Gold",
+                                    "id": "gold",
+                                    "logo": "nav-logos/assets/digital-gold.svg",
+                                    "type": "product",
+                                    "description": "All about digital gold in one place",
+                                    "link": "/digital-gold"
+                                },
+                                {
+                                    "label": "Loan against MF",
+                                    "id": "lamf",
+                                    "logo": "nav-logos/finance/lamf.svg",
+                                    "type": "widget",
+                                    "description": "Loan against MF"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Tools of the trade",
+                            "id": "tools",
+                            "products": [
+                                {
+                                    "label": "Stock Screener",
+                                    "id": "stock_screener",
+                                    "logo": "nav-logos/tools_of_the_trade/stock_screener.svg",
+                                    "regex": "screener/equity",
+                                    "segment": "equity",
+                                    "dWebPrefixPath": "home/",
+                                    "type": "product",
+                                    "description": "Discover your star stock using 200+ filters"
+                                },
+                                {
+                                    "label": "MF Screener",
+                                    "id": "mf_screener",
+                                    "logo": "nav-logos/tools_of_the_trade/mf_screener.svg",
+                                    "regex": "screener/mutual-fund",
+                                    "segment": "mutual-fund",
+                                    "dWebPrefixPath": "home/",
+                                    "type": "product",
+                                    "description": "Which mutual fund? Discover using 50+ filters"
+                                },
+                                {
+                                    "label": "Market Movers",
+                                    "id": "market_movers",
+                                    "logo": "nav-logos/tools_of_the_trade/market_movers.svg",
+                                    "link": "/market-movers?ref=product-switcher_product-switcher",
+                                    "type": "product",
+                                    "description": "Analyze insider trades and bulk / block deals",
+                                    "newTag": True
+                                },
+                                {
+                                    "label": "Market Mood",
+                                    "id": "market_mood",
+                                    "dynamic": True,
+                                    "link": "/market-mood-index",
+                                    "type": "product",
+                                    "description": "A sentiment tool to know the market mood",
+                                    "logos": [
+                                        {
+                                            "logo": "nav-logos/tools_of_the_trade/MMI_ExtremeFear.svg",
+                                            "minRange": 0,
+                                            "maxRange": 30
+                                        },
+                                        {
+                                            "logo": "nav-logos/tools_of_the_trade/MMI_Fear.svg",
+                                            "minRange": 30,
+                                            "maxRange": 50
+                                        },
+                                        {
+                                            "logo": "nav-logos/tools_of_the_trade/MMI_Greed.svg",
+                                            "minRange": 50,
+                                            "maxRange": 70
+                                        },
+                                        {
+                                            "logo": "nav-logos/tools_of_the_trade/MMI_ExtremeGreed.svg",
+                                            "minRange": 70,
+                                            "maxRange": 100
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Watchlist",
+                                    "id": "watchlist",
+                                    "logo": "nav-logos/profile/watchlist.svg",
+                                    "link": "/watchlist"
+                                },
+                                {
+                                    "label": "Portfolio",
+                                    "id": "portfolio",
+                                    "logo": "nav-logos/profile/portfolio.svg",
+                                    "link": "/portfolio",
+                                    "linkType": "client-side-rendered"
+                                },
+                                {
+                                    "label": "Basket",
+                                    "id": "basket",
+                                    "logo": "nav-logos/profile/basket.svg",
+                                    "link": "/basket"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Read and share",
+                            "id": "read_share",
+                            "products": [
+                                {
+                                    "label": "Learn",
+                                    "id": "learn",
+                                    "type": "ext",
+                                    "logo": "nav-logos/read_and_share/learn_v2.svg",
+                                    "link": "https://www.tickertape.in/knowledge-base/",
+                                    "description": "A place to learn everything about market"
+                                },
+                                {
+                                    "label": "Social",
+                                    "id": "social",
+                                    "type": "product",
+                                    "logo": "nav-logos/read_and_share/social_v2.svg",
+                                    "link": "/social",
+                                    "description": ""
+                                },
+                                {
+                                    "label": "Blog",
+                                    "id": "blog",
+                                    "type": "ext",
+                                    "logo": "nav-logos/read_and_share/blog_v2.svg",
+                                    "link": "https://www.tickertape.in/blog/",
+                                    "description": "Personal finance and market updates"
+                                },
+                                {
+                                    "label": "How To"s", "id": "how_to", "type": "ext", "logo": "nav-logos/read_and_share/how_to_v2.svg", "link": "https: //www.youtube.com/@Tickertape", "description": ""}]}]}, "loginFallback": {"immediateErrors": ["ERR_OTP_001", "ERR_OTP_002", "ERR_OTP_005", "ERR_OTP_006", "ERR_OTP_007", "ERR_OTP_014", "ERR_OTP_009"], "resendCount": 2}, "lamfCopyConfig": {"PORTFOLIO_NOT_SYNCED": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Find your credit limit", "validationObj": {"text": "120+ users applied this week", "icon": "https://assets.tickertape.in/images/lamf/people.svg"}, "validationMessage": "120+ users applied this week", "creditLimitHeading": None, "note": False, "rejected": False, "success": False, "lamfState": "SUCCESS", "creditNotSufficient": False, "hideCreditLimit": True, "miniWidgetModel": {"ctaText": "Apply Now", "title": "Get cash against your mutual funds", "subTitle": "in your bank a/c at 10.75%"}, "redirectionCopy": "Taking you to smallcase, our parent company, for next steps. Please do not refresh or press back button", "poweredByText": "Powered by smallcase"}, "PORTFOLIO_SYNC_IN_PROGRESS": {"catchyPhrase": "Your Credit Limit is being calculated", "oneLiner": "We are importing your MF holdings to calculate your credit limit, we will notify you when it is ready", "validationObj": None, "creditLimitHeading": None, "cta": None, "lamfState": None, "creditNotSufficient": False, "hideCreditLimit": True, "miniWidgetModel": {"ctaText": None, "title": "Your credit limit is being calculated", "subTitle": "We will notify you when it is ready"}, "poweredByText": "Powered by smallcase"}, "SUFFICIENT_LIMIT": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Get instant cash", "validationObj": {"text": "120+ users applied this week", "icon": "https://assets.tickertape.in/images/lamf/people.svg"}, "validationMessage": "120+ users applied this week", "creditLimitHeading": "Credit limit upto", "note": None, "rejected": False, "success": False, "lamfState": "SUCCESS", "creditNotSufficient": False, "miniWidgetModel": {"ctaText": "Apply Now", "title": "Get upto ₹ %creditLimit%", "subTitle": "in your bank a/c at 10.75%"}, "redirectionCopy": "Taking you to smallcase, our parent company, for next steps. Your tickertape holdings will be used for credit limit calculations", "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "INSUFFICIENT_LIMIT": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "validationObj": {"text": "Sorry, You don"t meet the minimum credit requirement to apply", "icon": ""}, "validationMessage": "Sorry, You don"t meet the credit requirement to apply", "creditLimitHeading": None, "cta": None, "note": True, "rejected": False, "success": False, "lamfState": "NOTE", "creditNotSufficient": False, "hideCreditLimit": True, "poweredByText": "Powered by smallcase"}, "NOT_STARTED": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Resume Application", "validationObj": {"text": "120+ users applied this week", "icon": "https://assets.tickertape.in/images/lamf/people.svg"}, "validationMessage": "120+ users applied this week", "creditLimitHeading": "Credit limit upto", "note": None, "rejected": False, "success": False, "lamfState": "SUCCESS", "creditNotSufficient": False, "miniWidgetModel": {"ctaText": "Resume", "title": "Get upto ₹ %creditLimit%", "subTitle": "in your bank a/c at 10.75%"}, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "ELIGIBILITY_CHECKED": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Resume Application", "validationObj": {"text": "95% users got instant cash under 2 hours", "icon": "https://assets.tickertape.in/images/lamf/people.svg"}, "validationMessage": "95% users got instant cash under 2 hours", "creditLimitHeading": "Credit Limit upto", "note": None, "rejected": False, "success": False, "lamfState": "SUCCESS", "creditNotSufficient": False, "miniWidgetModel": {"ctaText": "Resume", "title": "Get upto ₹ %creditLimit%", "subTitle": "Resume your application"}, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "NOT_ELIGIBLE": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "View Application", "validationObj": {"text": "Credit limit insufficient, try recalculating your credit limit", "icon": ""}, "validationMessage": "Credit limit insufficient, try recalculating your credit limit", "creditLimitHeading": "Credit Limit upto", "note": True, "rejected": False, "success": False, "lamfState": "NOTE", "creditNotSufficient": True, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "PROCESSING": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Resume Application", "validationObj": {"text": "95% users got instant credit under 2 hours", "icon": "https://assets.tickertape.in/images/lamf/people.svg"}, "validationMessage": "95% users got instant credit under 2 hours", "creditLimitHeading": "Loan Amount", "note": False, "rejected": False, "success": False, "lamfState": "SUCCESS", "creditNotSufficient": False, "miniWidgetModel": {"ctaText": "Resume", "title": "₹ %creditLimit% amount", "subTitle": "Resume your application"}, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "APPLIED": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "View Status", "validationObj": {"text": "Hang in there, your application is in progress", "icon": ""}, "validationMessage": "Hang in there, your application is in progress", "creditLimitHeading": "Applied loan amount", "note": True, "rejected": False, "success": False, "lamfState": "NOTE", "creditNotSufficient": False, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "REJECTED": {"catchyPhrase": "Liquidity without liquidating!", "oneLiner": "Get cash against your mutual funds", "cta": "Learn More", "validationObj": {"text": "Your application has been rejected, Tap to learn more", "icon": "https://assets.tickertape.in/images/lamf/info.svg"}, "validationMessage": "Your application has been rejected, Tap to learn more", "creditLimitHeading": "Applied loan amount", "rejected": True, "note": False, "success": False, "lamfState": "REJECTED", "creditNotSufficient": False, "poweredByText": "Powered by smallcase", "hideCreditLimit": False}, "ACTIVE": {"catchyPhrase": "Access your loan details", "oneLiner": "Amount - ₹%creditLimit%", "validationObj": None, "creditLimitHeading": None, "cta": "View dashboard", "lamfState": None, "creditNotSufficient": False, "hideCreditLimit": True, "miniWidgetModel": {"title": "Access your loan details", "subTitle": "Loan Amount - ₹%creditLimit%", "ctaText": "View"}, "poweredByText": "Powered by smallcase"}}, "homepageBanners": {"data": [{"banners": [{"title": " ", "subtitle": " ", "btnText": "", "url": "https://tickertape.in/pricing?offer=GOLD700&planId=P0012", "imgUrl": "https://i.imgur.com/axfrPAm.jpg", "btnColor": "#FFFFFF", "btnTextColor": "#3B0CA8", "hideBtn": True, "visibleForPro": False, "isVisible": True, "isRedirect": False, "tempURL": ""}, {"title": " ", "subtitle": " ", "btnText": "", "url": "https://www.tickertape.in/blog/netra-february-2024-market-analysis-report-3-key-takeaways/?utm_source=homepage-ad&utm_medium=blog&utm_campaign=netra-feb&utm_id=1&utm_term=dsp", "imgUrl": "https://i.imgur.com/GrD4ncN.png", "btnColor": "#FFFFFF", "btnTextColor": "#3B0CA8", "hideBtn": True, "visibleForPro": False, "isVisible": True, "isRedirect": False, "tempURL": ""}, {"title": " ", "subtitle": " ", "btnText": "", "url": "https://www.tickertape.in/#lamf_init", "imgUrl": "https://i.imgur.com/LmNg8UU.png", "btnColor": "#FFFFFF", "btnTextColor": "#3B0CA8", "hideBtn": True, "isVisible": True, "isRedirect": False, "tempURL": ""}, {"title": " ", "subtitle": " ", "btnText": "", "url": "https://www.tickertape.in/digital-gold/buy?type=monthly&utm_medium=homepage&utm_source=banner&utm_campaign=digitalgold&utm_content=savinguptobuygold", "imgUrl": "https://i.imgur.com/IMnw8rZ.png", "btnColor": "#FFFFFF", "btnTextColor": "#3B0CA8", "hideBtn": True, "isVisible": True, "isRedirect": False, "tempURL": ""}, {"title": " ", "subtitle": " ", "btnText": "Sync your MF Now", "url": "https://www.tickertape.in/portfolio/mutualfunds?utm_source=homepage&utm_medium=cpm&utm_campaign=mfportfolio&utm_term=diversification-score", "imgUrl": "https://i.imgur.com/CTxJkhc.png", "btnColor": "#FFFFFF", "btnTextColor": "#3B0CA8", "hideBtn": True, "isVisible": True, "isRedirect": False, "tempURL": ""}], "isVisible": True}]}, "homepageScreensAndDeals": {"data": [{"id": "1", "type": "equityScreener", "titleDweb": "Stock Screens", "titleMweb": "Stock Screens", "iconUrl": "/images/svg/ListMagnifyingGlass.svg", "link": "screener/equity?ref=homepage_screens-section", "desktopOnly": False, "lists": [{"id": "list-1", "img": "", "text": "Cash Rich Smallcaps", "link": "https://www.tickertape.in/screener/equity/prebuilt/SCR0017?ref=homepage_screens-section"}, {"id": "list-2", "img": "", "text": "Near 52W lows", "link": "https://www.tickertape.in/screener/equity/prebuilt/SCR0005?ref=homepage_screens-section"}, {"id": "list-3", "img": "", "text": "Momentum Monsters", "link": "https://www.tickertape.in/screener/equity/prebuilt/SCR0009?ref=homepage_screens-section"}]}, {"id": "2", "type": "deals", "titleDweb": "Deals", "titleMweb": "Deals", "iconUrl": "/images/svg/Handshake.svg", "link": "market-movers?ref=homepage_screens-and-deals-section#deals", "desktopOnly": False, "lists": [{"id": "list-1", "img": "", "text": "Latest deals by Radhakishan Damani", "link": "https://www.tickertape.in/market-movers?fromDate=1669288470975&person=Radhakishan%20Damani%2CBright%20Star%20Investments&toDate=1684926870976&ref=homepage_screens-and-deals-section#deals"}, {"id": "list-2", "text": "Latest deals by the Govt of Singapore", "link": "https://www.tickertape.in/market-movers?fromDate=1669288470976&person=Government%20of%20Singapore&toDate=1684926870976&transactiontype=buy&ref=homepage_screens-and-deals-section#deals"}, {"id": "list-3", "text": "Latest deals by the Vanguard group", "link": "https://www.tickertape.in/market-movers?fromDate=1669288470976&person=Vanguard&toDate=1684926870976&transactiontype=buy&ref=homepage_screens-and-deals-section#deals"}]}, {"id": "3", "type": "mfScreener", "titleDweb": "Mutual Fund Screens", "titleMweb": "MF Screens", "iconUrl": "/images/svg/ListMagnifyingGlass.svg", "link": "screener/mutual-fund?ref=homepage_screens-section", "desktopOnly": False, "lists": [{"id": "list-1", "img": "", "text": "Top Tax Savers", "link": "https://www.tickertape.in/screener/mutual-fund/prebuilt/SCR0001?ref=homepage_screens-section"}, {"id": "list-2", "img": "", "text": "Long Term Compounders", "link": "https://www.tickertape.in/screener/mutual-fund/prebuilt/SCR0002?ref=homepage_screens-section"}, {"id": "list-3", "img": "", "text": "Concentrated Bets", "link": "https://www.tickertape.in/screener/mutual-fund/prebuilt/SCR0005?ref=homepage_screens-section"}]}]}, "homepageWishlistSuggestions": {"data": [{"name": "Reliance Industries Ltd", "sector": "Energy", "assetId": "RELI", "ticker": "RELIANCE", "type": "stock"}, {"name": "Tata Consultancy Services Ltd", "sector": "Information Technology", "assetId": "TCS", "ticker": "TCS", "type": "stock"}, {"name": "HDFC Bank Ltd", "sector": "Financials", "assetId": "HDBK", "ticker": "HDFCBANK", "type": "stock"}]}, "remoteRoutesConfigs": {"landing-page": {"enableProfileMenu": True}, "landing-page-v2": {"enableProfileMenu": True}}, "portfolioConnectConfig": {"carousel": [{"img": "https://assets.tickertape.in/images/portfolio-connect/diversification.svg", "text": "Assess diversification"}, {"img": "https://assets.tickertape.in/images/portfolio-connect/analysis.svg", "text": "Analyse holdings"}, {"img": "https://assets.tickertape.in/images/portfolio-connect/forecast.svg", "text": "Forecast portfolio"}, {"img": "https://assets.tickertape.in/images/portfolio-connect/redflag.svg", "text": "Review red flags"}, {"img": "https://assets.tickertape.in/images/portfolio-connect/performance.svg", "text": "Track performance"}]}}, "userServerSession": {"serverSessionType": None}}}, "page": "/stocks", "query": {}, "buildId": "FZVuJQOZWvBfNgIibAuaz", "isFallback": False, "dynamicIds": [95458, 15188, 89224, 91705, 88460], "customServer": True, "gip": True, "appGip": True, "scriptLoader": []}
