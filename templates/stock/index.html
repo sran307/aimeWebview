@@ -6,16 +6,42 @@
 <div class="container my-4">
   <div class="row g-3">  <!-- g-3 adds spacing between buttons -->
     <div class="col-6 col-lg-3">
-      <button class="btn btn-primary w-100">Button 1</button>
+      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_holidays' %}" data-title="Fetching Holidays" data-text="Fetching Holidays of Trading Section">Get Holidays</button>
     </div>
     <div class="col-6 col-lg-3">
-      <button class="btn btn-success w-100">Button 2</button>
+      <button class="btn btn-primary w-100 commonFetch" data-path="{% url 'get_stock_code' %}" data-title="Fetch Stock Code" data-text="Fetching Stock Codes Of All The Stocks listed.. ">1.Fetch Stock Code</button>
     </div>
     <div class="col-6 col-lg-3">
-      <button class="btn btn-warning w-100">Button 3</button>
+      <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_stock_name' %}" data-title="Fetching New Stock Names" data-text="Fetching Stock Names corresponding To Code.. ">2.Fetch Stock Name</button>
     </div>
     <div class="col-6 col-lg-3">
-      <button class="btn btn-danger w-100">Button 4</button>
+      <button class="btn btn-warning w-100 commonFetch" data-path="{% url 'get_strong_stocks' %}" data-title="Selecting Strong Stocks" data-text="This is a filteration for select fundamentally strong stocks">3.Fetch Tradable Stocks</button>
+    </div>
+
+     <div class="col-6 col-lg-3">
+      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_slug' %}" data-title="Fetching Stock Codes in Ticker Tape" data-text="Fetching Stock Codes Used in Ticker Tape for get the stock details form Ticker Tape">4.Get Slug</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Fetching All the Sectors" data-text="Fetching All The Sectors">5.Fetch Sector</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_trending_sector' %}" data-title="Fetching Trending Sector" data-text="Finding Out the Trending Sectors">6.Fetch Trending Sector</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-primary w-100 commonFetch2" data-path="{% url 'get_penny_stocks' %}" data-title="Fetch Penny Stocks" data-text="Fetching Penny Stocks ">7.Fetch Penny Stocks</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-warning w-100 commonFetch" data-path="{% url 'get_swing_stocks' %}" data-title="Selecting Swing Stocks" data-text="Selecting the stocks for swing trade">8.Fetch Swing Stocks</button>
+    </div>
+    
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_long_stocks' %}" data-title="Fetching Long Term Stocks" data-text="Fetching Stocks For Long Term Trades">9.Fetch Long Stocks</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_52_low' %}" data-title="Fetch 52 Low" data-text="Fetching 52 Week Low Stocks">10.Fetch 52W Low</button>
+    </div>
+    <div class="col-6 col-lg-3">
+      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_52_high' %}" data-title="Fetching 52 High" data-text="Fetching 52 Week High Stocks">11.Fetch 52W High</button>
     </div>
   </div>
 </div>

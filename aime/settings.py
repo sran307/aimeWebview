@@ -82,10 +82,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aiMe',
-        'USER': 'root',
-        'PASSWORD': 'sr82an71',
-        'HOST': 'localhost',  # Or your MySQL host
+        'NAME': 'budget_nikhil',
+        'USER': 'sreeraj',
+        'PASSWORD': 'nic*123',
+        'HOST': '10.162.101.105',  # Or your MySQL host
         'PORT': '',  # If using a custom port, specify it here
     }
 }
@@ -127,6 +127,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# IF MULTIPLE APPS AVAILABLE THEN ADD THE LINE BELOW
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
