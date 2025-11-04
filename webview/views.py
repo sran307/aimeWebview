@@ -5,3 +5,6 @@ def home(request):
 
 def stockAnalyser(request):
     return render(request, 'stock/index.html')
+
+def budgetManager(request):
+    return render(request, 'budget/index.html')
