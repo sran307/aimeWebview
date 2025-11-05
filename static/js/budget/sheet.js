@@ -1,3 +1,4 @@
+
 (function(){
   function getCSRF() {
     const token = document.querySelector('meta[name="csrf-token"]');

@@ -1,20 +1,37 @@
 from django.db import models
 from django.conf import settings
 
+class FinancialYear(models.Model):
+    year = models.TextField(blank=True)
+    yearDesc = models.CharField(max_length=25, blank=True)
+    startDate = models.DateField(blank=True)
+    endDate = models.DateField(blank=True)
+    def __str__(self):
+        return self.yearDesc
+
+class Months(models.Model):
+    monthDesc = models.CharField(max_length=25)
+    monthAbbr = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.monthDesc
+
 class Sheet(models.Model):
+    finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="finIds")
+    month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="months")
     name = models.CharField(max_length=255)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} ({self.owner})"
+        return self.name
 
 
 class Cell(models.Model):
     sheet = models.ForeignKey(Sheet, on_delete=models.CASCADE, related_name="cells")
     row = models.PositiveIntegerField()
     col = models.PositiveIntegerField()
-    value = models.TextField(blank=True)
+    value = models.CharField(max_length=100, blank=True)
+    formula = models.CharField(max_length=255, blank=True, null=True)
     version = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -30,9 +47,11 @@ class CellChange(models.Model):
     cell = models.ForeignKey(Cell, on_delete=models.CASCADE, related_name="changes")
     old_value = models.TextField(blank=True)
     new_value = models.TextField(blank=True)
-    changed_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     changed_at = models.DateTimeField(auto_now_add=True)
     version = models.PositiveIntegerField()
 
     class Meta:
         ordering = ("-changed_at",)
+
+
+

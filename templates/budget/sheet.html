@@ -4,9 +4,10 @@
 {% block title %}Budget Manager{% endblock %}
 
 {% block content %}
-<!-- <h2>{{ sheet.name }}</h2> -->
-<div id="sheet-container">
-    <table id="grid">
+<h2>{{ sheet.name }}</h2>
+<div class="container-fluid">
+    <div class="status text-secondary" id="status">Loading...</div>
+    <table class="table table-dark table-striped table-bordered" id="grid">
         <thead>
             <tr>
                 <th></th>{% for c in cols %}<th>Col {{ c }}</th>{% endfor %}
@@ -26,7 +27,7 @@
     </table>
 </div>
 
-<div class="status" id="status">Loading...</div>
+
 
 {% endblock %}
 

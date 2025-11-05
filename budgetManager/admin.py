@@ -3,7 +3,7 @@ from .models import Sheet, Cell, CellChange
 
 @admin.register(Sheet)
 class SheetAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "owner", "created_at")
+    list_display = ("id", "name", "created_at")
 
 @admin.register(Cell)
 class CellAdmin(admin.ModelAdmin):
@@ -12,5 +12,5 @@ class CellAdmin(admin.ModelAdmin):
 
 @admin.register(CellChange)
 class CellChangeAdmin(admin.ModelAdmin):
-    list_display = ("id", "cell", "changed_by", "version", "changed_at")
-    list_filter = ("changed_by",)
+    list_display = ("id", "cell", "version", "changed_at")
+    list_filter = ("changed_at",)

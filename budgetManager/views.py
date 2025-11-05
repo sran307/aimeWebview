@@ -4,13 +4,56 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST, require_GET
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
-from .models import Sheet, Cell, CellChange
+from .models import Sheet, Cell, CellChange, FinancialYear, Months
 
 # @login_required
 def budgetManager(request):
-    # simple page showing an editable grid
-    sheet = get_object_or_404(Sheet, id=1)
+    today = date.today()
+
+    latest_fy = FinancialYear.objects.order_by("-startDate").first()
+
+    if latest_fy:
+        # If current date is within the existing financial year, do nothing
+        if today <= latest_fy.endDate:
+            fy = latest_fy
+            print(f"✅ Current Financial Year still active: {fy.yearDesc}")
+        else:
+            # Otherwise, create the next financial year
+            next_year = int(latest_fy.year) + 1
+            next_year_desc = f"{next_year}-{str(next_year + 1)[-2:]}"
+            fy = FinancialYear.objects.create(
+                year=str(next_year),
+                yearDesc=next_year_desc,
+                startDate=date(next_year, 4, 1),
+                endDate=date(next_year + 1, 3, 31)
+            )
+            print(f"🆕 Created new Financial Year: {fy.yearDesc}")
+    else:
+        # No record exists, create the first one
+        current_year = today.year
+        fy = FinancialYear.objects.create(
+            year=str(current_year),
+            yearDesc=f"{current_year}-{str(current_year + 1)[-2:]}",
+            startDate=date(current_year, 4, 1),
+            endDate=date(current_year + 1, 3, 31)
+        )
+        print(f"🌱 Created initial Financial Year: {fy.yearDesc}")
+
+    return render(request, "budget/index.html")
+
+def monthlyBudgetSheet(request):
+    finYear=FinancialYear.objects.order_by("-id").first()
+    current_month = date.today().month
+    month = Months.objects.get(id=current_month)
+    
+    sheet, created = Sheet.objects.get_or_create(
+        finYear=finYear,
+        month_id=current_month,  
+        defaults={'name': f'{month.monthAbbr} {finYear.yearDesc}'}
+    )
+
     # pass basic metadata (you can change grid size as needed)
     context = {"sheet": sheet, "rows": range(1, 21), "cols": range(1, 11)}
     return render(request, "budget/sheet.html", context)
@@ -77,7 +120,7 @@ def save_cell(request):
                 cell.save(update_fields=["value", "version", "updated_at"])
                 CellChange.objects.create(
                     cell=cell, old_value=old, new_value=new_value,
-                    changed_by=request.user, version=cell.version
+                    version=cell.version
                 )
 
     return JsonResponse({"status": "ok", "version": cell.version})

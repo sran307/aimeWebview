@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Budget Manager{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'budgetManager:monthlyBudgetSheet' %}" class="btn btn-primary">Monthly Budget</a>
+</div>
+{% endblock %}
