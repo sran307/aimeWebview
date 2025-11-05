@@ -38,6 +38,7 @@
     window.SHEETS_INIT = {
       loadUrl: "{% url 'budgetManager:load_sheet' sheet.id %}",
       saveUrl: "{% url 'budgetManager:save_cell' %}",
+      formulaUrl: "{% url 'budgetManager:show_formula' %}",
     };
   </script>
 {% endblock %}

@@ -66,6 +66,35 @@
     }
   }
 
+  async function showSavedFormula(sheetId, row, col, value, version) {
+    try {
+      const res = await fetch(window.SHEETS_INIT.formulaUrl, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRF()
+        },
+        body: JSON.stringify({sheet_id: sheetId, row, col, value, version})
+      });
+
+      if(res.status === 409){
+        // conflict
+        const data = await res.json();
+        return {status: 'conflict', server_value: data.server_value, server_version: data.server_version};
+      }
+
+      if(!res.ok){
+        const t = await res.text();
+        return {status: 'error', text: t};
+      }
+      const data = await res.json();
+      return data;
+    } catch(e){
+      return {status: 'error', text: e.message};
+    }
+  }
+
   function attachAutosave() {
     const saveDebounced = debounce(async (td) => {
       td.classList.remove('editing');
@@ -76,8 +105,9 @@
       const value = td.textContent;
       const version = parseInt(td.dataset.version || 0);
       const res = await saveCellRequest(sheetId, row, col, value, version);
-      if(res.status === 'ok'){
+      if(res.status === 'success'){
         td.dataset.version = res.version;
+        td.innerText = res.value
         setStatus('Saved');
       } else if(res.status === 'conflict'){
         // simple client behavior: accept server value
@@ -89,12 +119,32 @@
       }
     }, 600);
 
+
+    const showFormula = debounce(async (td) => {
+      td.classList.remove('editing');
+      setStatus('Fetching...');
+      const sheetId = td.dataset.sheet;
+      const row = td.dataset.row;
+      const col = td.dataset.col;
+      const value = td.textContent;
+      const version = parseInt(td.dataset.version || 0);
+      const res = await showSavedFormula(sheetId, row, col, value, version);
+      if(res.status === 'success'){
+        td.innerText = res.formula
+        setStatus('Saved');
+      }
+    }, 600);
+
     document.querySelectorAll('.cell').forEach(td=>{
-      td.addEventListener('input', function(){
+      // td.addEventListener('input', function(){
+      //   td.classList.add('editing');
+      //   saveDebounced(td);
+      // });
+      // td.addEventListener('focus', ()=> td.classList.add('editing'));
+      td.addEventListener('focus', () => {
         td.classList.add('editing');
-        saveDebounced(td);
-      });
-      td.addEventListener('focus', ()=> td.classList.add('editing'));
+        showFormula(td);
+    });
       td.addEventListener('blur', ()=> { td.classList.remove('editing'); saveDebounced(td); });
     });
   }
