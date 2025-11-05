@@ -21,5 +21,6 @@ from django.urls.conf import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('', include('webview.urls'))
+    path('', include('webview.urls')),
+    path('bm/', include('budgetManager.urls'))
 ]

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Budget Manager{% endblock %}
+
+{% block content %}
+<!-- <h2>{{ sheet.name }}</h2> -->
+<div id="sheet-container">
+    <table id="grid">
+        <thead>
+            <tr>
+                <th></th>{% for c in cols %}<th>Col {{ c }}</th>{% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <th>Row {{ r }}</th>
+                {% for c in cols %}
+                <td contenteditable="true" data-row="{{ r }}" data-col="{{ c }}" data-sheet="{{ sheet.id }}"
+                    data-version="0" class="cell"></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="status" id="status">Loading...</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/budget/sheet.js' %}"></script>
+<script>
+    // initialize autosave
+    window.SHEETS_INIT = {
+      loadUrl: "{% url 'budgetManager:load_sheet' sheet.id %}",
+      saveUrl: "{% url 'budgetManager:save_cell' %}",
+    };
+  </script>
+{% endblock %}
