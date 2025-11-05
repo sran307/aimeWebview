@@ -4,7 +4,10 @@
 {% block title %}Budget Manager{% endblock %}
 
 {% block content %}
-<div class="container">
-    <a href="{% url 'budgetManager:monthlyBudgetSheet' %}" class="btn btn-primary">Monthly Budget</a>
+<div class="container-fluid my-5 float-end">
+   
+    <button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:add_item_modal' %}">Add Expense/Earning Items</button>
+
+    <a href="{% url 'budgetManager:monthlyBudget' %}" class="btn btn-primary">Monthly Budget</a>
 </div>
 {% endblock %}

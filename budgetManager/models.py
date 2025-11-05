@@ -53,5 +53,20 @@ class CellChange(models.Model):
     class Meta:
         ordering = ("-changed_at",)
 
+class Items(models.Model):
+    desc = models.CharField(max_length=100, null=True)
+    isExpensive = models.BooleanField(default=False)
+    
+    def __int__(self):
+        return id
 
+class monthlyData(models.Model):
+    finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="finyrs")
+    month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="monthids") 
+    item=models.ForeignKey(Items, null=True, blank=True, on_delete=models.CASCADE, related_name="items") 
+    datedOn=models.DateField(null=True)
+    amount = models.PositiveIntegerField()
+    
+    def __int__(self):
+        return id
 

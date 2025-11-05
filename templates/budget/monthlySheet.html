@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Budget Manager{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:monthlyDataModal' %}">Add Expense/Earning</button>
+    <table class="table table-dark table-striped table-bordered" id="grid">
+        <thead>
+            <tr>
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

@@ -113,5 +113,60 @@ $(function () {
         return cookieValue;
     }
 
+    function showFlashMessage(message, type = 'success') {
+        // type can be 'success', 'danger', 'warning', 'info'
+        const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+        $("#flashMessage").html(alertHtml);
 
+        // Optional: auto-hide after 3 seconds
+        setTimeout(() => {
+            $(".alert").alert('close');
+        }, 3000);
+    }
+
+
+    $(document).on('click', ".open-form-btn", function () {
+        var url = $(this).data("path");
+        var btnText = $(this).text();
+
+        // Load form HTML via AJAX
+        $.get(url, function (data) {
+            $("#modalBody").html(data);
+            $("#modalTitle").text(btnText);
+            var modal = new bootstrap.Modal($("#formModal")[0]);
+            modal.show();
+
+            // Handle submit button
+            $("#modalSubmit").off("click").on("click", function () {
+                var form = $("#modalForm")[0]; // the form inside modal
+                var formData = new FormData(form);
+
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.status === "success") {
+                            modal.hide();
+                            showFlashMessage("Item saved successfully!", "success");
+                            location.reload();
+                        } else {
+                            showFlashMessage("Error!", "danger");
+                            $("#modalBody").html(response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        showFlashMessage(error, "danger");
+                    }
+                });
+            });
+        });
+    });
 })
