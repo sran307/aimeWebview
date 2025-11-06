@@ -16,7 +16,8 @@
                 <td colspan="5">DEBT GIVEN</td>
                 <td><button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:debt_create' %}">Add
                         Debt</button></td>
-                <td colspan="5">DEBT TAKEN</td>
+                <td colspan="4">DEBT TAKEN</td>
+                <td><a class="btn btn-warning" href="{% url 'budgetManager:budgetManager' %}">Back</a></td>
             </tr>
             <tr>
                 <td colspan="2">Total Amount given : </td>
@@ -44,18 +45,18 @@
 
             {% for debt in debts %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td contenteditable="true">{{ debt.debtGivenDate | date:'d-m-Y'}}</td>
-                <td contenteditable="true">{{ debt.debtGivenTo }}</td>
-                <td contenteditable="true">{{ debt.debtGivenAmount}}</td>
-                <td contenteditable="true">
+                <td><button class="btn btn-dark open-form-btn" data-path="{% url 'budgetManager:debt_form' debt.id %}">{{ forloop.counter }}</button></td>
+                <td>{{ debt.debtGivenDate | date:'d-m-Y'}}</td>
+                <td>{{ debt.debtGivenTo }}</td>
+                <td>{{ debt.debtGivenAmount}}</td>
+                <td>
                     {% if debt.isPaid %}
                     YES
                     {% else %}
                     NO
                     {% endif %}
                 </td>
-                <td contenteditable="true">{{ debt.debtPaidDate| date:'d-m-Y'}}</td>
+                <td>{{ debt.debtPaidDate| date:'d-m-Y'}}</td>
             </tr>
             {% endfor %}
 

@@ -11,6 +11,7 @@ urlpatterns = [
     path("debt-manager/", views.debtManager, name="debtManager"),
     path("loan-manager/", views.loanManager, name="loanManager"),
     path('debts/new/', views.debt_form, name='debt_create'),
+    path('debts/<int:id>/', views.debt_form, name='debt_form'),
     path('loans/new/', views.loan_form, name='loan_create'),
 
 
@@ -18,6 +19,4 @@ urlpatterns = [
     path("api/save_cell/", views.save_cell, name="save_cell"),
     path("api/load_sheet/<int:sheet_id>/", views.load_sheet, name="load_sheet"),
     path("show_formula/", views.show_formula, name="show_formula"),
-
-
 ]
