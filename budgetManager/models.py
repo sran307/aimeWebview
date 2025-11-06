@@ -61,11 +61,18 @@ class Items(models.Model):
         return id
 
 class monthlyData(models.Model):
+    VALUE_TYPE_CHOICES = [
+        ('ET', 'Expected Total'),
+        ('MD', 'Monthly Data'),
+        ('NIC', 'NIC'),
+        ('PR', 'Prathibha'),
+    ]
     finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="finyrs")
     month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="monthids") 
     item=models.ForeignKey(Items, null=True, blank=True, on_delete=models.CASCADE, related_name="items") 
     datedOn=models.DateField(null=True)
     amount = models.PositiveIntegerField()
+    valueType = models.CharField(max_length=10, choices=VALUE_TYPE_CHOICES, default='MD', null=True)
     
     def __int__(self):
         return id

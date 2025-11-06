@@ -19,21 +19,31 @@
             {% for earning in earnings %}
             <tr>
               <th class="w-25">{{ earning.desc }}</th>
-              <th contenteditable="true" class="w-50"></th>
+            <th contenteditable="true"
+                class="editable-cell"
+                data-date="{% now 'Y-m-d' %}"
+                data-item="{{ earning.id }}"
+                data-month="{{ month.id }}"
+                data-year="{{ finYear.id }}"
+                data-path="{% url 'budgetManager:save_monthly_data' %}"
+                data-valuetype="{{ earning.desc|valuetype_from_desc }}"
+            >
+                {{ totalEarning|dict_get:earning.id|default:0 }}
+            </th>
             </tr>
             {% endfor %}
             <tr>
               <th>Total</th>
-              <th contenteditable="true"></th>
+              <th>{{ overall_earnings}}</th>
             </tr>
           </table>
         </td>
         <td>
           <table class="table table-bordered table-dark table-sm mb-0">
-            <tr><th class="w-25">Expected Total</th><th contenteditable="true" class="w-50"></th></tr>
-            <tr><th>Expected Balance</th><th contenteditable="true"></th></tr>
-            <tr><th>Actual Total</th><th contenteditable="true"></th></tr>
-            <tr><th>Actual Balance</th><th contenteditable="true"></th></tr>
+            <tr><th class="w-25">Expected Total</th><th contenteditable="true" class="w-50">{{ overall_expected_total }}</th></tr>
+            <tr><th>Expected Balance</th><th contenteditable="true">{{ expectedBalance }} </th></tr>
+            <tr><th>Actual Total</th><th contenteditable="true">{{ overall_actual_total }}</th></tr>
+            <tr><th>Actual Balance</th><th contenteditable="true">{{ actualBalance }}</th></tr>
           </table>
         </td>
       </tr>
@@ -52,21 +62,29 @@
       <tr class="table-warning text-dark fw-bold">
         <td>Expect Expense</td>
         {% for expense in expenses %}
-        <td contenteditable="true"></td>
+        <td  contenteditable="true"
+            class="editable-cell"
+            data-date="{% now 'Y-m-d' %}"
+            data-item="{{ expense.id }}"
+            data-month="{{ month.id }}"
+            data-year="{{ finYear.id }}"
+            data-path="{% url 'budgetManager:save_monthly_data' %}"
+            data-valuetype="ET"
+        >{{ expectTotal|dict_get:expense.id|default:0 }}</td>
         {% endfor %}
       </tr>
 
       <tr class="table-danger text-white fw-bold">
         <td>Total Expense</td>
         {% for expense in expenses %}
-        <td contenteditable="true"></td>
+        <td>{{ totals|dict_get:expense.id|default:0 }}</td>
         {% endfor %}
       </tr>
 
       <tr class="table-success text-white fw-bold">
         <td>Balance Amount</td>
         {% for expense in expenses %}
-        <td contenteditable="true"></td>
+        <td>{{ balances|dict_get:expense.id|default:0 }}</td>
         {% endfor %}
       </tr>
 
@@ -81,7 +99,8 @@
             data-month="{{ month.id }}"
             data-year="{{ finYear.id }}"
             data-path="{% url 'budgetManager:save_monthly_data' %}"
-        >{% get_value data_dict expense.id date %}</td>
+            data-valuetype="MD"
+        >{% get_value data_dict expense.id date 'MD' %}</td>
         {% endfor %}
       </tr>
       {% endfor %}

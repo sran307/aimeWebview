@@ -7,6 +7,7 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 import calendar
 from datetime import date, datetime
+from collections import defaultdict
 
 from .models import *
 from .forms import ItemsForm,MonthlyDataForm
@@ -57,8 +58,49 @@ def monthlyBudget(request):
     dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
 
     existing_data = monthlyData.objects.filter(finYear=finYear.id, month__id=current_month)
-    data_dict = {(d.item_id, d.datedOn): d.amount for d in existing_data}
-    context={"earnings":earnings,"expenses":expenses,'dates':dates, 'finYear':finYear, 'month':month, "data_dict": data_dict}
+    data_dict = {(d.item_id, d.datedOn, d.valueType): d.amount for d in existing_data}
+
+    totals = defaultdict(int)
+    for (item_id, date1, valueType), amount in data_dict.items():
+        if(valueType == 'MD'):
+            totals[item_id] += amount
+
+    expectTotal = defaultdict(int)
+    for (item_id, date1, valueType), amount in data_dict.items():
+        if(valueType == 'ET'):
+            expectTotal[item_id] += amount
+
+    balances = defaultdict(int)
+    for item_id in set(list(totals.keys()) + list(expectTotal.keys())):
+        balances[item_id] = expectTotal[item_id] - totals[item_id]
+    
+    totalEarning = defaultdict(int)
+    for (item_id, date1, valueType), amount in data_dict.items():
+        if(valueType != 'MD' and valueType != 'ET'):
+            totalEarning[item_id] += amount
+
+    overall_expected_total = sum(expectTotal.values())
+    overall_actual_total = sum(totals.values())
+    overall_earnings = sum(totalEarning.values())
+
+    context={
+        "earnings":earnings,
+        "expenses":expenses,
+        'dates':dates, 
+        'finYear':finYear, 
+        'month':month, 
+        "data_dict": data_dict, 
+        'totals':totals, 
+        'expectTotal':expectTotal, 
+        'balances':balances, 
+        'overall_expected_total':overall_expected_total,
+        'overall_actual_total':overall_actual_total, 
+        'totalEarning' : totalEarning,
+        'overall_earnings' : overall_earnings,
+        'expectedBalance':overall_earnings-overall_expected_total,
+        'actualBalance':overall_earnings-overall_actual_total
+
+        }
     return render(request, "budget/monthlySheet.html", context)
 
 def addItemModal(request):
@@ -78,6 +120,7 @@ def save_monthly_data(request):
         item_id = request.POST.get("item")
         month_id = request.POST.get("month")
         year_id = request.POST.get("year")
+        valueType = request.POST.get("valueType")
 
         date = datetime.strptime(date_str, "%Y-%m-%d").date()
         
@@ -86,7 +129,8 @@ def save_monthly_data(request):
             month_id=month_id,
             item_id=item_id,
             datedOn=date,
-            defaults={"amount": value or 0}
+            defaults={"amount": value or 0},
+            valueType=valueType
         )
         return JsonResponse({"status": "ok", "created": created})
 
