@@ -7,7 +7,7 @@ urlpatterns = [
     path("index/", views.budgetManager, name="budgetManager"),
     path("monthlyBudget/", views.monthlyBudget, name="monthlyBudget"),
     path("add_item_modal/", views.addItemModal, name="add_item_modal"),
-    path("add_monthly-data/", views.monthlyDataModal, name="monthlyDataModal"),
+    path("save_monthly_data/", views.save_monthly_data, name="save_monthly_data"),
 
 
 

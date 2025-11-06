@@ -5,9 +5,10 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST, require_GET
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
-from datetime import date
+import calendar
+from datetime import date, datetime
 
-from .models import Sheet, Cell, CellChange, FinancialYear, Months
+from .models import *
 from .forms import ItemsForm,MonthlyDataForm
 
 # @login_required
@@ -46,7 +47,19 @@ def budgetManager(request):
     return render(request, "budget/index.html")
 
 def monthlyBudget(request):
-    return render(request, "budget/monthlySheet.html")
+    earnings = Items.objects.filter(isExpensive=False)
+    expenses = Items.objects.filter(isExpensive=True)
+
+    finYear=FinancialYear.objects.order_by("-id").first()
+    current_month = date.today().month
+    month = Months.objects.get(id=current_month)
+    days = calendar.monthrange(int(finYear.year), current_month)[1]
+    dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
+
+    existing_data = monthlyData.objects.filter(finYear=finYear.id, month__id=current_month)
+    data_dict = {(d.item_id, d.datedOn): d.amount for d in existing_data}
+    context={"earnings":earnings,"expenses":expenses,'dates':dates, 'finYear':finYear, 'month':month, "data_dict": data_dict}
+    return render(request, "budget/monthlySheet.html", context)
 
 def addItemModal(request):
     if request.method == "POST":
@@ -58,18 +71,28 @@ def addItemModal(request):
         form = ItemsForm()
     return render(request, "items/modal_form.html", {"form": form})
 
-def monthlyDataModal(request):
+def save_monthly_data(request):
     if request.method == "POST":
-        form = MonthlyDataForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({"status": "success"})
-        else:
-            # Return the form HTML with errors
-            return render(request, "monthly_data/modal_form.html", {"form": form})
-    else:
-        form = MonthlyDataForm()
-    return render(request, "monthly_data/modal_form.html", {"form": form})
+        date_str = request.POST.get("date")
+        value = request.POST.get("value")
+        item_id = request.POST.get("item")
+        month_id = request.POST.get("month")
+        year_id = request.POST.get("year")
+
+        date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        
+        obj, created = monthlyData.objects.update_or_create(
+            finYear_id=year_id,
+            month_id=month_id,
+            item_id=item_id,
+            datedOn=date,
+            defaults={"amount": value or 0}
+        )
+        return JsonResponse({"status": "ok", "created": created})
+
+
+
+
 
 
 def monthlyBudgetSheet(request):
