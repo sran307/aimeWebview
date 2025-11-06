@@ -13,6 +13,7 @@ urlpatterns = [
     path('debts/new/', views.debt_form, name='debt_create'),
     path('debts/<int:id>/', views.debt_form, name='debt_form'),
     path('loans/new/', views.loan_form, name='loan_create'),
+    path('loans/<int:id>/', views.loan_form, name='loan_form'),
 
 
     path("monthlyBudgetSheet/", views.monthlyBudgetSheet, name="monthlyBudgetSheet"),
