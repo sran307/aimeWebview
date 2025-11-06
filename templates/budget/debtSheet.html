@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Debt Manager{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/budget/monthlyView.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-2">
+    <table class="table table-dark table-bordered table-sm text-center align-middle">
+        <tbody>
+            <tr>
+                <td colspan="5">DEBT GIVEN</td>
+                <td><button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:debt_create' %}">Add
+                        Debt</button></td>
+                <td colspan="5">DEBT TAKEN</td>
+            </tr>
+            <tr>
+                <td colspan="2">Total Amount given : </td>
+                <td colspan="2">Total Amount Get</td>
+                <td colspan="2">Amount To Get</td>
+                <td colspan="2">Total Amount Taken : </td>
+                <td colspan="2">Total Amount Paid</td>
+                <td>Balance For Pay</td>
+            </tr>
+            <tr>
+                <td>Sl.no</td>
+                <td>Date</td>
+                <td>TO</td>
+                <td>Amount</td>
+                <td>Is Paid</td>
+                <td>Paid On</td>
+
+                <td>Date</td>
+                <td>From</td>
+                <td>Amount</td>
+                <td>Is Paid</td>
+                <td>Paid On</td>
+            </tr>
+
+
+            {% for debt in debts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td contenteditable="true">{{ debt.debtGivenDate | date:'d-m-Y'}}</td>
+                <td contenteditable="true">{{ debt.debtGivenTo }}</td>
+                <td contenteditable="true">{{ debt.debtGivenAmount}}</td>
+                <td contenteditable="true">
+                    {% if debt.isPaid %}
+                    YES
+                    {% else %}
+                    NO
+                    {% endif %}
+                </td>
+                <td contenteditable="true">{{ debt.debtPaidDate| date:'d-m-Y'}}</td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Loan Manager{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/budget/monthlyView.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-2">
+    <div class="row">
+        <div class="col-sm-6">
+
+            <table class="table table-dark table-bordered table-sm text-center align-middle">
+                <tbody>
+                    <tr>
+                        <td colspan="7">Loan Details</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>Taken From</td>
+                        <td>Amount</td>
+                        <td>Int. Rate</td>
+                        <td>Amount Paid</td>
+                        <td>Balance for Pay</td>
+                        <td>Total Int. Paid</td>
+                        <td>Is Closed</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-dark table-bordered table-sm text-center align-middle">
+                <tbody>
+                    <tr>
+                        <td colspan="7">Loan Transactions</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>Taken From</td>
+                        <td>Amount For Pay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}

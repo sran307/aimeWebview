@@ -10,7 +10,7 @@ from datetime import date, datetime
 from collections import defaultdict
 
 from .models import *
-from .forms import ItemsForm,MonthlyDataForm
+from .forms import *
 
 # @login_required
 def budgetManager(request):
@@ -149,9 +149,37 @@ def save_monthly_data(request):
         )
         return JsonResponse({"status": "ok", "created": created})
 
+def debtManager(request):
+    debts = DebtManager.objects.all()
+    context = {
+        'numbers': range(1, 101),
+        'debts':debts,
+    }
+    return render(request, 'budget/debtSheet.html', context)
 
+def debt_form(request, id=None):
+    if id:
+        debt = get_object_or_404(DebtManager, id=id)
+    else:
+        debt = None
 
+    if request.method == 'POST':
+        form = DebtManagerForm(request.POST, instance=debt)
+        if form.is_valid():
+            debt_obj = form.save(commit=False)
 
+            if not debt_obj.isPaid:
+                debt_obj.debtPaidDate = None
+
+            debt_obj.save()
+            return JsonResponse({"status": "success"})
+    else:
+        form = DebtManagerForm(instance=debt)
+
+    return render(request, 'budget/debt_form.html', {'form': form})
+
+def loanManager(request):
+    return render(request, 'budget/loanSheet.html')
 
 
 def monthlyBudgetSheet(request):

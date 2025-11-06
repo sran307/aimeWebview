@@ -77,3 +77,40 @@ class monthlyData(models.Model):
     def __int__(self):
         return id
 
+class LoanManager(models.Model):
+    loanTakenDate = models.DateField(null=True)
+    loanTakenFrom = models.CharField(max_length=100, null=True)
+    loanAmount = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        default=0.00
+    )
+    loanInterest = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00
+    )
+    loanAmountPaid = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00
+    )
+    loanPaidDate = models.DateField(null=True)
+    isClosed = models.BooleanField(default=False)
+
+    def __int__(self):
+        return id
+    
+class DebtManager(models.Model):
+    debtGivenDate = models.DateField(null=True)
+    debtGivenTo = models.CharField(max_length=100, null=True)
+    debtGivenAmount =  models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        default=0.00
+    )
+    debtPaidDate = models.DateField(null=True, blank=True)
+    isPaid = models.BooleanField(default=False)
+
+    def __int__(self):
+        return id

@@ -8,6 +8,10 @@ urlpatterns = [
     path("monthlyBudget/", views.monthlyBudget, name="monthlyBudget"),
     path("add_item_modal/", views.addItemModal, name="add_item_modal"),
     path("save_monthly_data/", views.save_monthly_data, name="save_monthly_data"),
+    path("debt-manager/", views.debtManager, name="debtManager"),
+    path("loan-manager/", views.loanManager, name="loanManager"),
+    path('debts/new/', views.debt_form, name='debt_create'),
+
 
 
 
