@@ -51,9 +51,22 @@ def monthlyBudget(request):
     earnings = Items.objects.filter(isExpensive=False)
     expenses = Items.objects.filter(isExpensive=True)
 
-    finYear=FinancialYear.objects.order_by("-id").first()
-    current_month = date.today().month
+    selected_year_id = request.GET.get('year') 
+    selected_month_id = request.GET.get('month')
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    if(selected_month_id):
+        current_month = Months.objects.get(id=selected_month_id).id
+    else:
+        current_month = date.today().month
     month = Months.objects.get(id=current_month)
+
+    months = Months.objects.all()
+    finYears = FinancialYear.objects.all()
+   
+    
     days = calendar.monthrange(int(finYear.year), current_month)[1]
     dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
 
@@ -89,6 +102,8 @@ def monthlyBudget(request):
         'dates':dates, 
         'finYear':finYear, 
         'month':month, 
+        'finYears':finYears, 
+        'months':months, 
         "data_dict": data_dict, 
         'totals':totals, 
         'expectTotal':expectTotal, 

@@ -15,6 +15,32 @@
     <thead>
       <tr>
         <td>
+            <form method="get" id="filterForm" class="row g-2 mb-3">
+                <div class="col-md-3">
+                    <select name="year" id="yearSelect" class="form-select">
+                    {% for y in finYears %}
+                        <option value="{{ y.id }}" {% if y.id == selected_year_id %}selected{% endif %}>
+                        {{ y.year }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                    <select name="month" id="monthSelect" class="form-select">
+                    {% for m in months %}
+                        <option value="{{ m.id }}" {% if m.id == month.id %}selected{% endif %}>
+                        {{ m.monthDesc }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </form>
+
           <table class="table table-bordered table-dark table-sm mb-0">
             {% for earning in earnings %}
             <tr>
