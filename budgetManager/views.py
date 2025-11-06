@@ -179,7 +179,34 @@ def debt_form(request, id=None):
     return render(request, 'budget/debt_form.html', {'form': form})
 
 def loanManager(request):
-    return render(request, 'budget/loanSheet.html')
+    loans = LoanManager.objects.all()
+    context = {
+        'loans':loans,
+    }
+    return render(request, 'budget/loanSheet.html', context)
+
+def loan_form(request, id=None):
+    loan = get_object_or_404(LoanManager, id=id) if id else None
+
+    if request.method == 'POST':
+        form = LoanManagerForm(request.POST, instance=loan)
+        if form.is_valid():
+            loan_obj = form.save(commit=False)
+
+            # If loan not closed, make sure paid date is None
+            if not loan_obj.isClosed:
+                loan_obj.loanPaidDate = None
+            else:
+                # Optional: Auto-set today’s date when loan is closed and no paid date entered
+                if not loan_obj.loanPaidDate:
+                    loan_obj.loanPaidDate = date.today()
+
+            loan_obj.save()
+            return JsonResponse({"status": "success"})
+    else:
+        form = LoanManagerForm(instance=loan)
+
+    return render(request, 'budget/loan_form.html', {'form': form})
 
 
 def monthlyBudgetSheet(request):

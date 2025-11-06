@@ -11,9 +11,7 @@ urlpatterns = [
     path("debt-manager/", views.debtManager, name="debtManager"),
     path("loan-manager/", views.loanManager, name="loanManager"),
     path('debts/new/', views.debt_form, name='debt_create'),
-
-
-
+    path('loans/new/', views.loan_form, name='loan_create'),
 
 
     path("monthlyBudgetSheet/", views.monthlyBudgetSheet, name="monthlyBudgetSheet"),

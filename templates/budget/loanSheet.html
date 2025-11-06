@@ -17,6 +17,8 @@
                 <tbody>
                     <tr>
                         <td colspan="7">Loan Details</td>
+                        <td><button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:loan_create' %}">Add
+                        Loan</button></td>
                     </tr>
                     <tr>
                         <td>Date</td>
@@ -29,6 +31,23 @@
                         <td>Is Closed</td>
 
                     </tr>
+
+                     {% for loan in loans %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td contenteditable="true">{{ loan.loanGivenDate | date:'d-m-Y'}}</td>
+                <td contenteditable="true">{{ loan.loanGivenTo }}</td>
+                <td contenteditable="true">{{ loan.loanGivenAmount}}</td>
+                <td contenteditable="true">
+                    {% if loan.isPaid %}
+                    YES
+                    {% else %}
+                    NO
+                    {% endif %}
+                </td>
+                <td contenteditable="true">{{ loan.loanPaidDate| date:'d-m-Y'}}</td>
+            </tr>
+            {% endfor %}
                 </tbody>
             </table>
         </div>

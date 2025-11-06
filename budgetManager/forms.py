@@ -57,3 +57,30 @@ class DebtManagerForm(forms.ModelForm):
             'debtPaidDate': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'isPaid': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+class LoanManagerForm(forms.ModelForm):
+    class Meta:
+        model = LoanManager
+        fields = [
+            'loanTakenDate',
+            'loanTakenFrom',
+            'loanAmount',
+            'loanInterest',
+            'isClosed',
+        ]
+        widgets = {
+            'loanTakenDate': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'loanTakenFrom': forms.TextInput(attrs={'class': 'form-control'}),
+            'loanAmount': forms.NumberInput(attrs={'step': '0.01', 'class': 'form-control'}),
+            'loanInterest': forms.NumberInput(attrs={'step': '0.01', 'class': 'form-control'}),
+            'isClosed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # These fields are excluded from validation if they exist
+            if 'loanAmountPaid' in self.fields:
+                self.fields['loanAmountPaid'].required = False
+            if 'loanPaidDate' in self.fields:
+                self.fields['loanPaidDate'].required = False
+
