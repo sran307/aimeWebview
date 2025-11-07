@@ -9,6 +9,10 @@ def get_value(data_dict, item_id, date, valueType):
     """
     return data_dict.get((item_id, date, valueType), "")
 
+@register.simple_tag
+def get_value_2(data_dict, item_id, valueType):
+    return data_dict.get((item_id, valueType), "")
+
 @register.filter
 def dict_get(d, key):
     if not d:

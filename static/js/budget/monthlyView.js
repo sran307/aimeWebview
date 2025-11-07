@@ -8,6 +8,10 @@ $(document).on('blur', '.editable-cell', function () {
     const year = cell.data('year');
     const path = cell.data('path');
     const valueType = cell.data('valuetype');
+    const reference = cell.data('reference');
+    var refValue = $('.'+reference).text();
+    const slNo = cell.data('slno');
+   
     $.ajax({
         url: path,  // your Django URL
         type: 'POST',
@@ -17,7 +21,10 @@ $(document).on('blur', '.editable-cell', function () {
             item: item,
             month: month,
             year: year,
-            valueType: valueType
+            valueType: valueType,
+            refValue:refValue,
+            slNo:slNo,
+
         },
         success: function (resp) {
             cell.css('border', '2px solid #28a745');  // green border
@@ -60,7 +67,7 @@ $(document).on('change', '.select-stock', function () {
         currentCell.trigger('blur');
 
         if (currentModal) {
-            currentModal.hide(); // hides the modal instance we created earlier
+            currentModal.hide();
             currentModal = null;
         }
     }

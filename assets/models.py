@@ -20,9 +20,10 @@ class stockTransactions(models.Model):
     finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="transYr")
     month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="transMnth") 
     heading=models.ForeignKey(stockHeadings, null=True, blank=True, on_delete=models.CASCADE, related_name="transHead")
-    transDate=models.DateField(null=True)
     transValue=models.TextField(blank=True, null=True)
     transType=models.CharField(max_length=15, choices=VALUE_TYPE_CHOICES, blank=True, null=True)
+    refNo = models.PositiveIntegerField(blank=True, null=True)
+    slNo = models.PositiveIntegerField(blank=True, null=True)
 
     def __int__(self):
         return id

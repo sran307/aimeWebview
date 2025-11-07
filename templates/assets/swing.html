@@ -21,6 +21,11 @@
                     {% endfor %}
                 </tr>
             </thead>
+            <tbody>
+                {% for heading in stockHeadings %}
+                    <td>{% get_value_2 data_dict heading.id 'SWING' %}</td>
+                {% endfor %}
+            </tbody>
         </table>
        
     </div>

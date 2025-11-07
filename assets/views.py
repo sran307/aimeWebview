@@ -57,29 +57,49 @@ def mtftTransactions(request):
 
 def saveTrans(request):
     if request.method == "POST":
-        date_str = request.POST.get("date")
+        # date_str = request.POST.get("date")
         value = request.POST.get("value")
         item_id = request.POST.get("item")
         month_id = request.POST.get("month")
         year_id = request.POST.get("year")
         valueType = request.POST.get("valueType")
-
-        date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        slNo = request.POST.get("slNo")
+        refValue = request.POST.get("refValue")
         
         obj, created = stockTransactions.objects.update_or_create(
             finYear_id=year_id,
             month_id=month_id,
             heading_id=item_id,
-            transDate=date,
-            defaults={"transValue": value or ''},
+            slNo=slNo,
+            defaults={"transValue": value or '', 'refNo':refValue or 0},
             transType=valueType
         )
         return JsonResponse({"status": "ok", "created": created})
 
 def swingManager(request):
     headings = stockHeadings.objects.all()
+
+    selected_year_id = request.GET.get('year') 
+    selected_month_id = request.GET.get('month')
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    if(selected_month_id):
+        current_month = Months.objects.get(id=selected_month_id).id
+    else:
+        current_month = date.today().month
+    month = Months.objects.get(id=current_month)
+
+    months = Months.objects.all()
+    finYears = FinancialYear.objects.all()
+
+    transactions = stockTransactions.objects.filter(finYear=finYear.id, transType='SWING')
+    data_dict = {(d.heading.id, d.transType): d.transValue for d in transactions}
+
     context={
-        'stockHeadings':headings
+        'stockHeadings':headings,
+        'data_dict':data_dict
     }
     return render(request, 'assets/swing.html', context)
 
@@ -106,7 +126,16 @@ def swingTransactions(request):
     headings = stockHeadings.objects.all()
 
     transactions = stockTransactions.objects.filter(finYear=finYear.id, month__id=current_month, transType='SWING')
-    data_dict = {(d.heading.id, d.transDate, d.transType): d.transValue for d in transactions}
+    data_dict = {}
+
+    for d in transactions:
+        key = (d.heading.id, d.slNo, d.transType)
+        data_dict[key] = d.transValue
+
+        # if this is a reference cell entry (example heading id = 2 for reference)
+        if d.heading.itemName == 'reference':
+            data_dict[('reference', d.slNo, d.transType)] = d.transValue
+
 
     context={
         'stockHeadings':headings,
@@ -116,6 +145,7 @@ def swingTransactions(request):
         'months':months,
         'finYears':finYears,
         'data_dict':data_dict,
+        'numbers': range(1, 101),
     }
     return render(request, 'assets/swingTrans.html', context)
 
