@@ -132,9 +132,7 @@ def swingTransactions(request):
         key = (d.heading.id, d.slNo, d.transType)
         data_dict[key] = d.transValue
 
-        # if this is a reference cell entry (example heading id = 2 for reference)
-        if d.heading.itemName == 'reference':
-            data_dict[('reference', d.slNo, d.transType)] = d.transValue
+        data_dict[('reference', d.slNo, d.transType)] = d.refNo
 
 
     context={
