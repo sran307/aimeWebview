@@ -23,4 +23,9 @@ urlpatterns = [
 
     path("show/stocks/", views.showStocks, name="showStocks"),
 
+    path("mf/", views.mfManager, name="mfManager"),
+    path("mf/transactions/", views.mfTransactions, name="mfTransactions"),
+
+    path("show/mf/", views.showMfs, name="showMfs"),
+
 ]

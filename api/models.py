@@ -357,3 +357,13 @@ class assets(models.Model):
 
     def __int__(self):
         return self.id
+
+class mfNames(models.Model):
+    mfName=models.CharField(max_length=100)
+    isActive=models.BooleanField(default=True)
+
+    class Meta:
+        db_table='mf_names'
+    
+    def __str__(self):
+        return self.mfName

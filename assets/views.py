@@ -255,3 +255,53 @@ def showStocks(request):
         'stocks':stocks
     }
     return render(request, 'assets/showStocks.html', context)
+
+def mfManager(request):
+    headings = stockHeadings.objects.all()
+    context={
+        'stockHeadings':headings
+    }
+    return render(request, 'assets/mf.html', context)
+
+def mfTransactions(request):
+    selected_year_id = request.GET.get('year') 
+    selected_month_id = request.GET.get('month')
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    if(selected_month_id):
+        current_month = Months.objects.get(id=selected_month_id).id
+    else:
+        current_month = date.today().month
+    month = Months.objects.get(id=current_month)
+
+    months = Months.objects.all()
+    finYears = FinancialYear.objects.all()
+   
+    
+    days = calendar.monthrange(int(finYear.year), current_month)[1]
+    dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
+
+    headings = stockHeadings.objects.all()
+
+    transactions = stockTransactions.objects.filter(finYear=finYear.id, month__id=current_month, transType='MF')
+    data_dict = {(d.heading.id, d.transDate, d.transType): d.transValue for d in transactions}
+
+    context={
+        'stockHeadings':headings,
+        'dates':dates,
+        'month':month,
+        'finYear':finYear,
+        'months':months,
+        'finYears':finYears,
+        'data_dict':data_dict,
+    }
+    return render(request, 'assets/mfTrans.html', context)
+
+def showMfs(request):
+    mfs = mfNames.objects.filter(isActive=True)
+    context={
+        'mfs':mfs
+    }
+    return render(request, 'assets/showMf.html', context)
