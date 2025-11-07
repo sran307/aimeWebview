@@ -14,6 +14,7 @@ class stockTransactions(models.Model):
         ('MTFT', 'Margin Trading Fund'),
         ('SWING', 'Swing Trading'),
         ('LONG', 'Long Posintion'),
+        ('OPTION', 'OPtion trading data'),
     ]
     finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="transYr")
     month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="transMnth") 

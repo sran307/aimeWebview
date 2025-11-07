@@ -36,7 +36,7 @@
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
                 <div class="col-md-1">
-                    <a class="btn btn-secondary float-end mb-1" href="{% url 'assets:mtftManager' %}">Go Back</a>
+                    <a class="btn btn-secondary float-end mb-1" href="{% url 'assets:intraManager' %}">Go Back</a>
                 </div>
             </form>
         
@@ -59,8 +59,8 @@
                         data-month="{{ month.id }}"
                         data-year="{{ finYear.id }}"
                         data-path="{% url 'assets:saveTrans' %}"
-                        data-valuetype="MTFT"
-                    >{% get_value data_dict heading.id date 'MTFT' %}</td>
+                        data-valuetype="INTRA"
+                    >{% get_value data_dict heading.id date 'INTRA' %}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
