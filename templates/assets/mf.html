@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Mutual Funds Manager{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/budget/monthlyView.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid mt-1">
+         <a class="btn btn-secondary">MUTUAL FUND DETAILS</a>
+        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:mfTransactions' %}">Goto Transactions</a>
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    {% for heading in stockHeadings %}
+                        <td>{{ heading.itemName }}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+        </table>
+       
+    </div>
+
+{% endblock %}

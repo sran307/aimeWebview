@@ -1,0 +1,6 @@
+<select class="form-select select-stock">
+    <option value="">--select--</option>
+    {% for mf in mfs %}
+        <option value="{{ mf.mfName}}"> {{ mf.mfName}} </option>
+        {% endfor %}
+</select>
