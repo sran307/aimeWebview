@@ -21,4 +21,6 @@ urlpatterns = [
     path("option/", views.longManager, name="optionManager"),
     path("option/transactions/", views.longTransactions, name="optionTransactions"),
 
+    path("show/stocks/", views.showStocks, name="showStocks"),
+
 ]

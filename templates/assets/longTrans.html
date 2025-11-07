@@ -53,13 +53,14 @@
                     <td>{{ date|date:"d/m/Y" }}</td>
                     {% for heading in stockHeadings %}
                     <td  contenteditable="true"
-                        class="editable-cell"
+                        class="editable-cell {% if heading.itemName == 'stockName'%} show-stock-name {% endif %}"
                         data-date="{{ date|date:'Y-m-d' }}"
                         data-item="{{ heading.id }}"
                         data-month="{{ month.id }}"
                         data-year="{{ finYear.id }}"
                         data-path="{% url 'assets:saveTrans' %}"
                         data-valuetype="LONG"
+                        data-stockurl="{% url 'assets:showStocks' %}"
                     >{% get_value data_dict heading.id date 'LONG' %}</td>
                     {% endfor %}
                 </tr>

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 from budgetManager.models import *
+from api.models import *
+
 import calendar
 from datetime import date, datetime
 from collections import defaultdict
@@ -246,3 +248,10 @@ def optionTransactions(request):
         'data_dict':data_dict,
     }
     return render(request, 'assets/optionTrans.html', context)
+
+def showStocks(request):
+    stocks = StockNames.objects.all()
+    context={
+        'stocks':stocks
+    }
+    return render(request, 'assets/showStocks.html', context)

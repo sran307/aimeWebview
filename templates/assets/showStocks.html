@@ -1,0 +1,6 @@
+<select class="form-select select-stock">
+    <option value="">--select--</option>
+    {% for stock in stocks %}
+        <option value="{{ stock.stockName}}">{{ stock.stockCode }} - {{ stock.stockName}} </option>
+        {% endfor %}
+</select>
