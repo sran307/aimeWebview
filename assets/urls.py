@@ -28,4 +28,7 @@ urlpatterns = [
 
     path("show/mf/", views.showMfs, name="showMfs"),
 
+    path("process/<str:transType>/<str:processType>/", views.process, name="process")
+
+
 ]

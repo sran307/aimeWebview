@@ -11,8 +11,9 @@
 {% block content %}
 
     <div class="container-fluid mt-1">
-         <a class="btn btn-secondary">SWING  TRADING DETAILS</a>
-        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:swingTransactions' %}">Goto Transactions</a>
+        <a class="btn btn-secondary">SWING  TRADING DETAILS</a>
+        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:process' 'SWING' 'N' %}">Process</a>
+        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:swingTransactions'  %}">Goto Transactions</a>
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>

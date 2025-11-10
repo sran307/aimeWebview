@@ -12,7 +12,6 @@ def add_initial_stockheadings(apps, schema_editor):
         'amntPerStock',
         'brockerage',
         'tax',
-        'totalAmnt',
         'buyReason',
         'sellReason',
         'remarks'

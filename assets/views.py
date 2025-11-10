@@ -2,11 +2,12 @@ from django.shortcuts import render
 from .models import *
 from budgetManager.models import *
 from api.models import *
-
+from django.http import HttpResponse
 import calendar
 from datetime import date, datetime
 from collections import defaultdict
 from django.http import JsonResponse, HttpResponseBadRequest
+from django.db.models import F
 
 
 def assets(request):
@@ -333,3 +334,79 @@ def showMfs(request):
         'mfs':mfs
     }
     return render(request, 'assets/showMf.html', context)
+
+
+def process(request, transType, processType):
+    if(processType == 'N'):
+        stockTrans = stockTransactions.objects.filter(transType=transType, isProcessed=False)
+        rows = (
+            stockTransactions.objects
+            .filter(transType='SWING', isProcessed=False)
+            .select_related('heading')
+            .values(
+                'refNo',
+                'slNo',
+                heading_desc=F('heading__itemName'),
+                transValue1=F('transValue')
+            )
+            .order_by('refNo', 'slNo', 'heading_id')
+        )
+
+        grouped_data = {}
+        for row in rows:
+            ref_no = row['refNo']
+            sl_no = row['slNo']
+            heading = row['heading_desc']
+            value = row['transValue1']
+
+            grouped_data.setdefault(ref_no, {})
+            grouped_data[ref_no].setdefault(sl_no, {})
+            grouped_data[ref_no][sl_no][heading] = value
+
+        
+        for ref_no, sl_data in grouped_data.items():
+            buy_data = None
+            sell_data = None
+            for sl_no, data in sl_data.items():
+                if data.get('transaction') == 'buy':
+                    stock_name = getattr(buy_data, 'stockName', None)
+                    stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+            
+                    # Parse dates safely
+                    def parse_date(date_str):
+                        try:
+                            return datetime.strptime(date_str, "%d/%m/%Y").date()
+                        except Exception:
+                            return None
+
+                    purchased_qty = int(buy_data.get('Quantity') or 0)
+                    sell_qty = int(sell_data.get('Quantity') or 0)
+                    purchased_rate = int(buy_data.get('Rate') or 0)
+                    sell_rate = int(sell_data.get('Rate') or 0)
+                    total_purchased = purchased_qty * purchased_rate
+                    total_sold = sell_qty * sell_rate
+                    profit = total_sold - total_purchased
+
+                    stockDetails.objects.create(
+                        finYear_id=1,
+                        month_id=11, 
+                        stock=stock_obj,
+                        purchasedOn=parse_date(buy_data.get('Date')),
+                        sellOn=parse_date(sell_data.get('Date')),
+                        purchasedQty=purchased_qty,
+                        sellQty=sell_qty,
+                        purchasedAmnt=purchased_rate,
+                        sellAmnt=sell_rate,
+                        totalPurchasedAmnt=total_purchased,
+                        totalSellAmnt=total_sold,
+                        profit=profit,
+                        refNo=ref_no,
+                        transType=transType,
+                    )
+                elif data.get('Transaction') == 'sell':
+                    sell_data = data
+
+           
+                
+
+    return JsonResponse({'status': 'success'})
