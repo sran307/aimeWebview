@@ -32,8 +32,6 @@ class stockTransactions(models.Model):
         return id
 
 class stockDetails(models.Model):
-    finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="stkYr")
-    month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="stkMnth")
     stock = models.ForeignKey(StockNames, on_delete=models.CASCADE, null=True, db_column = 'stock', related_name='stkName')
     purchasedOn=models.DateField(null=True, blank=True)
     sellOn=models.DateField(null=True, blank=True)
@@ -43,12 +41,19 @@ class stockDetails(models.Model):
     sellQty=models.PositiveIntegerField(blank=True, null=True)
     buyBrock=models.IntegerField(blank=True, null=True)
     sellBrock=models.IntegerField(blank=True, null=True)
-    totalTax=models.IntegerField(blank=True, null=True)
     totalPurchasedAmnt=models.IntegerField(blank=True, null=True)
     totalSellAmnt=models.IntegerField(blank=True, null=True)
     profit=models.IntegerField(blank=True, null=True)
     refNo=models.PositiveIntegerField(blank=True, null=True)
     transType=models.CharField(max_length=25, null=True, blank=True)
+    purchasedReason=models.TextField(blank=True, null=True)
+    sellReason=models.TextField(blank=True, null=True)
+    buyRemarks=models.TextField(blank=True, null=True)
+    sellRemarks=models.TextField(blank=True, null=True)
+    buyFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="buyYr")
+    sellFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="sellYr")
+
+
 
     def __int__(self):
         return id

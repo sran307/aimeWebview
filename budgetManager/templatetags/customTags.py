@@ -1,5 +1,6 @@
 from django import template
-
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 register = template.Library()
 
 @register.simple_tag
@@ -27,3 +28,12 @@ def valuetype_from_desc(desc):
         'Debt': 'DT',
     }
     return mapping.get(desc, 'OT')
+
+@register.filter
+def holdingPeriod(start, end):
+    if not start:
+        return ""
+    if not end:
+        end=datetime.today()
+    diff = relativedelta(end,start)
+    return f"{diff.years} year {diff.months} month {diff.days} days"

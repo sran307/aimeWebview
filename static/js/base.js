@@ -188,4 +188,16 @@ $(function () {
             });
         });
     });
+    $(document).on('click', '.common-get', function(){
+        var url = $(this).data('path');
+        $.get(url, function (data) {
+            if(data.status == 'success'){
+                showFlashMessage(data.message, 'success');
+                location.reload();
+            }else if(data.status == 'error'){
+                showFlashMessage(data.message, 'danger');
+            }
+        });
+    })
 })
+

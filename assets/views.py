@@ -8,7 +8,7 @@ from datetime import date, datetime
 from collections import defaultdict
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.db.models import F
-
+from pprint import pprint
 
 def assets(request):
     return render(request, 'assets/index.html')
@@ -78,8 +78,6 @@ def saveTrans(request):
         return JsonResponse({"status": "ok", "created": created})
 
 def swingManager(request):
-    headings = stockHeadings.objects.all()
-
     selected_year_id = request.GET.get('year') 
     selected_month_id = request.GET.get('month')
     if(selected_year_id):
@@ -95,12 +93,10 @@ def swingManager(request):
     months = Months.objects.all()
     finYears = FinancialYear.objects.all()
 
-    transactions = stockTransactions.objects.filter(finYear=finYear.id, transType='SWING')
-    data_dict = {(d.heading.id, d.transType): d.transValue for d in transactions}
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='SWING')
 
     context={
-        'stockHeadings':headings,
-        'data_dict':data_dict
+        'stockDetails':stockData
     }
     return render(request, 'assets/swing.html', context)
 
@@ -337,11 +333,16 @@ def showMfs(request):
 
 
 def process(request, transType, processType):
-    if(processType == 'N'):
-        stockTrans = stockTransactions.objects.filter(transType=transType, isProcessed=False)
+    def parse_date(date_str):
+        try:
+            return datetime.strptime(date_str, "%d/%m/%Y").date()
+        except Exception:
+            return None
+
+    if processType == 'N':
         rows = (
             stockTransactions.objects
-            .filter(transType='SWING', isProcessed=False)
+            .filter(transType=transType, isProcessed=False)
             .select_related('heading')
             .values(
                 'refNo',
@@ -351,62 +352,117 @@ def process(request, transType, processType):
             )
             .order_by('refNo', 'slNo', 'heading_id')
         )
+    elif processType == 'A':
+        rows = (
+            stockTransactions.objects
+            .filter(transType=transType)
+            .select_related('heading')
+            .values(
+                'refNo',
+                'slNo',
+                'finYear',
+                heading_desc=F('heading__itemName'),
+                transValue1=F('transValue')
+            )
+            .order_by('refNo', 'slNo', 'heading_id')
+        )
 
-        grouped_data = {}
-        for row in rows:
-            ref_no = row['refNo']
-            sl_no = row['slNo']
-            heading = row['heading_desc']
-            value = row['transValue1']
+    grouped_data = {}
+    for row in rows:
+        ref_no = row['refNo']
+        sl_no = row['slNo']
+        heading = row['heading_desc']
+        value = row['transValue1']
+        finYear  = row['finYear']
 
-            grouped_data.setdefault(ref_no, {})
-            grouped_data[ref_no].setdefault(sl_no, {})
-            grouped_data[ref_no][sl_no][heading] = value
+        grouped_data.setdefault(ref_no, {})
+        grouped_data[ref_no].setdefault(sl_no, {})
+        grouped_data[ref_no][sl_no][heading] = value
+        grouped_data[ref_no][sl_no]['finYear'] = finYear
 
+    for ref_no, sl_data in grouped_data.items():
+        buy_data = None
+        sell_data = None
         
-        for ref_no, sl_data in grouped_data.items():
-            buy_data = None
-            sell_data = None
-            for sl_no, data in sl_data.items():
-                if data.get('transaction') == 'buy':
-                    stock_name = getattr(buy_data, 'stockName', None)
-                    stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+        for sl_no, data in sl_data.items():
+            transaction_type = data.get('transaction', '').lower()
+
+            if transaction_type == 'buy':
+                buy_data = data
+                pprint(buy_data)
+                stock_name = buy_data.get('stockName')
+                stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+
+                purchased_qty = int(buy_data.get('quantity') or 0)
+                purchased_rate = int(buy_data.get('amntPerStock') or 0)
+                purchasedBrkg = int(buy_data.get('brockerage') or 0)
+                total_purchased = (purchased_qty * purchased_rate)+purchasedBrkg
+
+                buyReason = buy_data.get('buyReason') or ''
+                buyRemarks = buy_data.get('remarks') or ''
+                buyYear = buy_data.get('finYear') or ''
+                finYear = FinancialYear.objects.filter(id=buyYear).first()
+
+                stockDetails.objects.update_or_create(
+                    refNo=ref_no,
+                    transType=transType,
+                    defaults={
+                        'stock': stock_obj,
+                        'purchasedOn': parse_date(buy_data.get('transDate')),
+                        'purchasedQty': purchased_qty,
+                        'purchasedAmnt': purchased_rate,
+                        'totalPurchasedAmnt': total_purchased,
+                        'buyBrock':purchasedBrkg,
+                        'purchasedReason':buyReason,
+                        'buyRemarks': buyRemarks,
+                        'buyFinYear':finYear
+                    }
+                )
+            if transaction_type == 'sell':
+                sell_data = data
+                stock_name = sell_data.get('stockName')
+                stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+                sell_qty = int(sell_data.get('quantity') or 0)
+                sell_rate = int(sell_data.get('amntPerStock') or 0)
+                sellBrkg = int(buy_data.get('brockerage') or 0)
+
+                total_sold = (sell_qty * sell_rate)-sellBrkg
+                sellReason = sell_data.get('sellReason') or ''
+                sellRemarks = sell_data.get('remarks') or ''
+                sellYear = buy_data.get('finYear') or ''
+                finYear = FinancialYear.objects.filter(id=sellYear).first()
+
+                stockDetails.objects.update_or_create(
+                    refNo=ref_no,
+                    transType=transType,
+                    defaults={
+                        'stock': stock_obj,
+                        'sellOn': parse_date(sell_data.get('transDate')),
+                        'sellQty': sell_qty,
+                        'sellAmnt': sell_rate,
+                        'totalSellAmnt': total_sold,
+                        'sellBrock':sellBrkg,
+                        'sellReason':sellReason,
+                        'sellRemarks':sellRemarks,
+                        'sellFinYear':finYear
+                    }
+                )
             
-                    # Parse dates safely
-                    def parse_date(date_str):
-                        try:
-                            return datetime.strptime(date_str, "%d/%m/%Y").date()
-                        except Exception:
-                            return None
-
-                    purchased_qty = int(buy_data.get('Quantity') or 0)
-                    sell_qty = int(sell_data.get('Quantity') or 0)
-                    purchased_rate = int(buy_data.get('Rate') or 0)
-                    sell_rate = int(sell_data.get('Rate') or 0)
-                    total_purchased = purchased_qty * purchased_rate
-                    total_sold = sell_qty * sell_rate
-                    profit = total_sold - total_purchased
-
-                    stockDetails.objects.create(
-                        finYear_id=1,
-                        month_id=11, 
-                        stock=stock_obj,
-                        purchasedOn=parse_date(buy_data.get('Date')),
-                        sellOn=parse_date(sell_data.get('Date')),
-                        purchasedQty=purchased_qty,
-                        sellQty=sell_qty,
-                        purchasedAmnt=purchased_rate,
-                        sellAmnt=sell_rate,
-                        totalPurchasedAmnt=total_purchased,
-                        totalSellAmnt=total_sold,
-                        profit=profit,
-                        refNo=ref_no,
-                        transType=transType,
-                    )
-                elif data.get('Transaction') == 'sell':
-                    sell_data = data
-
-           
-                
-
-    return JsonResponse({'status': 'success'})
+            if buy_data and sell_data:
+                profit = total_sold - total_purchased
+                stockDetails.objects.update_or_create(
+                    refNo=ref_no,
+                    transType=transType,
+                    defaults={
+                        'profit': profit,
+                    }
+                )
+                stockTransactions.objects.filter(
+                    refNo=ref_no,
+                    transType=transType
+                ).update(
+                        isProcessed= True
+                )
+        return JsonResponse({'status': 'success', 'message':'Data Processed Successfully.'})
+    return JsonResponse({'status':'error', 'message': 'ERROR all the data processed'})
+    
