@@ -14,6 +14,7 @@ contourpy==1.2.1
 cycler==0.12.1
 dateutils==0.6.12
 Django==5.0.1
+django-environ==0.12.0
 django-filter==23.5
 djangorestframework==3.14.0
 flatbuffers==24.3.25
@@ -51,6 +52,7 @@ packaging==24.0
 pandas==2.2.2
 peewee==3.17.3
 pillow==10.3.0
+pip-autoremove==0.10.0
 protobuf==4.25.3
 pyarrow==16.1.0
 pydeck==0.9.1
@@ -64,6 +66,7 @@ requests==2.31.0
 rich==13.7.1
 rpds-py==0.18.1
 scipy==1.13.0
+setuptools==80.9.0
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
@@ -79,5 +82,6 @@ urllib3==2.2.1
 watchdog==4.0.0
 webencodings==0.5.1
 Werkzeug==3.0.3
+wheel==0.45.1
 wrapt==1.16.0
 yfinance==0.2.38
