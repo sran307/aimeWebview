@@ -14,9 +14,18 @@ def assets(request):
     return render(request, 'assets/index.html')
 
 def mtftManager(request):
-    headings = stockHeadings.objects.all()
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    finYears = FinancialYear.objects.all()
+
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='MTFT')
+
     context={
-        'stockHeadings':headings
+        'stockDetails':stockData
     }
     return render(request, 'assets/mtft.html', context)
 
@@ -79,18 +88,11 @@ def saveTrans(request):
 
 def swingManager(request):
     selected_year_id = request.GET.get('year') 
-    selected_month_id = request.GET.get('month')
     if(selected_year_id):
         finYear=FinancialYear.objects.get(id=selected_year_id)
     else:
         finYear=FinancialYear.objects.order_by("-id").first()
-    if(selected_month_id):
-        current_month = Months.objects.get(id=selected_month_id).id
-    else:
-        current_month = date.today().month
-    month = Months.objects.get(id=current_month)
-
-    months = Months.objects.all()
+    
     finYears = FinancialYear.objects.all()
 
     stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='SWING')
@@ -146,9 +148,18 @@ def swingTransactions(request):
 
 
 def intraManager(request):
-    headings = stockHeadings.objects.all()
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    finYears = FinancialYear.objects.all()
+
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='INTRA')
+
     context={
-        'stockHeadings':headings
+        'stockDetails':stockData
     }
     return render(request, 'assets/intra.html', context)
 
@@ -189,9 +200,18 @@ def intraTransactions(request):
     return render(request, 'assets/intraTrans.html', context)
 
 def longManager(request):
-    headings = stockHeadings.objects.all()
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    finYears = FinancialYear.objects.all()
+
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='LONG')
+
     context={
-        'stockHeadings':headings
+        'stockDetails':stockData
     }
     return render(request, 'assets/long.html', context)
 
@@ -232,9 +252,18 @@ def longTransactions(request):
     return render(request, 'assets/longTrans.html', context)
 
 def optionManager(request):
-    headings = stockHeadings.objects.all()
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    finYears = FinancialYear.objects.all()
+
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='OPTION')
+
     context={
-        'stockHeadings':headings
+        'stockDetails':stockData
     }
     return render(request, 'assets/option.html', context)
 
@@ -282,9 +311,18 @@ def showStocks(request):
     return render(request, 'assets/showStocks.html', context)
 
 def mfManager(request):
-    headings = stockHeadings.objects.all()
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    finYears = FinancialYear.objects.all()
+
+    stockData = stockDetails.objects.filter(buyFinYear=finYear.id, transType='MF')
+
     context={
-        'stockHeadings':headings
+        'stockDetails':stockData
     }
     return render(request, 'assets/mf.html', context)
 

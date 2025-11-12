@@ -13,14 +13,48 @@
     <div class="container-fluid mt-1">
          <a class="btn btn-secondary">INTRA DAY TRADING DETAILS</a>
         <a class="btn btn-primary float-end mb-1" href="{% url 'assets:intraTransactions' %}">Goto Transactions</a>
+        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' 'INTRA' 'N' %}">Process</button>
+        <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' 'INTRA' 'A' %}">ReProcess</button>
+
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>
-                    {% for heading in stockHeadings %}
-                        <td>{{ heading.itemName }}</td>
-                    {% endfor %}
+                    <th>SlNo</th>
+                    <th>Stock</th>
+                    <th>buy On</th>
+                    <th>buy Qty</th>
+                    <th>buy Amnt</th>
+                    <th>buy Brkg</th>
+                    <th>Total buy Amnt</th>
+                    <th>sell On</th>
+                    <th>sell Qty</th>
+                    <th>sell Amnt</th>
+                    <th>sell Brkg</th>
+                    <th>Total sell Amnt</th>
+                    <th>Profit</th>
+                    <th>Holding Period</th>
                 </tr>
             </thead>
+            <tbody>
+                {% for stock in stockDetails %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ stock.stock }}</td>
+                    <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
+                    <td>{{ stock.purchasedQty }}</td>
+                    <td>{{ stock.purchasedAmnt }}</td>
+                    <td>{{ stock.buyBrock }}</td>
+                    <td>{{ stock.totalPurchasedAmnt }}</td>
+                    <td>{{ stock.sellOn | date:'d-m-Y' }}</td>
+                    <td>{{ stock.sellQty }}</td>
+                    <td>{{ stock.sellAmnt }}</td>
+                    <td>{{ stock.sellBrock }}</td>
+                    <td>{{ stock.totalSellAmnt }}</td>
+                    <td>{{ stock.profit }}</td>
+                    <td>{{ stock.purchasedOn | holdingPeriod:stock.sellOn }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
        
     </div>
