@@ -43,25 +43,32 @@
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>
-                    <td>Date</td>
+                    <td>SlNo</td>
+                    <td>Reference Column</td>
                     {% for heading in stockHeadings %}
                         <td>{{ heading.itemName }}</td>
                     {% endfor %}
                 </tr>
-                {% for date in dates %}
+                {% for number in numbers %}
                 <tr>
-                    <td>{{ date|date:"d/m/Y" }}</td>
+                    {% with count=forloop.counter %}
+                    <td>{{ count }}</td>
+                    <td contenteditable="true" class="reference-cell{{ count }}">{% get_value data_dict 'reference' number 'OPTION' %}</td>
                     {% for heading in stockHeadings %}
                     <td  contenteditable="true"
                         class="editable-cell"
-                        data-date="{{ date|date:'Y-m-d' }}"
                         data-item="{{ heading.id }}"
                         data-month="{{ month.id }}"
                         data-year="{{ finYear.id }}"
                         data-path="{% url 'assets:saveTrans' %}"
                         data-valuetype="OPTION"
-                    >{% get_value data_dict heading.id date 'OPTION' %}</td>
+                        data-stockurl="{% url 'assets:showStocks' %}"
+                        data-reference="reference-cell{{ count }}"
+                        data-slno="{{ number }}"
+
+                    >{% get_value data_dict heading.id number 'OPTION' %}</td>
                     {% endfor %}
+                    {% endwith %}
                 </tr>
                 {% endfor %}
             </thead>

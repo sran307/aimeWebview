@@ -32,7 +32,7 @@ class stockTransactions(models.Model):
         return id
 
 class stockDetails(models.Model):
-    stock = models.ForeignKey(StockNames, on_delete=models.CASCADE, null=True, db_column = 'stock', related_name='stkName')
+    stock = models.ForeignKey(StockNames, on_delete=models.CASCADE, null=True, blank=True, db_column = 'stock', related_name='stkName')
     purchasedOn=models.DateField(null=True, blank=True)
     sellOn=models.DateField(null=True, blank=True)
     purchasedAmnt=models.IntegerField(blank=True, null=True)
@@ -52,8 +52,7 @@ class stockDetails(models.Model):
     sellRemarks=models.TextField(blank=True, null=True)
     buyFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="buyYr")
     sellFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="sellYr")
-
-
+    optionName=models.CharField(max_length=25, null=True, blank=True)
 
     def __int__(self):
         return id

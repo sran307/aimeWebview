@@ -75,7 +75,7 @@ def saveTrans(request):
         valueType = request.POST.get("valueType")
         slNo = request.POST.get("slNo")
         refValue = request.POST.get("refValue")
-        
+        print(refValue)
         obj, created = stockTransactions.objects.update_or_create(
             finYear_id=year_id,
             month_id=month_id,
@@ -290,7 +290,14 @@ def optionTransactions(request):
     headings = stockHeadings.objects.all()
 
     transactions = stockTransactions.objects.filter(finYear=finYear.id, month__id=current_month, transType='OPTION')
-    data_dict = {(d.heading.id, d.transDate, d.transType): d.transValue for d in transactions}
+    data_dict = {}
+
+    for d in transactions:
+        key = (d.heading.id, d.slNo, d.transType)
+        data_dict[key] = d.transValue
+
+        data_dict[('reference', d.slNo, d.transType)] = d.refNo
+
 
     context={
         'stockHeadings':headings,
@@ -300,6 +307,7 @@ def optionTransactions(request):
         'months':months,
         'finYears':finYears,
         'data_dict':data_dict,
+        'numbers': range(1, 101),
     }
     return render(request, 'assets/optionTrans.html', context)
 
@@ -385,6 +393,7 @@ def process(request, transType, processType):
             .values(
                 'refNo',
                 'slNo',
+                'finYear',
                 heading_desc=F('heading__itemName'),
                 transValue1=F('transValue')
             )
@@ -404,7 +413,6 @@ def process(request, transType, processType):
             )
             .order_by('refNo', 'slNo', 'heading_id')
         )
-
     grouped_data = {}
     for row in rows:
         ref_no = row['refNo']
@@ -417,19 +425,23 @@ def process(request, transType, processType):
         grouped_data[ref_no].setdefault(sl_no, {})
         grouped_data[ref_no][sl_no][heading] = value
         grouped_data[ref_no][sl_no]['finYear'] = finYear
-
+    pprint(grouped_data)
     for ref_no, sl_data in grouped_data.items():
         buy_data = None
         sell_data = None
-        
+        pprint(sl_data.items())
         for sl_no, data in sl_data.items():
             transaction_type = data.get('transaction', '').lower()
-
+            print(transaction_type)
             if transaction_type == 'buy':
                 buy_data = data
-                pprint(buy_data)
-                stock_name = buy_data.get('stockName')
-                stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+                if transType == 'OPTION':
+                    stock_obj = None
+                    optionName=buy_data.get('stockName')
+                else:
+                    stock_name = buy_data.get('stockName')
+                    stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+                    optionName=None
 
                 purchased_qty = int(buy_data.get('quantity') or 0)
                 purchased_rate = int(buy_data.get('amntPerStock') or 0)
@@ -453,13 +465,20 @@ def process(request, transType, processType):
                         'buyBrock':purchasedBrkg,
                         'purchasedReason':buyReason,
                         'buyRemarks': buyRemarks,
-                        'buyFinYear':finYear
+                        'buyFinYear':finYear,
+                        'optionName':optionName,
                     }
                 )
             if transaction_type == 'sell':
                 sell_data = data
-                stock_name = sell_data.get('stockName')
-                stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+                pprint(sell_data)
+                if transType == 'OPTION':
+                    stock_obj = None
+                    optionName=buy_data.get('stockName')
+                else:
+                    stock_name = buy_data.get('stockName')
+                    stock_obj = StockNames.objects.filter(stockName=stock_name).first()
+                    optionName=None
                 sell_qty = int(sell_data.get('quantity') or 0)
                 sell_rate = int(sell_data.get('amntPerStock') or 0)
                 sellBrkg = int(buy_data.get('brockerage') or 0)
@@ -482,7 +501,8 @@ def process(request, transType, processType):
                         'sellBrock':sellBrkg,
                         'sellReason':sellReason,
                         'sellRemarks':sellRemarks,
-                        'sellFinYear':finYear
+                        'sellFinYear':finYear,
+                        'optionName':optionName,
                     }
                 )
             

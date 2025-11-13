@@ -39,7 +39,7 @@
                 {% for stock in stockDetails %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ stock.stock }}</td>
+                    <td>{{ stock.optionName }}</td>
                     <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
                     <td>{{ stock.purchasedQty }}</td>
                     <td>{{ stock.purchasedAmnt }}</td>

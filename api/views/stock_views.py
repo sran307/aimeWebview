@@ -73,26 +73,42 @@ def getStockName(request):
         try:
             StockNames.objects.get(stockCode=stock)
             print(f"Stock {stock} already exists in the database.")
+            continue
         except StockNames.DoesNotExist:
-            stockData = {'stockCode': stock, 'yCode': stock + '.NS', 'isActive':False}
+            stockData = {
+                'stockCode': stock,
+                'yCode': stock + '.NS',
+                'isActive': False
+            }
+
             try:
                 q = fetch_with_retries(nse_eq, stock)
+
+                # Validate data before using
+                if not q or 'info' not in q or q['info'] is None:
+                    print(f"No NSE data found for {stock}. Skipping.")
+                    continue
+
+                # Safely extract info
+                stockData['stockName'] = q['info'].get('companyName', stock)
+                stockData['isFno'] = q['info'].get('isFNOSec', False)
+
             except Exception as e:
                 print(f"Failed to fetch NSE data for {stock}: {e}")
                 continue
-            stockData['stockName'] = q['info']['companyName']
-            stockData['isFno'] = q['info']['isFNOSec']
-            
+
+            # Save with serializer
             stockName_serializer = stockNameSerializer(data=stockData)
             try:
                 if stockName_serializer.is_valid():
                     stockName_serializer.save()
-                    stockCodeUpt = StockCodes.objects.filter(stockCode=stock).update(isUsed=True)
+                    StockCodes.objects.filter(stockCode=stock).update(isUsed=True)
                     print(f"Inserted new stock: {stockData['stockName']}")
                 else:
                     print(f"Serializer errors for {stock}: {stockName_serializer.errors}")
             except Exception as e:
                 print(f"Failed to save stock {stock}: {e}")
+
             
     return Response({'message': 'Data Fetched Successfully.'}, status=status.HTTP_200_OK)
 

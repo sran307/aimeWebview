@@ -18,8 +18,8 @@ urlpatterns = [
     path("long/", views.longManager, name="longManager"),
     path("long/transactions/", views.longTransactions, name="longTransactions"),
 
-    path("option/", views.longManager, name="optionManager"),
-    path("option/transactions/", views.longTransactions, name="optionTransactions"),
+    path("option/", views.optionManager, name="optionManager"),
+    path("option/transactions/", views.optionTransactions, name="optionTransactions"),
 
     path("show/stocks/", views.showStocks, name="showStocks"),
 
