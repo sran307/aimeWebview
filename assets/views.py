@@ -425,14 +425,13 @@ def process(request, transType, processType):
         grouped_data[ref_no].setdefault(sl_no, {})
         grouped_data[ref_no][sl_no][heading] = value
         grouped_data[ref_no][sl_no]['finYear'] = finYear
-    pprint(grouped_data)
+
     for ref_no, sl_data in grouped_data.items():
         buy_data = None
         sell_data = None
-        pprint(sl_data.items())
+
         for sl_no, data in sl_data.items():
             transaction_type = data.get('transaction', '').lower()
-            print(transaction_type)
             if transaction_type == 'buy':
                 buy_data = data
                 if transType == 'OPTION':
@@ -471,7 +470,6 @@ def process(request, transType, processType):
                 )
             if transaction_type == 'sell':
                 sell_data = data
-                pprint(sell_data)
                 if transType == 'OPTION':
                     stock_obj = None
                     optionName=buy_data.get('stockName')
@@ -524,3 +522,21 @@ def process(request, transType, processType):
         return JsonResponse({'status': 'success', 'message':'Data Processed Successfully.'})
     return JsonResponse({'status':'error', 'message': 'ERROR all the data processed'})
     
+
+
+def clearData(request):
+    """
+    Deletes all stockTransactions where transValue is either NULL or empty string.
+    Returns the number of deleted rows.
+    """
+    deleted_count, _ = stockTransactions.objects.filter(
+        transValue__isnull=True
+    ).delete()
+
+    deleted_empty_count, _ = stockTransactions.objects.filter(
+        transValue=''
+    ).delete()
+
+    total_deleted = deleted_count + deleted_empty_count
+    print(f"{total_deleted} empty transactions deleted.")
+    return JsonResponse({'status': 'success', 'message':'cache cleared Successfully.'})

@@ -12,9 +12,11 @@
 
     <div class="container-fluid mt-1">
         <a class="btn btn-secondary">OPTION TRADING STOCK DETAILS</a>
-        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:optionTransactions' %}">Goto Transactions</a>
-        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' 'OPTION' 'N' %}">Process</button>
-        <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' 'OPTION' 'A' %}">ReProcess</button>
+        <button class="btn btn-danger float-end mb-1 common-get " data-path="{% url 'assets:clearData' %}">clear</button>
+        <a class="btn btn-info float-end me-2 mb-1" href="{% url 'assets:optionTransactions' %}">Goto Transactions</a>
+        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' 'OPTION' 'A' %}">ReProcess</button>
+        <button class="btn btn-primary float-end mb-1 common-get me-2" data-path="{% url 'assets:process' 'OPTION' 'N' %}">Process</button>
+
 
         <table class="table table-bordered table-dark">
             <thead>

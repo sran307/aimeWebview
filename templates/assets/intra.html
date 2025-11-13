@@ -12,7 +12,8 @@
 
     <div class="container-fluid mt-1">
          <a class="btn btn-secondary">INTRA DAY TRADING DETAILS</a>
-        <a class="btn btn-primary float-end mb-1" href="{% url 'assets:intraTransactions' %}">Goto Transactions</a>
+        <button class="btn btn-danger float-end mb-1 common-get " data-path="{% url 'assets:clearData' %}">clear</button>
+        <a class="btn btn-info float-end mb-1 me-2" href="{% url 'assets:intraTransactions' %}">Goto Transactions</a>
         <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' 'INTRA' 'N' %}">Process</button>
         <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' 'INTRA' 'A' %}">ReProcess</button>
 
