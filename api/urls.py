@@ -15,8 +15,8 @@ urlpatterns = [
     path('stock/codes/', stock_views.getStockCode, name='get_stock_code'),
     path('stock/names/', stock_views.getStockName, name='get_stock_name'),
     path('stock/quotes/', stock_views.getQuotes, name='get_strong_stocks'),
-    path('stock/daily/', stock_views.getDailyData),
-    path('stock/screen/', stock_views.dataScreen),
+    path('stock/daily/', stock_views.getDailyData, name='get_daily_data'),
+    path('stock/screen/', stock_views.dataScreen, name="data_screen_stocks"),
     path('stock/holidays/', stock_views.getHolidays, name='get_holidays'),
     # path('stock/predict/', stock_ai.getPredictPrice),
     

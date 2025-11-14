@@ -6,7 +6,7 @@
 <div class="container my-4">
   <div class="row g-3">  <!-- g-3 adds spacing between buttons -->
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_holidays' %}" data-title="Fetching Holidays" data-text="Fetching Holidays of Trading Section">Get Holidays</button>
+      <button class="btn btn-lg btn-danger w-100 commonFetch" data-path="{% url 'get_holidays' %}" data-title="Fetching Holidays" data-text="Fetching Holidays of Trading Section">Get Holidays</button>
     </div>
     <div class="col-md-6 col-lg-3">
       <button class="btn btn-primary w-100 commonFetch" data-path="{% url 'get_stock_code' %}" data-title="Fetch Stock Code" data-text="Fetching Stock Codes Of All The Stocks listed.. ">1.Fetch Stock Code</button>
@@ -24,24 +24,37 @@
     <div class="col-md-6 col-lg-3">
       <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Fetching All the Sectors" data-text="Fetching All The Sectors">5.Fetch Sector</button>
     </div>
+
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_trending_sector' %}" data-title="Fetching Trending Sector" data-text="Finding Out the Trending Sectors">6.Fetch Trending Sector</button>
+      <button class="btn btn-primary w-100 commonFetch2" data-path="{% url 'get_fundamentals' %}" data-title="Fetching Stock Fundamentals" data-text="Fetching Fundamentals of the stocks">6.Fetch Fundamentals</button>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_trending_sector' %}" data-title="Fetching Trending Sector" data-text="Finding Out the Trending Sectors">7.Fetch Trending Sector</button>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <button class="btn btn-info w-100 commonFetch2" data-path="{% url 'get_daily_data' %}" data-title="Fetching Daily Stock data" data-text="Fetching Daily data of stocks">8.Fetch Daily Data</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-primary w-100 commonFetch2" data-path="{% url 'get_penny_stocks' %}" data-title="Fetch Penny Stocks" data-text="Fetching Penny Stocks ">7.Fetch Penny Stocks</button>
+      <button class="btn btn-danger w-100 commonFetch2" data-path="{% url 'data_screen_stocks' %}" data-title="Screening stocks" data-text="Screening Stocks for trading">9.Screen Stocks</button>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <button class="btn btn-primary w-100 commonFetch2" data-path="{% url 'get_penny_stocks' %}" data-title="Fetch Penny Stocks" data-text="Fetching Penny Stocks ">10.Fetch Penny Stocks</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-warning w-100 commonFetch" data-path="{% url 'get_swing_stocks' %}" data-title="Selecting Swing Stocks" data-text="Selecting the stocks for swing trade">8.Fetch Swing Stocks</button>
+      <button class="btn btn-warning w-100 commonFetch" data-path="{% url 'get_swing_stocks' %}" data-title="Selecting Swing Stocks" data-text="Selecting the stocks for swing trade">11.Fetch Swing Stocks</button>
     </div>
     
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_long_stocks' %}" data-title="Fetching Long Term Stocks" data-text="Fetching Stocks For Long Term Trades">9.Fetch Long Stocks</button>
+      <button class="btn btn-danger w-100 commonFetch" data-path="{% url 'get_long_stocks' %}" data-title="Fetching Long Term Stocks" data-text="Fetching Stocks For Long Term Trades">12.Fetch Long Stocks</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_52_low' %}" data-title="Fetch 52 Low" data-text="Fetching 52 Week Low Stocks">10.Fetch 52W Low</button>
+      <button class="btn btn-success w-100 commonFetch" data-path="{% url 'get_52_low' %}" data-title="Fetch 52 Low" data-text="Fetching 52 Week Low Stocks">13.Fetch 52W Low</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_52_high' %}" data-title="Fetching 52 High" data-text="Fetching 52 Week High Stocks">11.Fetch 52W High</button>
+      <button class="btn btn-success w-100 commonFetch2" data-path="{% url 'get_52_high' %}" data-title="Fetching 52 High" data-text="Fetching 52 Week High Stocks">14.Fetch 52W High</button>
     </div>
   </div>
 </div>
