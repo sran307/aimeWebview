@@ -5,12 +5,12 @@
 
 {% block content %}
 <div class="container-fluid my-5 float-end">
-    <a href="{% url 'assets:mtftManager' %}" class="btn btn-primary">MTFT Manager</a>
-    <a href="{% url 'assets:intraManager' %}" class="btn btn-primary">Intra Day Manager</a>
-    <a href="{% url 'assets:swingManager' %}" class="btn btn-primary">Swing Data Manager</a>
-    <a href="{% url 'assets:longManager' %}" class="btn btn-primary">Long Position Manager</a>
-    <a href="{% url 'assets:optionManager' %}" class="btn btn-primary">Option Trading Manager</a>
-    <a href="{% url 'assets:mfManager' %}" class="btn btn-primary">MUTUAL FUNDS Manager</a>
+    <a href="{% url 'assets:indexManager' 'MTFT' %}" class="btn btn-primary">MTFT Manager</a>
+    <a href="{% url 'assets:indexManager' 'INTRA' %}" class="btn btn-primary">Intra Day Manager</a>
+    <a href="{% url 'assets:indexManager' 'SWING' %}" class="btn btn-primary">Swing Data Manager</a>
+    <a href="{% url 'assets:indexManager' 'LONG' %}" class="btn btn-primary">Long Position Manager</a>
+    <a href="{% url 'assets:indexManager' 'OPTION' %}" class="btn btn-primary">Option Trading Manager</a>
+    <a href="{% url 'assets:indexManager' 'MF' %}" class="btn btn-primary">MUTUAL FUNDS Manager</a>
 
 </div>
 {% endblock %}

@@ -197,12 +197,12 @@ def getDailyData(request):
             data = yf.download(ticker_symbol, start=start_date_str, end=end_date_str)            
             for index, row in data.iterrows():
                 date = index
-                open_price = row['Open']
-                high_price = row['High']
-                low_price = row['Low']
-                close_price = row['Close']
-                volume = row['Volume']
-                adjClose = row.get('Adj Close', 0.0)           
+                open_price = float(row['Open'])
+                high_price = float(row['High'])
+                low_price = float(row['Low'])
+                close_price = float(row['Close'])
+                volume = float(row['Volume'])
+                adjClose = float(row.get('Adj Close', 0.0))
                 stock_data = TradeData(date=date, 
                                        open=open_price, 
                                        high=high_price,

@@ -53,6 +53,7 @@ class stockDetails(models.Model):
     buyFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="buyYr")
     sellFinYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="sellYr")
     optionName=models.CharField(max_length=25, null=True, blank=True)
+    mfName=models.ForeignKey(mfNames, on_delete=models.CASCADE, null=True, blank=True, db_column='mf_name', related_name='mutualfundName')
 
     def __int__(self):
         return id

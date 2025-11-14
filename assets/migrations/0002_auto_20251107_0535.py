@@ -11,10 +11,10 @@ def add_initial_stockheadings(apps, schema_editor):
         'quantity',
         'amntPerStock',
         'brockerage',
-        'tax',
         'buyReason',
         'sellReason',
-        'remarks'
+        'remarks',
+        'transDate'
     ]
 
     # Insert each record

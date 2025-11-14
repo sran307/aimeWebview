@@ -2,7 +2,7 @@
 {% load static %}
 {% load customTags %}
 
-{% block title %}Mutual Funds Manager{% endblock %}
+{% block title %}{{transType}} Manager{% endblock %}
 
 {% block extra_styles %}
 <link rel="stylesheet" href="{% static 'css/budget/monthlyView.css' %}">
@@ -11,11 +11,11 @@
 {% block content %}
 
     <div class="container-fluid mt-1">
-         <a class="btn btn-secondary">MUTUAL FUND DETAILS</a>
+        <a class="btn btn-secondary">{{transType}} TRADING DETAILS</a>
         <button class="btn btn-danger float-end mb-1 common-get " data-path="{% url 'assets:clearData' %}">clear</button>
-        <a class="btn btn-info float-end mb-1 me-2" href="{% url 'assets:mfTransactions' %}">Goto Transactions</a>
-        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' 'MF' 'N' %}">Process</button>
-        <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' 'MF' 'A' %}">ReProcess</button>
+        <a class="btn btn-info float-end me-2 mb-1" href="{% url 'assets:transManager' transType %}">Goto Transactions</a>
+        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' transType 'N' %}">Process</button>
+        <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' transType 'A' %}">ReProcess</button>
 
         <table class="table table-bordered table-dark">
             <thead>
@@ -40,7 +40,7 @@
                 {% for stock in stockDetails %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ stock.stock }}</td>
+                    <td>{% if transType == 'OPTION' %}{{ stock.optionName }} {% elif transType == 'MF' %} {{ stock.mfName }} {% else %} {{ stock.stock }} {% endif %}</td>
                     <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
                     <td>{{ stock.purchasedQty }}</td>
                     <td>{{ stock.purchasedAmnt }}</td>
