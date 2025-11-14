@@ -5,11 +5,15 @@ def add_initial_mf_names(apps, schema_editor):
 
     # List of default Mutual Fund names to insert
     default_mfs = [
-        "Axis Bluechip Fund",
-        "HDFC Balanced Advantage Fund",
-        "ICICI Prudential Equity & Debt Fund",
-        "SBI Small Cap Fund",
-        "Nippon India Growth Fund",
+        "Canara Robeco Small Cap Fund",
+        "Parag Parikh Flexi Cap Fund",
+        "HDFC Midcap Fund",
+        "Edelweiss Gold & Silver ETF",
+        "Franklin US Equity",
+        "ICICI Prudential Divident Fund",
+        "ICICI Prudential Savings Fund",
+        "BitCoin",
+        "Ethereum"
     ]
 
     for name in default_mfs:
