@@ -85,19 +85,19 @@ $(function () {
                 });
             },
             success: function (response) {
-                // Decode the base64 encoded data
                 const decoded = atob(response.data);
-                const parsedData = JSON.parse(decoded);
+                const parsed = JSON.parse(decoded);
 
-                // Now you have: parsedData.sectors = [{sector: 'IT'}, {sector: 'Finance'}, ...]
+                const title = parsed.title || "List";
+                const label = parsed.label || "name";
+                let msg = `<b>${title}:</b><br>`;
 
-                let msg = '<b>Trending Sectors:</b><br>';
-                parsedData.sectors.forEach(s => {
-                    msg += `• ${s.sector}<br>`;
+                parsed.items.forEach(item => {
+                    msg += `• ${item.stockName} (ID: ${item.id})<br>`;
                 });
 
                 Swal.fire({
-                    title: 'Sectors List',
+                    title: title,
                     html: msg,
                     icon: 'info'
                 });
@@ -188,13 +188,13 @@ $(function () {
             });
         });
     });
-    $(document).on('click', '.common-get', function(){
+    $(document).on('click', '.common-get', function () {
         var url = $(this).data('path');
         $.get(url, function (data) {
-            if(data.status == 'success'){
+            if (data.status == 'success') {
                 showFlashMessage(data.message, 'success');
                 location.reload();
-            }else if(data.status == 'error'){
+            } else if (data.status == 'error') {
                 showFlashMessage(data.message, 'danger');
             }
         });

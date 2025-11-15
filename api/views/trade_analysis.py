@@ -56,7 +56,7 @@ def getTrendySector(request):
     sectors=TrendySector.objects.filter(week__gt=10).order_by('-week').values()
     sector=[{'sector':str(sector['sector'])}for sector in sectors]
     data = {
-        'sectors':sector
+        'items':sector
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
@@ -146,7 +146,7 @@ def swingAnalysis(request):
         stockData.append(stock_data)
 
     data = {
-        'swingStocks':stockData
+        'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
@@ -254,7 +254,7 @@ def getLong(request):
         stockData.append(stock_data)
 
     data = {
-        'longStocks':stockData
+        'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
@@ -281,7 +281,7 @@ def get52Low(request):
         stockData.append(stock_data)
 
     data = {
-        'stock52Low':stockData
+        'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
@@ -307,7 +307,7 @@ def get52High(request):
         stockData.append(stock_data)
 
     data = {
-        'stock52High':stockData
+        'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)

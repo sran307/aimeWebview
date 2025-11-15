@@ -678,7 +678,7 @@ def GetPenny(request):
             stockData.append(stock_data)
             
     data = {
-        'pennyStocks':stockData
+        'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
