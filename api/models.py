@@ -92,7 +92,7 @@ class TradeData(models.Model):
         return self.id
 
 class Holidays(models.Model):
-    holiday = models.DateTimeField()
+    holiday = models.DateField()
     reason = models.CharField(max_length=100)
     
     class Meta:
