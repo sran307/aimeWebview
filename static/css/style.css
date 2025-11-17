@@ -1,3 +1,5 @@
 .btn{
     border-radius: 1em;
 }
+.profit-positive { background-color: #c8f7c5; }  /* green */
+.profit-negative { background-color: #f7c5c5; }  /* red */

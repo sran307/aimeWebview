@@ -38,7 +38,11 @@
             </thead>
             <tbody>
                 {% for stock in stockDetails %}
-                <tr>
+                <tr class="
+                    {% if stock.profit > 0 %} profit-positive 
+                    {% elif stock.profit < 0 %} profit-negative 
+                    {% endif %}
+                ">
                     <td>{{ forloop.counter }}</td>
                     <td>{% if transType == 'OPTION' %}{{ stock.optionName }} {% elif transType == 'MF' %} {{ stock.mfName }} {% else %} {{ stock.stock }} {% endif %}</td>
                     <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
