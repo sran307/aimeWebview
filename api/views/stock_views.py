@@ -215,6 +215,7 @@ def getDailyData(request):
                                     endDate=end_date-timedelta(days=1),
                                     prevDate = prev_date)
                 stock_data.save()
+                print('inserted.')
                 
     return Response({'message': 'Daily data updated successfully.'}, status=status.HTTP_200_OK)
     
