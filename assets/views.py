@@ -168,9 +168,9 @@ def process(request, transType, processType):
                     optionName=None
                     mfName=None
 
-                purchased_qty = int(buy_data.get('quantity') or 0)
-                purchased_rate = int(buy_data.get('amntPerStock') or 0)
-                purchasedBrkg = int(buy_data.get('brockerage') or 0)
+                purchased_qty = float(buy_data.get('quantity') or 0)
+                purchased_rate = float(buy_data.get('amntPerStock') or 0)
+                purchasedBrkg = float(buy_data.get('brockerage') or 0)
                 total_purchased = (purchased_qty * purchased_rate)+purchasedBrkg
 
                 buyReason = buy_data.get('buyReason') or ''
@@ -200,24 +200,24 @@ def process(request, transType, processType):
                 if transType == 'OPTION':
                     stock_obj = None
                     mfName = None
-                    optionName=buy_data.get('stockName')
+                    optionName=sell_data.get('stockName')
                 elif transType == 'MF':
                     stock_obj = None
                     optionName = None
-                    mfName=mfNames.objects.filter(mfName=buy_data.get('stockName')).first()
+                    mfName=mfNames.objects.filter(mfName=sell_data.get('stockName')).first()
                 else:
-                    stock_name = buy_data.get('stockName')
+                    stock_name = sell_data.get('stockName')
                     stock_obj = StockNames.objects.filter(stockName=stock_name).first()
                     optionName=None
                     mfName=None
-                sell_qty = int(sell_data.get('quantity') or 0)
-                sell_rate = int(sell_data.get('amntPerStock') or 0)
-                sellBrkg = int(buy_data.get('brockerage') or 0)
+                sell_qty = float(sell_data.get('quantity') or 0)
+                sell_rate = float(sell_data.get('amntPerStock') or 0)
+                sellBrkg = float(sell_data.get('brockerage') or 0)
 
                 total_sold = (sell_qty * sell_rate)-sellBrkg
                 sellReason = sell_data.get('sellReason') or ''
                 sellRemarks = sell_data.get('remarks') or ''
-                sellYear = buy_data.get('finYear') or ''
+                sellYear = sell_data.get('finYear') or ''
                 finYear = FinancialYear.objects.filter(id=sellYear).first()
 
                 stockDetails.objects.update_or_create(
@@ -253,9 +253,7 @@ def process(request, transType, processType):
                 ).update(
                         isProcessed= True
                 )
-        return JsonResponse({'status': 'success', 'message':'Data Processed Successfully.'})
-    return JsonResponse({'status':'error', 'message': 'ERROR all the data processed'})
-    
+    return JsonResponse({'status': 'success', 'message':'Data Processed Successfully.'})  
 
 
 def clearData(request):
