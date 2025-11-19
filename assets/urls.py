@@ -15,4 +15,8 @@ urlpatterns = [
     path("process/<str:transType>/<str:processType>/", views.process, name="process"),
     path("clear/data", views.clearData, name="clearData"),
 
+    path('divident/', views.dividentManager, name="dividentManager"),
+    path("save-divident/", views.saveDivident, name="saveDivident"),
+
+
 ]

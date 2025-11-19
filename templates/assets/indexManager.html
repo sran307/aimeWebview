@@ -47,16 +47,16 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{% if transType == 'OPTION' %}{{ stock.optionName }} {% elif transType == 'MF' %} {{ stock.mfName }} {% else %} {{ stock.stock }} {% endif %}</td>
                     <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
-                    <td>{{ stock.purchasedQty }}</td>
-                    <td>{{ stock.purchasedAmnt }}</td>
-                    <td>{{ stock.buyBrock }}</td>
-                    <td>{{ stock.totalPurchasedAmnt }}</td>
+                    <td>{{ stock.purchasedQty |floatformat:3 }}</td>
+                    <td>{{ stock.purchasedAmnt|floatformat:3 }}</td>
+                    <td>{{ stock.buyBrock|floatformat:3 }}</td>
+                    <td>{{ stock.totalPurchasedAmnt|floatformat:3 }}</td>
                     <td>{{ stock.sellOn | date:'d-m-Y' }}</td>
-                    <td>{{ stock.sellQty }}</td>
-                    <td>{{ stock.sellAmnt }}</td>
-                    <td>{{ stock.sellBrock }}</td>
-                    <td>{{ stock.totalSellAmnt }}</td>
-                    <td>{{ stock.profit }}</td>
+                    <td>{{ stock.sellQty|floatformat:3 }}</td>
+                    <td>{{ stock.sellAmnt|floatformat:3 }}</td>
+                    <td>{{ stock.sellBrock|floatformat:3 }}</td>
+                    <td>{{ stock.totalSellAmnt|floatformat:3 }}</td>
+                    <td>{{ stock.profit |floatformat:3 }}</td>
                     <td>{{ stock.purchasedOn | holdingPeriod:stock.sellOn }}</td>
                 </tr>
                 {% endfor %}

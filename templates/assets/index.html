@@ -4,13 +4,67 @@
 {% block title %}Budget Manager{% endblock %}
 
 {% block content %}
-<div class="container-fluid my-5 float-end">
-    <a href="{% url 'assets:indexManager' 'MTFT' %}" class="btn btn-primary">MTFT Manager</a>
-    <a href="{% url 'assets:indexManager' 'INTRA' %}" class="btn btn-primary">Intra Day Manager</a>
-    <a href="{% url 'assets:indexManager' 'SWING' %}" class="btn btn-primary">Swing Data Manager</a>
-    <a href="{% url 'assets:indexManager' 'LONG' %}" class="btn btn-primary">Long Position Manager</a>
-    <a href="{% url 'assets:indexManager' 'OPTION' %}" class="btn btn-primary">Option Trading Manager</a>
-    <a href="{% url 'assets:indexManager' 'MF' %}" class="btn btn-primary">MUTUAL FUNDS Manager</a>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <a href="{% url 'assets:indexManager' 'MTFT' %}" class="btn btn-primary">MTFT Manager</a>
+            <a href="{% url 'assets:indexManager' 'INTRA' %}" class="btn btn-primary">Intra Day Manager</a>
+            <a href="{% url 'assets:indexManager' 'SWING' %}" class="btn btn-primary">Swing Data Manager</a>
+            <a href="{% url 'assets:indexManager' 'LONG' %}" class="btn btn-primary">Long Position Manager</a>
+            <a href="{% url 'assets:indexManager' 'OPTION' %}" class="btn btn-primary">Option Trading Manager</a>
+            <a href="{% url 'assets:indexManager' 'MF' %}" class="btn btn-primary">MUTUAL FUNDS Manager</a>
+            <a href="{% url 'assets:dividentManager' %}" class="btn btn-primary">Divident Manager</a>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Amount Used For MF</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Total Divident Amount</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Total Amount Used for Trading</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From MTF</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From Option</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From IntraDay</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From Swing</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From Long</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Profit From MF</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Total Amount In Trading</th>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

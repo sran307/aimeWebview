@@ -2,7 +2,7 @@
 {% load static %}
 {% load customTags %}
 
-{% block title %}{{transType}} Manager{% endblock %}
+{% block title %}Divident Manager{% endblock %}
 
 {% block extra_styles %}
 <link rel="stylesheet" href="{% static 'css/budget/monthlyView.css' %}">
@@ -13,7 +13,7 @@
     <div class="container-fluid mt-1">
         <form method="get" id="filterForm" class="row g-2 mb-3">
                 <div class="col-md-4">
-                    <button class="btn btn-secondary float-center">{{transType}} Transactions</button>
+                    <button class="btn btn-secondary float-center">Divident Manager</button>
                 </div>
                 <div class="col-md-3">
                     <select name="year" id="yearSelect" class="form-select">
@@ -28,39 +28,32 @@
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
-                
-                <div class="col-md-4">
-                    <a class="btn btn-secondary float-end mb-1" href="{% url 'assets:indexManager' transType %}">Go Back</a>
-                </div>
             </form>
         
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>
                     <td>SlNo</td>
-                    <td>Reference Column</td>
                     {% for heading in stockHeadings %}
-                        <td>{{ heading.itemName }}</td>
+                    <td>{{heading}}</td>
                     {% endfor %}
                 </tr>
                 {% for number in numbers %}
                 <tr>
                     {% with count=forloop.counter %}
                     <td>{{ count }}</td>
-                    <td contenteditable="true" class="reference-cell{{ count }}">{% get_value data_dict 'reference' number transType %}</td>
                     {% for heading in stockHeadings %}
                     <td  contenteditable="true"
-                        class="editable-cell {% if heading.itemName == 'stockName' and transType != 'OPTION' %} show-stock-name {% endif %}"
-                        data-item="{{ heading.id }}"
-                        data-month="{{ month.id }}"
+                        class="editable-cell {% if heading == 'Stock Name' %} show-stock-name {% endif %}"
+                        data-item="{{ heading }}"
                         data-year="{{ finYear.id }}"
-                        data-path="{% url 'assets:saveTrans' %}"
-                        data-valuetype="{{transType}}"
-                        data-stockurl="{% if transType == 'MF'%} {% url 'assets:showMfs' %} {% else %} {% url 'assets:showStocks' %} {% endif %}"
+                        data-path="{% url 'assets:saveDivident' %}"
+                        data-valuetype="{{number}}"
+                        data-stockurl="{% url 'assets:showStocks' %}"
                         data-reference="reference-cell{{ count }}"
                         data-slno="{{ number }}"
 
-                    >{% get_value data_dict heading.id number transType %}</td>
+                    >{% get_value data_dict heading number transType %}</td>
                     {% endfor %}
                     {% endwith %}
                 </tr>

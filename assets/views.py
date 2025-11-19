@@ -63,6 +63,38 @@ def transManager(request, transType):
     }
     return render(request, 'assets/transManager.html', context)
 
+def dividentManager(request):
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    
+    current_month = date.today().month
+    month = Months.objects.get(id=current_month)
+
+    finYears = FinancialYear.objects.all()
+
+    headings = {'Date', 'Stock Name', 'Amount'}
+
+    transactions = dividentDetails.objects.filter(finYear=finYear.id)
+    data_dict = {}
+    for d in transactions:
+        key = (d.heading, d.id)
+        data_dict[key] = d.transValue
+
+        data_dict[('reference', d.slNo, d.transType)] = d.refNo
+
+    context={
+        'stockHeadings':headings,
+        'month':month,
+        'finYear':finYear,
+        'finYears':finYears,
+        'data_dict':data_dict,
+        'numbers': range(1, 101),
+    }
+    return render(request, 'assets/divManager.html', context)
+
 def saveTrans(request):
     if request.method == "POST":
         # date_str = request.POST.get("date")
@@ -74,6 +106,24 @@ def saveTrans(request):
         slNo = request.POST.get("slNo")
         refValue = request.POST.get("refValue")
         obj, created = stockTransactions.objects.update_or_create(
+            finYear_id=year_id,
+            month_id=month_id,
+            heading_id=item_id,
+            slNo=slNo,
+            defaults={"transValue": value or '', 'refNo':refValue or 0},
+            transType=valueType
+        )
+        return JsonResponse({"status": "ok", "created": created})
+
+def saveDivident(request):
+    if request.method == "POST":
+        value = request.POST.get("value")
+        item_id = request.POST.get("item")
+        year_id = request.POST.get("year")
+        valueType = request.POST.get("valueType")
+        slNo = request.POST.get("slNo")
+        refValue = request.POST.get("refValue")
+        obj, created = dividentDetails.objects.update_or_create(
             finYear_id=year_id,
             month_id=month_id,
             heading_id=item_id,

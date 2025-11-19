@@ -35,16 +35,16 @@ class stockDetails(models.Model):
     stock = models.ForeignKey(StockNames, on_delete=models.CASCADE, null=True, blank=True, db_column = 'stock', related_name='stkName')
     purchasedOn=models.DateField(null=True, blank=True)
     sellOn=models.DateField(null=True, blank=True)
-    purchasedAmnt=models.IntegerField(blank=True, null=True)
-    purchasedQty=models.PositiveIntegerField(blank=True, null=True)
-    sellAmnt=models.IntegerField(blank=True, null=True)
-    sellQty=models.PositiveIntegerField(blank=True, null=True)
-    buyBrock=models.IntegerField(blank=True, null=True)
-    sellBrock=models.IntegerField(blank=True, null=True)
-    totalPurchasedAmnt=models.IntegerField(blank=True, null=True)
-    totalSellAmnt=models.IntegerField(blank=True, null=True)
-    profit=models.IntegerField(blank=True, null=True)
-    refNo=models.PositiveIntegerField(blank=True, null=True)
+    purchasedAmnt=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    purchasedQty=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    sellAmnt=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    sellQty=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    buyBrock=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    sellBrock=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    totalPurchasedAmnt=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    totalSellAmnt=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    profit=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    refNo=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
     transType=models.CharField(max_length=25, null=True, blank=True)
     purchasedReason=models.TextField(blank=True, null=True)
     sellReason=models.TextField(blank=True, null=True)
@@ -59,3 +59,11 @@ class stockDetails(models.Model):
         return id
 
 
+class dividentDetails(models.Model):
+    finYear=models.ForeignKey(FinancialYear, on_delete=models.CASCADE,blank=True, null=True, related_name="divYr")
+    divDate=models.DateField(null=True, blank=True)
+    stock = models.ForeignKey(StockNames, on_delete=models.CASCADE, null=True, blank=True, db_column = 'stock', related_name='divStkName')
+    amount=models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+
+    def __int__(self):
+        return id
