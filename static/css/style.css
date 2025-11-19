@@ -4,6 +4,9 @@
 .profit-positive { background-color: #c8f7c5 !important; }  /* green */
 .profit-negative { background-color: #f7c5c5 !important; }  /* red */
 .table-header{
-    background-color: rgb(4, 7, 51);
-    color: aliceblue;
+    background-color: rgb(4, 7, 51) !important;
+    color: aliceblue !important;
+}
+.holding{
+    background-color: #0d0acf !important;
 }

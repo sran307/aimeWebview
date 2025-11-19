@@ -40,7 +40,8 @@
                 {% for stock in stockDetails %}
                 <tr class="
                     {% if stock.profit > 0 %} profit-positive 
-                    {% elif stock.profit < 0 %} profit-negative 
+                    {% elif stock.profit <= 0 %} profit-negative 
+                    {% else %} holding
                     {% endif %}
                 ">
                     <td>{{ forloop.counter }}</td>
