@@ -11,11 +11,11 @@
 {% block content %}
 
     <div class="container-fluid mt-1">
-        <form method="get" id="filterForm" class="row g-2 mb-3">
+        <form method="get" id="filterForm" class="d-flex flex-wrap gap-2 mb-3 align-items-center">
                 <div class="col-md-4">
                     <button class="btn btn-secondary float-center">{{transType}} Transactions</button>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <select name="year" id="yearSelect" class="form-select">
                     {% for y in finYears %}
                         <option value="{{ y.id }}" {% if y.id == selected_year_id %}selected{% endif %}>
@@ -29,7 +29,7 @@
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a class="btn btn-secondary float-end mb-1" href="{% url 'assets:indexManager' transType %}">Go Back</a>
                 </div>
             </form>
