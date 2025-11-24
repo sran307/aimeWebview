@@ -47,7 +47,7 @@
                                 Overall Profit: <b>{{ overallProfit | floatformat:3 }}</b><br>
                                 Overall Brockerage & Tax: <b>{{ overallTax | floatformat:3 }}</b>
                             </button>
-                            <select name="year" id="yearSelect" class="form-select w-auto flex-grow-1">
+                            <select name="year" id="yearSelect" class="form-select w-auto flex-grow-2">
                                 {% for y in finYears %}
                                     <option value="{{ y.id }}" {% if y.id == selected_year_id %}selected{% endif %}>
                                         {{ y.year }}
