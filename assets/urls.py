@@ -16,7 +16,7 @@ urlpatterns = [
     path("clear/data", views.clearData, name="clearData"),
 
     path('divident/', views.dividentManager, name="dividentManager"),
-    path("save-divident/", views.saveDivident, name="saveDivident"),
+    path("add-dividend/", views.addDividend, name="addDividend"),
 
 
 ]

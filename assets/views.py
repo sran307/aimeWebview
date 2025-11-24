@@ -9,6 +9,7 @@ from collections import defaultdict
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.db.models import F
 from pprint import pprint
+from .forms import *
 
 def assets(request):
     return render(request, 'assets/index.html')
@@ -70,30 +71,28 @@ def dividentManager(request):
     else:
         finYear=FinancialYear.objects.order_by("-id").first()
     
-    current_month = date.today().month
-    month = Months.objects.get(id=current_month)
-
     finYears = FinancialYear.objects.all()
-
-    headings = {'Date', 'Stock Name', 'Amount'}
-
-    transactions = dividentDetails.objects.filter(finYear=finYear.id)
-    data_dict = {}
-    for d in transactions:
-        key = (d.heading, d.id)
-        data_dict[key] = d.transValue
-
-        data_dict[('reference', d.slNo, d.transType)] = d.refNo
-
+    dividends = dividentDetails.objects.filter(finYear=finYear)
     context={
-        'stockHeadings':headings,
-        'month':month,
         'finYear':finYear,
         'finYears':finYears,
-        'data_dict':data_dict,
-        'numbers': range(1, 101),
+        'dividends':dividends
     }
     return render(request, 'assets/divManager.html', context)
+
+def addDividend(request):
+    if request.method == 'POST':
+        form = DividentDetailsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"status": "success"})
+        else:
+            return JsonResponse({"status": "error"})
+    else:
+        form = DividentDetailsForm()
+
+    return render(request, 'assets/divident_form.html', {'form': form})
+
 
 def saveTrans(request):
     if request.method == "POST":
@@ -106,24 +105,6 @@ def saveTrans(request):
         slNo = request.POST.get("slNo")
         refValue = request.POST.get("refValue")
         obj, created = stockTransactions.objects.update_or_create(
-            finYear_id=year_id,
-            month_id=month_id,
-            heading_id=item_id,
-            slNo=slNo,
-            defaults={"transValue": value or '', 'refNo':refValue or 0},
-            transType=valueType
-        )
-        return JsonResponse({"status": "ok", "created": created})
-
-def saveDivident(request):
-    if request.method == "POST":
-        value = request.POST.get("value")
-        item_id = request.POST.get("item")
-        year_id = request.POST.get("year")
-        valueType = request.POST.get("valueType")
-        slNo = request.POST.get("slNo")
-        refValue = request.POST.get("refValue")
-        obj, created = dividentDetails.objects.update_or_create(
             finYear_id=year_id,
             month_id=month_id,
             heading_id=item_id,

@@ -28,37 +28,29 @@
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary open-form-btn" data-path="{% url 'assets:addDividend' %}">Add Dividend</button>
+                </div>
             </form>
+
         
         <table class="table table-bordered table-dark">
             <thead>
                 <tr>
                     <td>SlNo</td>
-                    {% for heading in stockHeadings %}
-                    <td>{{heading}}</td>
-                    {% endfor %}
+                    <td>Date</td>
+                    <td>Stock Name</td>
+                    <td>Amount</td>
                 </tr>
-                {% for number in numbers %}
-                <tr>
-                    {% with count=forloop.counter %}
-                    <td>{{ count }}</td>
-                    {% for heading in stockHeadings %}
-                    <td  contenteditable="true"
-                        class="editable-cell {% if heading == 'Stock Name' %} show-stock-name {% endif %}"
-                        data-item="{{ heading }}"
-                        data-year="{{ finYear.id }}"
-                        data-path="{% url 'assets:saveDivident' %}"
-                        data-valuetype="{{number}}"
-                        data-stockurl="{% url 'assets:showStocks' %}"
-                        data-reference="reference-cell{{ count }}"
-                        data-slno="{{ number }}"
-
-                    >{% get_value data_dict heading number transType %}</td>
-                    {% endfor %}
-                    {% endwith %}
-                </tr>
-                {% endfor %}
             </thead>
+            <tbody>
+                {% for dividend in dividends %}
+                <td>{{ forloop.counter }}</td>
+                <td>{{ dividend.divDate | date:'d/m/Y' }}</td>
+                <td>{{ dividend.stock }}</td>
+                <td>{{ dividend.amount|floatformat:3 }}</td>
+                {% endfor %}
+            </tbody>
         </table>
        
     </div>

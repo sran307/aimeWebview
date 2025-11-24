@@ -72,4 +72,3 @@ $(document).on('change', '.select-stock', function () {
         }
     }
 });
-

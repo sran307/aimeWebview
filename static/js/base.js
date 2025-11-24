@@ -159,7 +159,10 @@ $(function () {
             $("#modalTitle").text(btnText);
             var modal = new bootstrap.Modal($("#formModal")[0]);
             modal.show();
-
+            $("#modalBody .searchable").select2({
+                width: '100%',
+                dropdownParent: $('#formModal')
+            });
             // Handle submit button
             $("#modalSubmit").off("click").on("click", function () {
                 var form = $("#modalForm")[0]; // the form inside modal

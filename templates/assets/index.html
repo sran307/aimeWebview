@@ -4,63 +4,100 @@
 {% block title %}Budget Manager{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <a href="{% url 'assets:indexManager' 'MTFT' %}" class="btn btn-primary">MTFT Manager</a>
-            <a href="{% url 'assets:indexManager' 'INTRA' %}" class="btn btn-primary">Intra Day Manager</a>
-            <a href="{% url 'assets:indexManager' 'SWING' %}" class="btn btn-primary">Swing Data Manager</a>
-            <a href="{% url 'assets:indexManager' 'LONG' %}" class="btn btn-primary">Long Position Manager</a>
-            <a href="{% url 'assets:indexManager' 'OPTION' %}" class="btn btn-primary">Option Trading Manager</a>
-            <a href="{% url 'assets:indexManager' 'MF' %}" class="btn btn-primary">MUTUAL FUNDS Manager</a>
-            <a href="{% url 'assets:dividentManager' %}" class="btn btn-primary">Divident Manager</a>
+<div class="container-fluid px-2">
 
+    <!-- Mobile-friendly header buttons -->
+    <div class="card mb-3">
+        <div class="card-header p-0">
+            <div class="d-flex flex-row flex-nowrap overflow-auto gap-2 p-2">
+                <a href="{% url 'assets:indexManager' 'MTFT' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    MTFT
+                </a>
+                <a href="{% url 'assets:indexManager' 'INTRA' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Intra Day
+                </a>
+                <a href="{% url 'assets:indexManager' 'SWING' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Swing
+                </a>
+                <a href="{% url 'assets:indexManager' 'LONG' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Long
+                </a>
+                <a href="{% url 'assets:indexManager' 'OPTION' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Option
+                </a>
+                <a href="{% url 'assets:indexManager' 'MF' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Mutual Funds
+                </a>
+                <a href="{% url 'assets:dividentManager' %}" class="btn btn-primary btn-sm flex-shrink-0">
+                    Dividend
+                </a>
+            </div>
         </div>
-        <div class="card-body">
+    </div>
+
+    <!-- Content Body -->
+    <div class="card">
+        <div class="card-body px-2">
+
+            <!-- Mobile cards instead of table -->
             <div class="row">
-                <div class="col-md-4">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Amount Used For MF</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Total Divident Amount</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Total Amount Used for Trading</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From MTF</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From Option</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From IntraDay</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From Swing</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From Long</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Profit From MF</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Total Amount In Trading</th>
-                            <td></td>
-                        </tr>
-                    </table>
+                <div class="col-12">
+
+                    <!-- Use Bootstrap list-group for mobile readability -->
+                    <ul class="list-group">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Amount Used For MF</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Total Dividend Amount</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Total Amount Used for Trading</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From MTF</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From Option</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From IntraDay</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From Swing</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From Long</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Profit From MF</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Total Amount In Trading</strong>
+                            <span class="small text-muted">0</span>
+                        </li>
+
+                    </ul>
+
                 </div>
             </div>
         </div>
