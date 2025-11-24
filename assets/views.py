@@ -21,7 +21,7 @@ def assets(request):
         finYear=FinancialYear.objects.order_by("-id").first()
     finYears = FinancialYear.objects.all()
 
-    divAmount = dividentDetails.objects.filter(finYear=finYear).aggregate(total=Sum('amount'))['total']
+    divAmount = dividentDetails.objects.filter(finYear=finYear).aggregate(total=Sum('amount'))['total'] or Decimal(0)
     optionProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='OPTION').aggregate(total=Sum('profit'))['total'] or Decimal(0)
     longProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='LONG').aggregate(total=Sum('profit'))['total'] or Decimal(0)
     swingProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='SWING').aggregate(total=Sum('profit'))['total'] or Decimal(0)
