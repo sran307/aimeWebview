@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="container-fluid my-5 float-end">
-   <div class="d-flex flex-row flex-nowrap overflow-auto gap-2 p-2">
+   <div class="d-flex flex-column flex-nowrap overflow-auto gap-2 p-2">
        <button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:add_item_modal' %}">Add Expense/Earning Items</button>
        <a href="{% url 'budgetManager:monthlyBudget' %}" class="btn btn-primary">Monthly Budget</a>
        <a href="{% url 'budgetManager:debtManager' %}" class="btn btn-primary">Debt Manager</a>
