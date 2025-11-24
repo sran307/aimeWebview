@@ -11,12 +11,12 @@
 {% block content %}
 
     <div class="container-fluid mt-1">
-        <div class="d-flex flex-row overflow-auto gap-2 p-2">
-        <a class="btn btn-secondary">{{transType}} TRADING DETAILS</a>
-        <button class="btn btn-danger float-end mb-1 common-get " data-path="{% url 'assets:clearData' %}">clear</button>
-        <a class="btn btn-info float-end me-2 mb-1" href="{% url 'assets:transManager' transType %}">Goto Transactions</a>
-        <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2" data-path="{% url 'assets:process' transType 'N' %}">Process</button>
-        <button class="btn btn-primary float-end mb-1 common-get" data-path="{% url 'assets:process' transType 'A' %}">ReProcess</button>
+        <div class="d-flex flex-row flex-nowrap overflow-auto gap-2 p-2">
+            <a class="btn btn-secondary text-nowrap">{{transType}} TRADING DETAILS</a>
+            <button class="btn btn-danger float-end mb-1 common-get text-nowrap" data-path="{% url 'assets:clearData' %}">clear</button>
+            <a class="btn btn-info float-end me-2 mb-1 text-nowrap" href="{% url 'assets:transManager' transType %}">Goto Transactions</a>
+            <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2 text-nowrap" data-path="{% url 'assets:process' transType 'N' %}">Process</button>
+            <button class="btn btn-primary float-end mb-1 common-get text-nowrap" data-path="{% url 'assets:process' transType 'A' %}">ReProcess</button>
         </div>
 
         <table class="table table-bordered">
