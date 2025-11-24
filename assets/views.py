@@ -10,9 +10,39 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.db.models import F
 from pprint import pprint
 from .forms import *
+from django.db.models import Sum
+from decimal import Decimal
 
 def assets(request):
-    return render(request, 'assets/index.html')
+    selected_year_id = request.GET.get('year') 
+    if(selected_year_id):
+        finYear=FinancialYear.objects.get(id=selected_year_id)
+    else:
+        finYear=FinancialYear.objects.order_by("-id").first()
+    finYears = FinancialYear.objects.all()
+
+    divAmount = dividentDetails.objects.filter(finYear=finYear).aggregate(total=Sum('amount'))['total']
+    optionProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='OPTION').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    longProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='LONG').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    swingProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='SWING').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    intraProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='INTRA').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    mtfProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='MTF').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    mfProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='MF').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+
+
+    totalProfit = divAmount+optionProfit+longProfit+swingProfit+intraProfit+mtfProfit+mfProfit
+    context={
+        'divAmount': divAmount,
+        'optionProfit':optionProfit,
+        'longProfit':longProfit,
+        'swingProfit':swingProfit,
+        'intraProfit':intraProfit,
+        'mtfProfit':mtfProfit,
+        'totalProfit':totalProfit,
+        'mfProfit':mfProfit
+
+    }
+    return render(request, 'assets/index.html', context)
 
 def indexManager(request, transType):
     selected_year_id = request.GET.get('year') 

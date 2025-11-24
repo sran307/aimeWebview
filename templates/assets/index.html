@@ -45,55 +45,59 @@
 
                     <!-- Use Bootstrap list-group for mobile readability -->
                     <ul class="list-group">
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong class="small">Amount Used For MF</strong>
-                            <span class="small text-muted">0</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center profit-positive">
+                            <strong class="small">Total Profit From Trading include Divident</strong>
+                            <span class="small">{{ totalProfit | floatformat:3 }}</span>
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong class="small">Amount Used For MF</strong>
+                            <span class="small">0</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center profit-positive">
                             <strong class="small">Total Dividend Amount</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ divAmount | floatformat:3 }}</span>
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong class="small">Total Amount Used for Trading</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">0</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if mtfProfit > 0 %} profit-positive {% elif mtfProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From MTF</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ mtfProfit | floatformat:3}}</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if optionProfit > 0 %} profit-positive {% elif optionProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From Option</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ optionProfit | floatformat:3 }}</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if intraProfit > 0 %} profit-positive {% elif intraProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From IntraDay</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ intraProfit | floatformat:3 }}</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if swingProfit > 0 %} profit-positive {% elif swingProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From Swing</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ swingProfit | floatformat:3 }}</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if longProfit > 0 %} profit-positive {% elif longProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From Long</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ longProfit | floatformat:3 }}</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if mfProfit > 0 %} profit-positive {% elif mfProfit <= 0 %} profit-negative{% endif %}">
                             <strong class="small">Profit From MF</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">{{ mfProfit }}</span>
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong class="small">Total Amount In Trading</strong>
-                            <span class="small text-muted">0</span>
+                            <span class="small">0</span>
                         </li>
 
                     </ul>
