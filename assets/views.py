@@ -28,7 +28,10 @@ def assets(request):
     intraProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='INTRA').aggregate(total=Sum('profit'))['total'] or Decimal(0)
     mtfProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='MTF').aggregate(total=Sum('profit'))['total'] or Decimal(0)
     mfProfit = stockDetails.objects.filter(buyFinYear=finYear, transType='MF').aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    totalTax = stockDetails.objects.filter(buyFinYear=finYear).aggregate(total=(Sum('buyBrock')+Sum('sellBrock')))['total'] or Decimal(0)
 
+    overallProfit = stockDetails.objects.aggregate(total=Sum('profit'))['total'] or Decimal(0)
+    overallTax = stockDetails.objects.aggregate(total=(Sum('buyBrock')+Sum('sellBrock')))['total'] or Decimal(0)
 
     totalProfit = divAmount+optionProfit+longProfit+swingProfit+intraProfit+mtfProfit+mfProfit
     context={
@@ -39,7 +42,12 @@ def assets(request):
         'intraProfit':intraProfit,
         'mtfProfit':mtfProfit,
         'totalProfit':totalProfit,
-        'mfProfit':mfProfit
+        'mfProfit':mfProfit,
+        'finYears':finYears,
+        'finYear':finYear,
+        'overallProfit':overallProfit,
+        'overallTax':overallTax,
+        'totalTax':totalTax
 
     }
     return render(request, 'assets/index.html', context)
