@@ -11,27 +11,35 @@
 {% block content %}
 
     <div class="container-fluid mt-1">
-        <form method="get" id="filterForm" class="row g-2 mb-3">
-                <div class="col-md-4">
-                    <button class="btn btn-secondary float-center">Divident Manager</button>
-                </div>
-                <div class="col-md-3">
-                    <select name="year" id="yearSelect" class="form-select">
-                    {% for y in finYears %}
-                        <option value="{{ y.id }}" {% if y.id == selected_year_id %}selected{% endif %}>
+        <form method="get" id="filterForm" class="d-flex flex-wrap gap-2 mb-3 align-items-center">
+
+            <!-- Title -->
+            <button class="btn btn-secondary flex-grow-1">
+                Divident Manager
+            </button>
+
+            <!-- Year Dropdown -->
+            <select name="year" id="yearSelect" class="form-select w-auto flex-grow-1">
+                {% for y in finYears %}
+                    <option value="{{ y.id }}" {% if y.id == selected_year_id %}selected{% endif %}>
                         {{ y.year }}
-                        </option>
-                    {% endfor %}
-                    </select>
-                </div>
-                
-                <div class="col-md-1">
-                    <button type="submit" class="btn btn-primary w-100">Filter</button>
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-primary open-form-btn" data-path="{% url 'assets:addDividend' %}">Add Dividend</button>
-                </div>
-            </form>
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Filter Button -->
+            <button type="submit" class="btn btn-primary">
+                Filter
+            </button>
+
+            <!-- Add Button -->
+            <button type="button" class="btn btn-success open-form-btn"
+                    data-path="{% url 'assets:addDividend' %}">
+                Add
+            </button>
+
+        </form>
+
 
         
         <table class="table table-bordered table-dark">
