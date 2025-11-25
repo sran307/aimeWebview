@@ -11,14 +11,15 @@
 {% block content %}
 <div class="container-fluid px-2">
     <div class="row">
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6 col-md-6 table-responsive">
 
             <table class="table table-dark table-bordered table-sm text-center align-middle">
                 <tbody>
                     <tr>
-                        <td colspan="5">Loan Details</td>
-                        <td colspan="2"><button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:loan_create' %}">Add
-                        Loan</button></td>
+                        <td colspan="6">Loan Details</td>
+                        <td colspan="2"><button class="btn btn-primary open-form-btn"
+                                data-path="{% url 'budgetManager:loan_create' %}">Add
+                                Loan</button></td>
                         <td colspan="2">
                             <a class="btn btn-warning" href="{% url 'budgetManager:budgetManager' %}">Back</a>
                         </td>
@@ -33,43 +34,63 @@
                         <td>Balance for Pay</td>
                         <td>Total Int. Paid</td>
                         <td>Is Closed</td>
-
+                        <td>Closed Date</td>
                     </tr>
 
-                     {% for loan in loans %}
-            <tr>
-                <td><button class="btn btn-dark open-form-btn" data-path="{% url 'budgetManager:loan_form' loan.id %}">{{ forloop.counter }}</button></td>
-                <td contenteditable="true">{{ loan.loanTakenDate | date:'d-m-Y'}}</td>
-                <td contenteditable="true">{{ loan.loanTakenFrom }}</td>
-                <td contenteditable="true">{{ loan.loanAmount}}</td>
-                <td contenteditable="true">{{ loan.loanInterest}}</td>
-                <td contenteditable="true">
-                    {% if loan.isClosed %}
-                    YES
-                    {% else %}
-                    NO
-                    {% endif %}
-                </td>
-                <td contenteditable="true">{{ loan.loanPaidDate| date:'d-m-Y'}}</td>
-            </tr>
-            {% endfor %}
+                    {% for loan in loans %}
+                    <tr>
+                        <td><button class="btn btn-dark open-form-btn"
+                                data-path="{% url 'budgetManager:loan_form' loan.id %}">{{ forloop.counter }}</button>
+                        </td>
+                        <td contenteditable="true">{{ loan.loanTakenDate | date:'d-m-Y'}}</td>
+                        <td contenteditable="true">{{ loan.loanTakenFrom }}</td>
+                        <td contenteditable="true">{{ loan.loanAmount}}</td>
+                        <td contenteditable="true">{{ loan.loanInterest}}</td>
+                        <td>{{ loan.total_paid }}</td>
+                        <td>{{ loan.balance }}</td>
+                        <td>{{ loan.totalInt }}</td>
+                        <td contenteditable="true">
+                            {% if loan.isClosed %}
+                            YES
+                            {% else %}
+                            NO
+                            {% endif %}
+                        </td>
+                        <td contenteditable="true">{{ loan.loanPaidDate| date:'d-m-Y'}}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="col-md-6 col-sm-6">
-            <table class="table table-dark table-bordered table-sm text-center align-middle">
-                <tbody>
+            <table class="table table-dark table-bordered table-sm text-center align-middle datatable">
+                <thead>
                     <tr>
                         <td colspan="2">Loan Transactions</td>
-                        <td><button class="btn btn-dark open-form-btn" data-path="{% url 'budgetManager:loanTrans' %}">Add</button></td>
+                        <td>
+                            <button class="btn btn-dark open-form-btn" data-path="{% url 'budgetManager:loanTrans' %}">
+                                Add
+                            </button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Date</td>
-                        <td>Taken From</td>
-                        <td>Amount For Pay</td>
+                        <th>Date</th>
+                        <th>Taken From</th>
+                        <th>Amount For Pay</th>
                     </tr>
+                </thead>
+
+                <tbody>
+                    {% for loanTran in loanTrans %}
+                    <tr>
+                        <td>{{ loanTran.payedOn | date:'d-m-Y' }}</td>
+                        <td>{{ loanTran.loanName }}</td>
+                        <td>{{ loanTran.amount }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+
         </div>
     </div>
     {% endblock %}

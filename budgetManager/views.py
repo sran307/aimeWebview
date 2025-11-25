@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 import calendar
 from datetime import date, datetime
 from collections import defaultdict
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 
 from .models import *
 from .forms import *
@@ -179,9 +180,22 @@ def debt_form(request, id=None):
     return render(request, 'budget/debt_form.html', {'form': form})
 
 def loanManager(request):
-    loans = LoanManager.objects.all()
+    loans = LoanManager.objects.annotate(
+        total_paid=Sum('loanName__amount'),
+    ).annotate(
+        balance=ExpressionWrapper(
+            F('loanAmount') - (F('total_paid')),
+            output_field=DecimalField(max_digits=10, decimal_places=2)
+        ),
+        totalInt=ExpressionWrapper(
+            F('total_paid') - (F('loanAmount')),
+            output_field=DecimalField(max_digits=10, decimal_places=2)
+        )
+    )
+    loanTrans = LoanTrans.objects.all().order_by('-id')
     context = {
         'loans':loans,
+        'loanTrans':loanTrans
     }
     return render(request, 'budget/loanSheet.html', context)
 
