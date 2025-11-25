@@ -84,3 +84,17 @@ class LoanManagerForm(forms.ModelForm):
             if 'loanPaidDate' in self.fields:
                 self.fields['loanPaidDate'].required = False
 
+class LoanTransForm(forms.ModelForm):
+    class Meta:
+        model = LoanTrans
+        fields = ['payedOn', 'loanName', 'amount']
+
+        widgets = {
+            'payedOn': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'loanName': forms.Select(attrs={'class': 'form-select'}), 
+            'amount': forms.NumberInput(attrs={'step': '0.01', 'class': 'form-control'}),
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Filter dropdown
+        self.fields['loanName'].queryset = LoanManager.objects.filter(isClosed=False)

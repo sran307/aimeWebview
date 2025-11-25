@@ -305,3 +305,14 @@ def show_formula(request):
                 "value": "",
                 "formula": None
             })
+
+def loanTrans(request):
+    if request.method == 'POST':
+        form = LoanTransForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'status': 'success'})  # change as needed
+    else:
+        form = LoanTransForm()
+
+    return render(request, 'budget/loan_form.html', {'form': form})

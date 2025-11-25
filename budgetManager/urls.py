@@ -14,6 +14,7 @@ urlpatterns = [
     path('debts/<int:id>/', views.debt_form, name='debt_form'),
     path('loans/new/', views.loan_form, name='loan_create'),
     path('loans/<int:id>/', views.loan_form, name='loan_form'),
+    path('loans/trans/', views.loanTrans, name='loanTrans'),
 
 
     path("monthlyBudgetSheet/", views.monthlyBudgetSheet, name="monthlyBudgetSheet"),

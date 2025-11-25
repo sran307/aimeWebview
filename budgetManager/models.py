@@ -98,8 +98,8 @@ class LoanManager(models.Model):
     loanPaidDate = models.DateField(null=True)
     isClosed = models.BooleanField(default=False)
 
-    def __int__(self):
-        return id
+    def __str__(self):
+        return self.loanTakenFrom
     
 class DebtManager(models.Model):
     debtGivenDate = models.DateField(null=True)
@@ -114,3 +114,15 @@ class DebtManager(models.Model):
 
     def __int__(self):
         return id
+
+class LoanTrans(models.Model):
+    payedOn = models.DateField(null=True)
+    loanName = models.ForeignKey(
+        LoanManager, 
+        on_delete=models.CASCADE,
+        related_name="loanName"
+    )
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return f"{self.loanName} - {self.amount}"
