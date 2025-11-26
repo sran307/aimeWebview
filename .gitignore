@@ -79,3 +79,7 @@ htmlcov/
 .mypy_cache/
 pytest_cache/
 __pypackages__/
+
+next_data.json
+soup_content.html
+ticker.json
