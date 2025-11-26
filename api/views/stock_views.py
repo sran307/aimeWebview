@@ -134,7 +134,7 @@ def getQuotes(request):
         try:
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
-            print(yStock)
+            
             info = yStock.info
             if (
                 info.get('trailingEps', -1) > 0 and
@@ -154,7 +154,7 @@ def getQuotes(request):
                 stockCodeUpt = StockNames.objects.filter(stockCode=stockCode).update(
                             isActive=False
                         )
-                print(f"Stock {stock} did not meet the criteria.")           
+                print(f"Stock {stock['stockName']} did not meet the criteria.")           
         except Exception as e:
             print(f"Failed to update stock {stockCode}: {e}")
     return Response({'message': 'Trading Stocks Added.'}, status=status.HTTP_200_OK)

@@ -19,10 +19,10 @@
     </div>
 
      <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-danger w-100 commonFetch" data-path="{% url 'get_slug' %}" data-title="Fetching Stock Codes in Ticker Tape" data-text="Fetching Stock Codes Used in Ticker Tape for get the stock details form Ticker Tape">4.Get Slug</button>
+      <button class="btn btn-lg {% if isSlugEmpty %} btn-danger {% else %} btn-success {% endif %} w-100 commonFetch" data-path="{% url 'get_slug' %}" data-title="Fetching Stock Codes in Ticker Tape" data-text="Fetching Stock Codes Used in Ticker Tape for get the stock details form Ticker Tape">4.Get Slug</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-success w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Fetching All the Sectors" data-text="Fetching All The Sectors">5.Fetch Sector</button>
+      <button class="btn btn-lg btn-primary w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Updating Sector of F&O or Active Stocks" data-text="Fetching All The Sectors">5.Update Sector</button>
     </div>
 
     <div class="col-md-6 col-lg-3">

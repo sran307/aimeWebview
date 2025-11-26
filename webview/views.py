@@ -11,9 +11,11 @@ def stockAnalyser(request):
     isHoliday = max_holiday and max_holiday > timezone.now().date()
 
     isStockNotUsed = StockCodes.objects.filter(isUsed=False).exists()
+    isSlugEmpty = StockNames.objects.filter(stockSlug__isnull=True).exists()
     context = {
         'isHolidayLessThan':isHoliday,
         'isStockNotUsed':isStockNotUsed,
+        'isSlugEmpty':isSlugEmpty
     }
     return render(request, 'stock/index.html', context)
 
