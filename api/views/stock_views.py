@@ -134,8 +134,8 @@ def getQuotes(request):
         try:
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
+            print(yStock)
             info = yStock.info
-             
             if (
                 info.get('trailingEps', -1) > 0 and
                 info.get('returnOnEquity', -1) > 0 and
@@ -707,7 +707,7 @@ def getSector(request):
                 StockNames.objects.filter(id=stock['id']).update(
                     sector=gic.get('sector')
                 )
-
+                print("sector updated")
         except requests.exceptions.RequestException as e:
             return Response({'message': 'Error Occured.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
