@@ -159,6 +159,18 @@ def getQuotes(request):
             #     (info.get('debtToEquity', -1) / 100) < 1 and
             #     info.get('marketCap', -1) > 10000000000
             # ):
+            print(info.get('trailingEps', -1))
+            print(info.get('returnOnEquity', -1))
+            print(info.get('returnOnCapital', -1))
+            print(info.get('totalRevenue', -1))
+            print(info.get('profitMargins', -1))
+            print(info.get('operatingMargins', -1))
+            print(info.get('earningsQuarterlyGrowth', -1))
+            print(info.get('revenueGrowth', -1))
+            print(info.get('pegRatio', -1))
+            print(info.get('debtToEquity', -1))
+            print(info.get('beta', -1))
+            print(info.get('marketCap', -1))
             if (
                 info.get('trailingEps', -1) > 0 and
                 info.get('returnOnEquity', -1) > 0.12 and
