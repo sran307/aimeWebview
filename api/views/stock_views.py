@@ -259,146 +259,263 @@ def getDailyData(request):
     return Response({'message': 'Daily data updated successfully.'}, status=status.HTTP_200_OK)
     
 @api_view(['POST'])  
-def dataScreen(request):
-    dataExist = SwingData.objects.exists()
-    if dataExist:
-        tableName = 'swing_data'
-        with connection.cursor() as cursor:
-            cursor.execute("TRUNCATE TABLE {};".format(tableName))
-                
+def get_swing_data(request):
+
+    # --- Safe delete instead of TRUNCATE ---
+    SwingData.objects.all().delete()
+
     current_date = datetime.now().date()
-    for x in range(6):
-        end_date = current_date- timedelta(days=x)
-        dateExist = Holidays.objects.filter(holiday=end_date)
-        if not dateExist.exists():
+
+    # ---- Get latest trading day (not holiday) ----
+    end_date = current_date
+    for _ in range(6):
+        if not Holidays.objects.filter(holiday=end_date).exists():
             break
-        
+        end_date -= timedelta(days=1)
+
+    # ---- Find valid start date (100+ days before, not holiday) ----
+    start_date = end_date
     for x in range(6):
-        start_date = end_date - timedelta(days=100+x)
-        sDate = Holidays.objects.filter(holiday=start_date)
-        if not sDate.exists():
+        d = end_date - timedelta(days=100 + x)
+        if not Holidays.objects.filter(holiday=d).exists():
+            start_date = d
             break
-    
-    end_date = end_date+timedelta(days=1) 
-    end_date_str = end_date.strftime("%Y-%m-%d")
+
+    end_date_plus = end_date + timedelta(days=1)
+
+    # Format for yfinance
     start_date_str = start_date.strftime("%Y-%m-%d")
-    
-    firstData = TradeData.objects.filter(id=1).values()
-    for data in firstData:
-        target_date = data['endDate']
-        date_1 = data['startDate']
-        date_2 = data['prevDate']
-        stocks = StockNames.objects.all()
-        for stock in stocks:
-            stock_id = stock.id
+    end_date_str = end_date_plus.strftime("%Y-%m-%d")
 
-            query = """
-                SELECT stock
-                FROM trade_data
-                WHERE `date` = %s
-                AND `stock` = %s
-                AND `close` > (
-                    SELECT `close`
-                    FROM trade_data 
-                    WHERE `date` = %s
-                    AND `stock` = %s
-                )
-                AND `close` > (
-                    SELECT `close`
-                    FROM trade_data 
-                    WHERE `date` = %s
-                    AND `stock` = %s
-                )
-                AND `close` > (
-                    SELECT (`close` * 1.01)
-                    FROM trade_data 
-                    WHERE `date` = %s
-                    AND `stock` = %s
-                )
-                AND `close` > (
-                    SELECT `open`
-                    FROM trade_data 
-                    WHERE `date` = %s
-                    AND `stock` = %s
-                )
-                AND `close` > 100
-                AND `close` <= 400
-                AND volume > 1000000;
-            """
+    # ---- Fetch base dates from TradeData #1 ----
+    td = TradeData.objects.get(id=1)
+    target_date = td.endDate
+    date_1 = td.startDate
+    date_2 = td.prevDate
 
-            with connection.cursor() as cursor:
-                cursor.execute(query, [target_date, stock_id, date_1, stock_id, date_2, stock_id, date_2, stock_id, date_2, stock_id])
-                rows = cursor.fetchall()
-                for stock in rows:
-                    stocks = StockNames.objects.filter(id = stock[0]).values()
-                    for stock in stocks:                       
-                        ticker_symbol = stock['yCode']
+    # Preload all stocks to reduce DB queries
+    all_stocks = StockNames.objects.all()
 
-                        data = yf.download(ticker_symbol, start=start_date_str, end=end_date_str)
-                            
-                        data['ema5'] = data['Close'].ewm(span=5, adjust=False).mean()
-                        data['ema20'] = data['Close'].ewm(span=20, adjust=False).mean()
-                        data['sma50'] = data['Close'].rolling(window=50).mean()
-                        
-                        for index, row in data.iterrows():
-                            date = index
-                            close_price = row['Close']    
-                            ema5 = row['ema5']
-                            ema20 = row['ema20']
-                            if math.isnan(row['sma50']):
-                                sma50 = 0
-                            else:
-                                sma50 = row['sma50']
-                            # Create and save a new StockData object
-                            swing_data = SwingData.objects.create(date=date,
-                                                stock=StockNames.objects.get(pk=stock['id']), 
-                                                startDate=start_date, 
-                                                endDate=end_date-timedelta(days=1),
-                                                ema5 = ema5,
-                                                ema20 = ema20,
-                                                sma50=sma50,
-                                                close=close_price)
-                            swing_data.save()
-    latest_date = end_date-timedelta(days=1)     
-    stockData = []
-    swingStock = """ SELECT DISTINCT(stock) FROM swing_data;"""
-    with connection.cursor() as cursor:
-        cursor.execute(swingStock)
-        rows = cursor.fetchall()
-    unique_stocks = set(row[0] for row in rows)
-    for stock in unique_stocks:
-        procesQry = """
-                        SELECT stock FROM swing_data
-                WHERE `date` = %s
-                AND stock = %s
-                AND `close` >  (SELECT ema5 FROM swing_data WHERE date = %s AND stock = %s)
-                AND `ema5` >  (SELECT ema20 FROM swing_data WHERE date = %s AND stock = %s)
-                AND `ema20` >  (SELECT sma50 FROM swing_data WHERE date = %s AND stock = %s);
-                """
+    for stock in all_stocks:
+        stock_id = stock.id
+
+        # ---------- SQL Filter ----------
+        query = """
+            SELECT stock
+            FROM trade_data
+            WHERE date = %s AND stock = %s
+            AND close > (SELECT close FROM trade_data WHERE date=%s AND stock=%s)
+            AND close > (SELECT close FROM trade_data WHERE date=%s AND stock=%s)
+            AND close > (SELECT (close*1.01) FROM trade_data WHERE date=%s AND stock=%s)
+            AND close > (SELECT open FROM trade_data WHERE date=%s AND stock=%s)
+            AND close > 100 AND close <= 400
+            AND volume > 1000000
+        """
+
         with connection.cursor() as cursor:
-            cursor.execute(procesQry, [latest_date, stock, latest_date, stock,latest_date, stock, latest_date, stock])
+            cursor.execute(query, [
+                target_date, stock_id,
+                date_1, stock_id,
+                date_2, stock_id,
+                date_2, stock_id,
+                date_2, stock_id
+            ])
             rows = cursor.fetchall()
 
-            for data in rows:
-                stock_instance = StockNames.objects.filter(id=data[0]).values()
-                SwingStocks.objects.update_or_create(stock=data[0],date=current_date, defaults={
-                    'stock' :StockNames.objects.get(pk=data[0]),
-                    'date' : current_date
-                })
-                for stock in stock_instance:
-                    stock_data = {
-                        'id': stock['id'],
-                        'stockName': stock['stockName'],
-                        'stockCode': stock['stockCode'],
-                        'yCode': stock['yCode'],
-                    }
-                stockData.append(stock_data)
+        if not rows:
+            continue
+
+        # ---------- Yfinance ----------
+        ticker_symbol = stock.yCode
+        df = yf.download(ticker_symbol, start=start_date_str, end=end_date_str)
+
+        if df.empty:
+            continue
+
+        df["ema5"] = df["Close"].ewm(span=5).mean()
+        df["ema20"] = df["Close"].ewm(span=20).mean()
+        df["sma50"] = df["Close"].rolling(50).mean().fillna(0)
+
+        # --- Bulk insert for speed ---
+        objs = []
+        for idx, row in df.iterrows():
+            objs.append(SwingData(
+                date=idx.date(),
+                stock=stock,
+                startDate=start_date,
+                endDate=end_date,
+                close=row["Close"],
+                ema5=row["ema5"],
+                ema20=row["ema20"],
+                sma50=row["sma50"],
+            ))
+
+        SwingData.objects.bulk_create(objs, batch_size=500)
+
+    # ---- Find final swing stocks ----
+    latest_date = end_date
+    swing_stocks = SwingData.objects.filter(date=latest_date)
+
+    final_list = []
+
+    for s in swing_stocks:
+        if s.close > s.ema5 > s.ema20 > s.sma50:
+            SwingStocks.objects.update_or_create(
+                stock=s.stock,
+                date=current_date,
+                defaults={"stock": s.stock}
+            )
+            final_list.append({
+                "id": s.stock.id,
+                "stockName": s.stock.stockName,
+                "stockCode": s.stock.stockCode,
+                "yCode": s.stock.yCode,
+            })
+
+    encoded = baseEncode({"items": final_list})
+
+    return Response({"data": encoded})
+
+# def dataScreen(request):
+    # dataExist = SwingData.objects.exists()
+    # if dataExist:
+    #     tableName = 'swing_data'
+    #     with connection.cursor() as cursor:
+    #         cursor.execute("TRUNCATE TABLE {};".format(tableName))
+                
+    # current_date = datetime.now().date()
+    # for x in range(6):
+    #     end_date = current_date- timedelta(days=x)
+    #     dateExist = Holidays.objects.filter(holiday=end_date)
+    #     if not dateExist.exists():
+    #         break
+        
+    # for x in range(6):
+    #     start_date = end_date - timedelta(days=100+x)
+    #     sDate = Holidays.objects.filter(holiday=start_date)
+    #     if not sDate.exists():
+    #         break
+    
+    # end_date = end_date+timedelta(days=1) 
+    # end_date_str = end_date.strftime("%Y-%m-%d")
+    # start_date_str = start_date.strftime("%Y-%m-%d")
+    
+    # firstData = TradeData.objects.filter(id=1).values()
+    # for data in firstData:
+    #     target_date = data['endDate']
+    #     date_1 = data['startDate']
+    #     date_2 = data['prevDate']
+    #     stocks = StockNames.objects.all()
+    #     for stock in stocks:
+    #         stock_id = stock.id
+
+    #         query = """
+    #             SELECT stock
+    #             FROM trade_data
+    #             WHERE `date` = %s
+    #             AND `stock` = %s
+    #             AND `close` > (
+    #                 SELECT `close`
+    #                 FROM trade_data 
+    #                 WHERE `date` = %s
+    #                 AND `stock` = %s
+    #             )
+    #             AND `close` > (
+    #                 SELECT `close`
+    #                 FROM trade_data 
+    #                 WHERE `date` = %s
+    #                 AND `stock` = %s
+    #             )
+    #             AND `close` > (
+    #                 SELECT (`close` * 1.01)
+    #                 FROM trade_data 
+    #                 WHERE `date` = %s
+    #                 AND `stock` = %s
+    #             )
+    #             AND `close` > (
+    #                 SELECT `open`
+    #                 FROM trade_data 
+    #                 WHERE `date` = %s
+    #                 AND `stock` = %s
+    #             )
+    #             AND `close` > 100
+    #             AND `close` <= 400
+    #             AND volume > 1000000;
+    #         """
+
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(query, [target_date, stock_id, date_1, stock_id, date_2, stock_id, date_2, stock_id, date_2, stock_id])
+    #             rows = cursor.fetchall()
+    #             for stock in rows:
+    #                 stocks = StockNames.objects.filter(id = stock[0]).values()
+    #                 for stock in stocks:                       
+    #                     ticker_symbol = stock['yCode']
+
+    #                     data = yf.download(ticker_symbol, start=start_date_str, end=end_date_str)
+                            
+    #                     data['ema5'] = data['Close'].ewm(span=5, adjust=False).mean()
+    #                     data['ema20'] = data['Close'].ewm(span=20, adjust=False).mean()
+    #                     data['sma50'] = data['Close'].rolling(window=50).mean()
+                        
+    #                     for index, row in data.iterrows():
+    #                         date = index
+    #                         close_price = row['Close']    
+    #                         ema5 = row['ema5']
+    #                         ema20 = row['ema20']
+    #                         if math.isnan(row['sma50']):
+    #                             sma50 = 0
+    #                         else:
+    #                             sma50 = row['sma50']
+    #                         # Create and save a new StockData object
+    #                         swing_data = SwingData.objects.create(date=date,
+    #                                             stock=StockNames.objects.get(pk=stock['id']), 
+    #                                             startDate=start_date, 
+    #                                             endDate=end_date-timedelta(days=1),
+    #                                             ema5 = ema5,
+    #                                             ema20 = ema20,
+    #                                             sma50=sma50,
+    #                                             close=close_price)
+    #                         swing_data.save()
+    # latest_date = end_date-timedelta(days=1)     
+    # stockData = []
+    # swingStock = """ SELECT DISTINCT(stock) FROM swing_data;"""
+    # with connection.cursor() as cursor:
+    #     cursor.execute(swingStock)
+    #     rows = cursor.fetchall()
+    # unique_stocks = set(row[0] for row in rows)
+    # for stock in unique_stocks:
+    #     procesQry = """
+    #                     SELECT stock FROM swing_data
+    #             WHERE `date` = %s
+    #             AND stock = %s
+    #             AND `close` >  (SELECT ema5 FROM swing_data WHERE date = %s AND stock = %s)
+    #             AND `ema5` >  (SELECT ema20 FROM swing_data WHERE date = %s AND stock = %s)
+    #             AND `ema20` >  (SELECT sma50 FROM swing_data WHERE date = %s AND stock = %s);
+    #             """
+    #     with connection.cursor() as cursor:
+    #         cursor.execute(procesQry, [latest_date, stock, latest_date, stock,latest_date, stock, latest_date, stock])
+    #         rows = cursor.fetchall()
+
+    #         for data in rows:
+    #             stock_instance = StockNames.objects.filter(id=data[0]).values()
+    #             SwingStocks.objects.update_or_create(stock=data[0],date=current_date, defaults={
+    #                 'stock' :StockNames.objects.get(pk=data[0]),
+    #                 'date' : current_date
+    #             })
+    #             for stock in stock_instance:
+    #                 stock_data = {
+    #                     'id': stock['id'],
+    #                     'stockName': stock['stockName'],
+    #                     'stockCode': stock['stockCode'],
+    #                     'yCode': stock['yCode'],
+    #                 }
+    #             stockData.append(stock_data)
             
-    data = {
-        'items':stockData
-    }
-    encodedData = baseEncode(data)
-    return Response({'data': encodedData}, status=200)
+    # data = {
+    #     'items':stockData
+    # }
+    # encodedData = baseEncode(data)
+    # return Response({'data': encodedData}, status=200)
 
 @api_view(['POST'])
 def getHolidays(request):
