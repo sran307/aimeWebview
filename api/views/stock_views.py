@@ -138,7 +138,7 @@ def getQuotes(request):
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
 
-            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.json")
+            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.txt")
             # Write to file
             with open(file_path, "w") as f:
                 json.dump(yStock, f, indent=4)
