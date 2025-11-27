@@ -19,6 +19,9 @@ from bs4 import BeautifulSoup
 from django.db.models import Q
 from rest_framework import generics, status
 from encoder import hashUsername, hashPassword, baseEncode
+import os
+import json
+from django.conf import settings
 
 def fetch_with_retries(func, *args, retries=3, delay=5, **kwargs):
     """Helper function to retry a function call with a delay."""
@@ -134,6 +137,13 @@ def getQuotes(request):
         try:
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
+
+            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.json")
+            # Write to file
+            with open(file_path, "w") as f:
+                json.dump(data, f, indent=4)
+
+            print("Saved to:", file_path)
             
             info = yStock.info
             if (
