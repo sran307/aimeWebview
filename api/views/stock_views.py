@@ -138,10 +138,15 @@ def getQuotes(request):
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
 
-            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.txt")
+            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.json")
             # Write to file
             with open(file_path, "w") as f:
-                f.write(str(yStock))
+            for attr in dir(yStock):
+                if not attr.startswith("_"):
+                    try:
+                        f.write(f"{attr}:\n{getattr(yStock, attr)}\n\n")
+                    except:
+                        pass
 
             print("Saved to:", file_path)
             
