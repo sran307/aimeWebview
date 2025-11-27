@@ -141,7 +141,7 @@ def getQuotes(request):
             file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.txt")
             # Write to file
             with open(file_path, "w") as f:
-                json.dump(yStock, f, indent=4)
+                f.write(str(yStock))
 
             print("Saved to:", file_path)
             
