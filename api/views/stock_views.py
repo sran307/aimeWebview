@@ -159,31 +159,28 @@ def getQuotes(request):
             #     (info.get('debtToEquity', -1) / 100) < 1 and
             #     info.get('marketCap', -1) > 10000000000
             # ):
-            print(info.get('trailingEps', -1))
-            print(info.get('returnOnEquity', -1))
-            print(info.get('returnOnCapital', -1))
-            print(info.get('totalRevenue', -1))
-            print(info.get('profitMargins', -1))
-            print(info.get('operatingMargins', -1))
-            print(info.get('earningsQuarterlyGrowth', -1))
-            print(info.get('revenueGrowth', -1))
-            print(info.get('pegRatio', -1))
-            print(info.get('debtToEquity', -1))
-            print(info.get('beta', -1))
-            print(info.get('marketCap', -1))
+            roe = info.get('returnOnEquity', 0)
+            om = info.get('operatingMargins', 0)
+            pm = info.get('profitMargins', 0)
+            eps = info.get('trailingEps', 0)
+            rev = info.get('totalRevenue', 0)
+            mc = info.get('marketCap', 0)
+            dte = info.get('debtToEquity', 0) / 100
+            rev_growth = info.get('revenueGrowth', 0)
+            earn_growth = info.get('earningsQuarterlyGrowth', 0)
+            beta = info.get('beta', 0)
+
             if (
-                info.get('trailingEps', -1) > 0 and
-                info.get('returnOnEquity', -1) > 0.12 and
-                info.get('returnOnCapital', -1) > 0.12 and
-                info.get('totalRevenue', -1) > 0 and
-                info.get('profitMargins', -1) > 0.08 and
-                info.get('operatingMargins', -1) > 0.10 and
-                info.get('earningsQuarterlyGrowth', -1) > 0 and
-                info.get('revenueGrowth', -1) > 0 and
-                info.get('pegRatio', -1) < 1.5 and
-                info.get('debtToEquity', -1) < 0.5 and
-                info.get('beta', -1) < 1.5 and
-                info.get('marketCap', -1) > 20000000000      # 20,000cr
+                eps > 0 and
+                roe > 0.12 and
+                pm > 0.08 and
+                om > 0.05 and
+                rev > 0 and
+                dte < 1 and
+                rev_growth > 0 and
+                earn_growth > 0 and
+                beta < 1.5 and
+                mc > 10000000000        # 1000Cr or change as needed
             ):
 
                 stockCodeUpt = StockNames.objects.filter(stockCode=stockCode).update(
