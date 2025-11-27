@@ -1,0 +1,879 @@
+actions:
+                           Dividends  Stock Splits
+Date                                              
+2020-03-26 00:00:00+05:30        0.0           1.5
+2022-02-03 00:00:00+05:30        0.0          10.0
+
+analyst_price_targets:
+{'current': 8.81}
+
+balance_sheet:
+                                                   2025-03-31   2024-03-31   2023-03-31   2022-03-31  2021-03-31
+Treasury Shares Number                                    NaN          0.0          NaN          NaN         NaN
+Ordinary Shares Number                            101250000.0  101250000.0  101250000.0  101250000.0         NaN
+Share Issued                                      101250000.0  101250000.0  101250000.0  101250000.0         NaN
+Net Debt                                          230495700.0  248862600.0  229290040.0  157142540.0         NaN
+Total Debt                                        237283160.0  259780750.0  244425160.0  163072580.0         NaN
+...                                                       ...          ...          ...          ...         ...
+Cash Cash Equivalents And Short Term Investments   33183040.0   78411010.0   12556100.0    3377060.0         NaN
+Other Short Term Investments                       29033100.0   70100000.0          NaN          NaN  30609920.0
+Cash And Cash Equivalents                           4149940.0    8311010.0   12556100.0    3377060.0         NaN
+Cash Equivalents                                          0.0          0.0          0.0          0.0         NaN
+Cash Financial                                      4149940.0    8311010.0   12556110.0    3377060.0         NaN
+
+[68 rows x 5 columns]
+
+balancesheet:
+                                                   2025-03-31   2024-03-31   2023-03-31   2022-03-31  2021-03-31
+Treasury Shares Number                                    NaN          0.0          NaN          NaN         NaN
+Ordinary Shares Number                            101250000.0  101250000.0  101250000.0  101250000.0         NaN
+Share Issued                                      101250000.0  101250000.0  101250000.0  101250000.0         NaN
+Net Debt                                          230495700.0  248862600.0  229290040.0  157142540.0         NaN
+Total Debt                                        237283160.0  259780750.0  244425160.0  163072580.0         NaN
+...                                                       ...          ...          ...          ...         ...
+Cash Cash Equivalents And Short Term Investments   33183040.0   78411010.0   12556100.0    3377060.0         NaN
+Other Short Term Investments                       29033100.0   70100000.0          NaN          NaN  30609920.0
+Cash And Cash Equivalents                           4149940.0    8311010.0   12556100.0    3377060.0         NaN
+Cash Equivalents                                          0.0          0.0          0.0          0.0         NaN
+Cash Financial                                      4149940.0    8311010.0   12556110.0    3377060.0         NaN
+
+[68 rows x 5 columns]
+
+calendar:
+{'Earnings Date': [], 'Earnings High': None, 'Earnings Low': None, 'Earnings Average': None, 'Revenue High': None, 'Revenue Low': None, 'Revenue Average': None}
+
+capital_gains:
+Series([], dtype: object)
+
+cash_flow:
+                                             2025-03-31   2024-03-31   2023-03-31   2022-03-31  2021-03-31
+Free Cash Flow                               -8610600.0   66861310.0  -56140800.0   -6040270.0         NaN
+Issuance Of Capital Stock                           NaN     100000.0          0.0          NaN         NaN
+Capital Expenditure                         -90905150.0  -35247040.0 -241121000.0 -103342750.0         NaN
+End Cash Position                             4149940.0    8311010.0   12556100.0    3377060.0         NaN
+Other Cash Adjustment Outside Changein Cash         NaN          NaN       1000.0        500.0        -1.0
+Beginning Cash Position                       8311010.0   12556100.0    3376060.0   12291230.0         NaN
+Changes In Cash                              -4161070.0   -4245090.0    9179040.0   -8914670.0         NaN
+Financing Cash Flow                         -42253210.0   -2468040.0   64543070.0  -34889010.0         NaN
+Net Other Financing Charges                         NaN         10.0        -10.0          NaN         NaN
+Interest Paid Cff                           -19725230.0  -17795510.0  -16783480.0  -13677260.0         NaN
+Net Common Stock Issuance                           NaN     100000.0          0.0          NaN         NaN
+Common Stock Issuance                               NaN     100000.0          0.0          NaN         NaN
+Net Issuance Payments Of Debt               -22527980.0   15327460.0   81326560.0  -21211750.0         NaN
+Net Long Term Debt Issuance                 -22527980.0   15327460.0   81326560.0  -21211750.0         NaN
+Investing Cash Flow                         -44202410.0 -103885400.0 -240344230.0  -71328140.0         NaN
+Net Other Investing Changes                       -10.0          NaN        -10.0        -10.0         NaN
+Interest Received Cfi                         3136950.0    1461640.0     776780.0     713990.0         NaN
+Net Investment Purchase And Sale             43565800.0  -70100000.0          0.0   31300630.0         NaN
+Net PPE Purchase And Sale                   -90905150.0  -35247040.0 -241121000.0 -103342750.0         NaN
+Operating Cash Flow                          82294550.0  102108350.0  184980200.0   97302480.0         NaN
+Taxes Refund Paid                           -19501790.0   -2461850.0  -22808020.0  -11681190.0         NaN
+Change In Working Capital                    -5435240.0  -71538920.0   57554720.0  -49949110.0         NaN
+Change In Other Current Liabilities         -15764150.0   27234870.0  -19384980.0    3260860.0         NaN
+Change In Other Current Assets                -433070.0    -614950.0    -152840.0    -280650.0         NaN
+Change In Payable                            39382840.0   -9319600.0   11186810.0    5597090.0         NaN
+Change In Receivables                       -31096990.0  -93464700.0   64805560.0  -56857680.0         NaN
+Other Non Cash Items                         16588280.0   16333870.0   16006700.0   12963270.0         NaN
+Depreciation And Amortization                71746320.0   75527560.0   70154200.0   62581320.0         NaN
+Amortization Cash Flow                          10090.0          0.0         40.0          NaN         NaN
+Depreciation                                 71736230.0   75527560.0   70154200.0   62581320.0         NaN
+Pension And Employee Benefit Expense           -40060.0     175090.0     222060.0    1417120.0         NaN
+Gain Loss On Investment Securities           -2498900.0          NaN          NaN    -690710.0   -968970.0
+Gain Loss On Sale Of PPE                     -4125730.0    -141070.0     781000.0          0.0         NaN
+Net Income From Continuing Operations        25561650.0   83788820.0   61372910.0   82087010.0         NaN
+
+cashflow:
+                                             2025-03-31   2024-03-31   2023-03-31   2022-03-31  2021-03-31
+Free Cash Flow                               -8610600.0   66861310.0  -56140800.0   -6040270.0         NaN
+Issuance Of Capital Stock                           NaN     100000.0          0.0          NaN         NaN
+Capital Expenditure                         -90905150.0  -35247040.0 -241121000.0 -103342750.0         NaN
+End Cash Position                             4149940.0    8311010.0   12556100.0    3377060.0         NaN
+Other Cash Adjustment Outside Changein Cash         NaN          NaN       1000.0        500.0        -1.0
+Beginning Cash Position                       8311010.0   12556100.0    3376060.0   12291230.0         NaN
+Changes In Cash                              -4161070.0   -4245090.0    9179040.0   -8914670.0         NaN
+Financing Cash Flow                         -42253210.0   -2468040.0   64543070.0  -34889010.0         NaN
+Net Other Financing Charges                         NaN         10.0        -10.0          NaN         NaN
+Interest Paid Cff                           -19725230.0  -17795510.0  -16783480.0  -13677260.0         NaN
+Net Common Stock Issuance                           NaN     100000.0          0.0          NaN         NaN
+Common Stock Issuance                               NaN     100000.0          0.0          NaN         NaN
+Net Issuance Payments Of Debt               -22527980.0   15327460.0   81326560.0  -21211750.0         NaN
+Net Long Term Debt Issuance                 -22527980.0   15327460.0   81326560.0  -21211750.0         NaN
+Investing Cash Flow                         -44202410.0 -103885400.0 -240344230.0  -71328140.0         NaN
+Net Other Investing Changes                       -10.0          NaN        -10.0        -10.0         NaN
+Interest Received Cfi                         3136950.0    1461640.0     776780.0     713990.0         NaN
+Net Investment Purchase And Sale             43565800.0  -70100000.0          0.0   31300630.0         NaN
+Net PPE Purchase And Sale                   -90905150.0  -35247040.0 -241121000.0 -103342750.0         NaN
+Operating Cash Flow                          82294550.0  102108350.0  184980200.0   97302480.0         NaN
+Taxes Refund Paid                           -19501790.0   -2461850.0  -22808020.0  -11681190.0         NaN
+Change In Working Capital                    -5435240.0  -71538920.0   57554720.0  -49949110.0         NaN
+Change In Other Current Liabilities         -15764150.0   27234870.0  -19384980.0    3260860.0         NaN
+Change In Other Current Assets                -433070.0    -614950.0    -152840.0    -280650.0         NaN
+Change In Payable                            39382840.0   -9319600.0   11186810.0    5597090.0         NaN
+Change In Receivables                       -31096990.0  -93464700.0   64805560.0  -56857680.0         NaN
+Other Non Cash Items                         16588280.0   16333870.0   16006700.0   12963270.0         NaN
+Depreciation And Amortization                71746320.0   75527560.0   70154200.0   62581320.0         NaN
+Amortization Cash Flow                          10090.0          0.0         40.0          NaN         NaN
+Depreciation                                 71736230.0   75527560.0   70154200.0   62581320.0         NaN
+Pension And Employee Benefit Expense           -40060.0     175090.0     222060.0    1417120.0         NaN
+Gain Loss On Investment Securities           -2498900.0          NaN          NaN    -690710.0   -968970.0
+Gain Loss On Sale Of PPE                     -4125730.0    -141070.0     781000.0          0.0         NaN
+Net Income From Continuing Operations        25561650.0   83788820.0   61372910.0   82087010.0         NaN
+
+dividends:
+Series([], Name: Dividends, dtype: float64)
+
+earnings:
+None
+
+earnings_dates:
+None
+
+earnings_estimate:
+Empty DataFrame
+Columns: []
+Index: [0q, +1q, 0y, +1y]
+
+earnings_history:
+Empty DataFrame
+Columns: []
+Index: []
+
+eps_revisions:
+Empty DataFrame
+Columns: []
+Index: [0q, +1q, 0y, +1y]
+
+eps_trend:
+Empty DataFrame
+Columns: []
+Index: [0q, +1q, 0y, +1y]
+
+fast_info:
+lazy-loading dict with keys = ['currency', 'dayHigh', 'dayLow', 'exchange', 'fiftyDayAverage', 'lastPrice', 'lastVolume', 'marketCap', 'open', 'previousClose', 'quoteType', 'regularMarketPreviousClose', 'shares', 'tenDayAverageVolume', 'threeMonthAverageVolume', 'timezone', 'twoHundredDayAverage', 'yearChange', 'yearHigh', 'yearLow']
+
+financials:
+                                                      2025-03-31    2024-03-31    2023-03-31    2022-03-31  2021-03-31
+Tax Effect Of Unusual Items                         1.853885e+06 -7.358991e+04 -6.464832e+05  2.948281e+04         NaN
+Tax Rate For Calcs                                  2.798470e-01  2.593660e-01  2.609270e-01  2.542720e-01         NaN
+Normalized EBITDA                                   1.104086e+08  1.773956e+08  1.507882e+08  1.582296e+08         NaN
+Total Unusual Items                                 6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Total Unusual Items Excluding Goodwill              6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Net Income From Continuing Operation Net Minori...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Reconciled Depreciation                             7.174632e+07  7.552756e+07  7.015420e+07  6.258132e+07         NaN
+Reconciled Cost Of Revenue                          4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+EBITDA                                              1.170332e+08  1.771119e+08  1.483106e+08  1.583456e+08         NaN
+EBIT                                                4.528688e+07  1.015843e+08  7.815639e+07  9.576427e+07         NaN
+Net Interest Income                                -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense                                    1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income                                     3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Normalized Income                                   1.363755e+07  6.226700e+07  4.719023e+07  6.112813e+07         NaN
+Net Income From Continuing And Discontinued Ope...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Total Expenses                                      9.525422e+08  8.262281e+08  8.599857e+08  6.775425e+08         NaN
+Diluted Average Shares                              1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Basic Average Shares                                1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Diluted EPS                                         0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Basic EPS                                           0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Diluted NI Availto Com Stockholders                 1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Common Stockholders                      1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00         NaN
+Net Income                                          1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Including Noncontrolling Interests       1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Continuous Operations                    1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Tax Provision                                       7.153360e+06  2.173197e+07  1.601385e+07  2.087241e+07         NaN
+Pretax Income                                       2.556165e+07  8.378882e+07  6.137291e+07  8.208701e+07         NaN
+Other Non Operating Income Expenses                 1.746980e+06  4.931500e+05  1.295880e+06  2.625280e+06         NaN
+Special Income Charges                              4.125730e+06 -2.837300e+05 -2.477640e+06 -5.747600e+05         NaN
+Other Special Charges                              -4.125730e+06 -1.410700e+05  7.810000e+05           NaN     50690.0
+Write Off                                           0.000000e+00  4.248000e+05  1.696640e+06  5.747600e+05         NaN
+Net Non Operating Interest Income Expense          -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense Non Operating                      1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income Non Operating                       3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Operating Income                                    2.934716e+07  9.609802e+07  6.578360e+07  9.122398e+07         NaN
+Operating Expense                                   5.092105e+08  4.041995e+08  4.107427e+08  3.349326e+08         NaN
+Other Operating Expenses                            4.750702e+07  5.514751e+07  7.992995e+07  5.016259e+07         NaN
+Depreciation And Amortization In Income Statement            NaN           NaN           NaN           NaN  59265784.0
+Depreciation Income Statement                                NaN           NaN           NaN           NaN  59265784.0
+Selling General And Administration                  1.042495e+07  1.265942e+07  7.939670e+06  6.615280e+06         NaN
+Selling And Marketing Expense                       8.720000e+04  7.250000e+04  1.355800e+05  1.076400e+05         NaN
+General And Administrative Expense                  1.033775e+07  1.258692e+07  7.804090e+06  6.507640e+06         NaN
+Gross Profit                                        5.385576e+08  5.002975e+08  4.765263e+08  4.261566e+08         NaN
+Cost Of Revenue                                     4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+Total Revenue                                       9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+Operating Revenue                                   9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+
+funds_data:
+<yfinance.scrapers.funds.FundsData object at 0x7624359a50>
+
+get_actions:
+<bound method TickerBase.get_actions of yfinance.Ticker object <AAKASH.NS>>
+
+get_analyst_price_targets:
+<bound method TickerBase.get_analyst_price_targets of yfinance.Ticker object <AAKASH.NS>>
+
+get_balance_sheet:
+<bound method TickerBase.get_balance_sheet of yfinance.Ticker object <AAKASH.NS>>
+
+get_balancesheet:
+<bound method TickerBase.get_balancesheet of yfinance.Ticker object <AAKASH.NS>>
+
+get_calendar:
+<bound method TickerBase.get_calendar of yfinance.Ticker object <AAKASH.NS>>
+
+get_capital_gains:
+<bound method TickerBase.get_capital_gains of yfinance.Ticker object <AAKASH.NS>>
+
+get_cash_flow:
+<bound method TickerBase.get_cash_flow of yfinance.Ticker object <AAKASH.NS>>
+
+get_cashflow:
+<bound method TickerBase.get_cashflow of yfinance.Ticker object <AAKASH.NS>>
+
+get_dividends:
+<bound method TickerBase.get_dividends of yfinance.Ticker object <AAKASH.NS>>
+
+get_earnings:
+<bound method TickerBase.get_earnings of yfinance.Ticker object <AAKASH.NS>>
+
+get_earnings_dates:
+<bound method TickerBase.get_earnings_dates of yfinance.Ticker object <AAKASH.NS>>
+
+get_earnings_estimate:
+<bound method TickerBase.get_earnings_estimate of yfinance.Ticker object <AAKASH.NS>>
+
+get_earnings_history:
+<bound method TickerBase.get_earnings_history of yfinance.Ticker object <AAKASH.NS>>
+
+get_eps_revisions:
+<bound method TickerBase.get_eps_revisions of yfinance.Ticker object <AAKASH.NS>>
+
+get_eps_trend:
+<bound method TickerBase.get_eps_trend of yfinance.Ticker object <AAKASH.NS>>
+
+get_fast_info:
+<bound method TickerBase.get_fast_info of yfinance.Ticker object <AAKASH.NS>>
+
+get_financials:
+<bound method TickerBase.get_financials of yfinance.Ticker object <AAKASH.NS>>
+
+get_funds_data:
+<bound method TickerBase.get_funds_data of yfinance.Ticker object <AAKASH.NS>>
+
+get_growth_estimates:
+<bound method TickerBase.get_growth_estimates of yfinance.Ticker object <AAKASH.NS>>
+
+get_history_metadata:
+<bound method TickerBase.get_history_metadata of yfinance.Ticker object <AAKASH.NS>>
+
+get_income_stmt:
+<bound method TickerBase.get_income_stmt of yfinance.Ticker object <AAKASH.NS>>
+
+get_incomestmt:
+<bound method TickerBase.get_incomestmt of yfinance.Ticker object <AAKASH.NS>>
+
+get_info:
+<bound method TickerBase.get_info of yfinance.Ticker object <AAKASH.NS>>
+
+get_insider_purchases:
+<bound method TickerBase.get_insider_purchases of yfinance.Ticker object <AAKASH.NS>>
+
+get_insider_roster_holders:
+<bound method TickerBase.get_insider_roster_holders of yfinance.Ticker object <AAKASH.NS>>
+
+get_insider_transactions:
+<bound method TickerBase.get_insider_transactions of yfinance.Ticker object <AAKASH.NS>>
+
+get_institutional_holders:
+<bound method TickerBase.get_institutional_holders of yfinance.Ticker object <AAKASH.NS>>
+
+get_isin:
+<bound method TickerBase.get_isin of yfinance.Ticker object <AAKASH.NS>>
+
+get_major_holders:
+<bound method TickerBase.get_major_holders of yfinance.Ticker object <AAKASH.NS>>
+
+get_mutualfund_holders:
+<bound method TickerBase.get_mutualfund_holders of yfinance.Ticker object <AAKASH.NS>>
+
+get_news:
+<bound method TickerBase.get_news of yfinance.Ticker object <AAKASH.NS>>
+
+get_recommendations:
+<bound method TickerBase.get_recommendations of yfinance.Ticker object <AAKASH.NS>>
+
+get_recommendations_summary:
+<bound method TickerBase.get_recommendations_summary of yfinance.Ticker object <AAKASH.NS>>
+
+get_revenue_estimate:
+<bound method TickerBase.get_revenue_estimate of yfinance.Ticker object <AAKASH.NS>>
+
+get_sec_filings:
+<bound method TickerBase.get_sec_filings of yfinance.Ticker object <AAKASH.NS>>
+
+get_shares:
+<bound method TickerBase.get_shares of yfinance.Ticker object <AAKASH.NS>>
+
+get_shares_full:
+<bound method TickerBase.get_shares_full of yfinance.Ticker object <AAKASH.NS>>
+
+get_splits:
+<bound method TickerBase.get_splits of yfinance.Ticker object <AAKASH.NS>>
+
+get_sustainability:
+<bound method TickerBase.get_sustainability of yfinance.Ticker object <AAKASH.NS>>
+
+get_upgrades_downgrades:
+<bound method TickerBase.get_upgrades_downgrades of yfinance.Ticker object <AAKASH.NS>>
+
+growth_estimates:
+        stockTrend  indexTrend
+period                        
+0q             NaN      0.1501
++1q            NaN      0.0668
+0y             NaN      0.1096
++1y            NaN      0.1447
+LTG            NaN      0.1220
+
+history:
+<bound method TickerBase.history of yfinance.Ticker object <AAKASH.NS>>
+
+history_metadata:
+{'currency': 'INR', 'symbol': 'AAKASH.NS', 'exchangeName': 'NSI', 'fullExchangeName': 'NSE', 'instrumentType': 'EQUITY', 'firstTradeDate': 1526355900, 'regularMarketTime': 1764237087, 'hasPrePostMarketData': False, 'gmtoffset': 19800, 'timezone': 'IST', 'exchangeTimezoneName': 'Asia/Kolkata', 'regularMarketPrice': 8.81, 'fiftyTwoWeekHigh': 13.79, 'fiftyTwoWeekLow': 7.06, 'regularMarketDayHigh': 8.99, 'regularMarketDayLow': 8.65, 'regularMarketVolume': 78199, 'longName': 'Aakash Exploration Services Limited', 'shortName': 'AAKASH EXPLORATION SER L', 'chartPreviousClose': 8.85, 'previousClose': 8.77, 'scale': 3, 'priceHint': 2, 'currentTradingPeriod': {'pre': {'timezone': 'IST', 'end': 1764215100, 'start': 1764215100, 'gmtoffset': 19800}, 'regular': {'timezone': 'IST', 'end': 1764237600, 'start': 1764215100, 'gmtoffset': 19800}, 'post': {'timezone': 'IST', 'end': 1764237600, 'start': 1764237600, 'gmtoffset': 19800}}, 'tradingPeriods':                                           pre_start                   pre_end                     start                       end                post_start                  post_end
+Date                                                                                                                                                                                 
+2025-11-21 00:00:00+05:30 2025-11-21 09:15:00+05:30 2025-11-21 09:15:00+05:30 2025-11-21 09:15:00+05:30 2025-11-21 15:30:00+05:30 2025-11-21 15:30:00+05:30 2025-11-21 15:30:00+05:30
+2025-11-24 00:00:00+05:30 2025-11-24 09:15:00+05:30 2025-11-24 09:15:00+05:30 2025-11-24 09:15:00+05:30 2025-11-24 15:30:00+05:30 2025-11-24 15:30:00+05:30 2025-11-24 15:30:00+05:30
+2025-11-25 00:00:00+05:30 2025-11-25 09:15:00+05:30 2025-11-25 09:15:00+05:30 2025-11-25 09:15:00+05:30 2025-11-25 15:30:00+05:30 2025-11-25 15:30:00+05:30 2025-11-25 15:30:00+05:30
+2025-11-26 00:00:00+05:30 2025-11-26 09:15:00+05:30 2025-11-26 09:15:00+05:30 2025-11-26 09:15:00+05:30 2025-11-26 15:30:00+05:30 2025-11-26 15:30:00+05:30 2025-11-26 15:30:00+05:30
+2025-11-27 00:00:00+05:30 2025-11-27 09:15:00+05:30 2025-11-27 09:15:00+05:30 2025-11-27 09:15:00+05:30 2025-11-27 15:30:00+05:30 2025-11-27 15:30:00+05:30 2025-11-27 15:30:00+05:30, 'dataGranularity': '1h', 'range': '5d', 'validRanges': ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'], 'lastTrade': {'Price': np.float64(8.8100004196167), 'Time': Timestamp('2025-11-27 15:21:27+0530', tz='Asia/Kolkata')}}
+
+income_stmt:
+                                                      2025-03-31    2024-03-31    2023-03-31    2022-03-31  2021-03-31
+Tax Effect Of Unusual Items                         1.853885e+06 -7.358991e+04 -6.464832e+05  2.948281e+04         NaN
+Tax Rate For Calcs                                  2.798470e-01  2.593660e-01  2.609270e-01  2.542720e-01         NaN
+Normalized EBITDA                                   1.104086e+08  1.773956e+08  1.507882e+08  1.582296e+08         NaN
+Total Unusual Items                                 6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Total Unusual Items Excluding Goodwill              6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Net Income From Continuing Operation Net Minori...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Reconciled Depreciation                             7.174632e+07  7.552756e+07  7.015420e+07  6.258132e+07         NaN
+Reconciled Cost Of Revenue                          4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+EBITDA                                              1.170332e+08  1.771119e+08  1.483106e+08  1.583456e+08         NaN
+EBIT                                                4.528688e+07  1.015843e+08  7.815639e+07  9.576427e+07         NaN
+Net Interest Income                                -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense                                    1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income                                     3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Normalized Income                                   1.363755e+07  6.226700e+07  4.719023e+07  6.112813e+07         NaN
+Net Income From Continuing And Discontinued Ope...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Total Expenses                                      9.525422e+08  8.262281e+08  8.599857e+08  6.775425e+08         NaN
+Diluted Average Shares                              1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Basic Average Shares                                1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Diluted EPS                                         0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Basic EPS                                           0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Diluted NI Availto Com Stockholders                 1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Common Stockholders                      1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00         NaN
+Net Income                                          1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Including Noncontrolling Interests       1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Continuous Operations                    1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Tax Provision                                       7.153360e+06  2.173197e+07  1.601385e+07  2.087241e+07         NaN
+Pretax Income                                       2.556165e+07  8.378882e+07  6.137291e+07  8.208701e+07         NaN
+Other Non Operating Income Expenses                 1.746980e+06  4.931500e+05  1.295880e+06  2.625280e+06         NaN
+Special Income Charges                              4.125730e+06 -2.837300e+05 -2.477640e+06 -5.747600e+05         NaN
+Other Special Charges                              -4.125730e+06 -1.410700e+05  7.810000e+05           NaN     50690.0
+Write Off                                           0.000000e+00  4.248000e+05  1.696640e+06  5.747600e+05         NaN
+Net Non Operating Interest Income Expense          -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense Non Operating                      1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income Non Operating                       3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Operating Income                                    2.934716e+07  9.609802e+07  6.578360e+07  9.122398e+07         NaN
+Operating Expense                                   5.092105e+08  4.041995e+08  4.107427e+08  3.349326e+08         NaN
+Other Operating Expenses                            4.750702e+07  5.514751e+07  7.992995e+07  5.016259e+07         NaN
+Depreciation And Amortization In Income Statement            NaN           NaN           NaN           NaN  59265784.0
+Depreciation Income Statement                                NaN           NaN           NaN           NaN  59265784.0
+Selling General And Administration                  1.042495e+07  1.265942e+07  7.939670e+06  6.615280e+06         NaN
+Selling And Marketing Expense                       8.720000e+04  7.250000e+04  1.355800e+05  1.076400e+05         NaN
+General And Administrative Expense                  1.033775e+07  1.258692e+07  7.804090e+06  6.507640e+06         NaN
+Gross Profit                                        5.385576e+08  5.002975e+08  4.765263e+08  4.261566e+08         NaN
+Cost Of Revenue                                     4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+Total Revenue                                       9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+Operating Revenue                                   9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+
+incomestmt:
+                                                      2025-03-31    2024-03-31    2023-03-31    2022-03-31  2021-03-31
+Tax Effect Of Unusual Items                         1.853885e+06 -7.358991e+04 -6.464832e+05  2.948281e+04         NaN
+Tax Rate For Calcs                                  2.798470e-01  2.593660e-01  2.609270e-01  2.542720e-01         NaN
+Normalized EBITDA                                   1.104086e+08  1.773956e+08  1.507882e+08  1.582296e+08         NaN
+Total Unusual Items                                 6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Total Unusual Items Excluding Goodwill              6.624630e+06 -2.837300e+05 -2.477640e+06  1.159500e+05         NaN
+Net Income From Continuing Operation Net Minori...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Reconciled Depreciation                             7.174632e+07  7.552756e+07  7.015420e+07  6.258132e+07         NaN
+Reconciled Cost Of Revenue                          4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+EBITDA                                              1.170332e+08  1.771119e+08  1.483106e+08  1.583456e+08         NaN
+EBIT                                                4.528688e+07  1.015843e+08  7.815639e+07  9.576427e+07         NaN
+Net Interest Income                                -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense                                    1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income                                     3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Normalized Income                                   1.363755e+07  6.226700e+07  4.719023e+07  6.112813e+07         NaN
+Net Income From Continuing And Discontinued Ope...  1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Total Expenses                                      9.525422e+08  8.262281e+08  8.599857e+08  6.775425e+08         NaN
+Diluted Average Shares                              1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Basic Average Shares                                1.012500e+08  1.012500e+08  1.012500e+08  1.012500e+08         NaN
+Diluted EPS                                         0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Basic EPS                                           0.000000e+00  1.000000e-02  4.479910e-01  6.045890e-01         NaN
+Diluted NI Availto Com Stockholders                 1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Common Stockholders                      1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00         NaN
+Net Income                                          1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Including Noncontrolling Interests       1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Net Income Continuous Operations                    1.840829e+07  6.205686e+07  4.535907e+07  6.121460e+07         NaN
+Tax Provision                                       7.153360e+06  2.173197e+07  1.601385e+07  2.087241e+07         NaN
+Pretax Income                                       2.556165e+07  8.378882e+07  6.137291e+07  8.208701e+07         NaN
+Other Non Operating Income Expenses                 1.746980e+06  4.931500e+05  1.295880e+06  2.625280e+06         NaN
+Special Income Charges                              4.125730e+06 -2.837300e+05 -2.477640e+06 -5.747600e+05         NaN
+Other Special Charges                              -4.125730e+06 -1.410700e+05  7.810000e+05           NaN     50690.0
+Write Off                                           0.000000e+00  4.248000e+05  1.696640e+06  5.747600e+05         NaN
+Net Non Operating Interest Income Expense          -1.658828e+07 -1.633387e+07 -1.600670e+07 -1.296327e+07         NaN
+Interest Expense Non Operating                      1.972523e+07  1.779551e+07  1.678348e+07  1.367726e+07         NaN
+Interest Income Non Operating                       3.136950e+06  1.461640e+06  7.767800e+05  7.139900e+05         NaN
+Operating Income                                    2.934716e+07  9.609802e+07  6.578360e+07  9.122398e+07         NaN
+Operating Expense                                   5.092105e+08  4.041995e+08  4.107427e+08  3.349326e+08         NaN
+Other Operating Expenses                            4.750702e+07  5.514751e+07  7.992995e+07  5.016259e+07         NaN
+Depreciation And Amortization In Income Statement            NaN           NaN           NaN           NaN  59265784.0
+Depreciation Income Statement                                NaN           NaN           NaN           NaN  59265784.0
+Selling General And Administration                  1.042495e+07  1.265942e+07  7.939670e+06  6.615280e+06         NaN
+Selling And Marketing Expense                       8.720000e+04  7.250000e+04  1.355800e+05  1.076400e+05         NaN
+General And Administrative Expense                  1.033775e+07  1.258692e+07  7.804090e+06  6.507640e+06         NaN
+Gross Profit                                        5.385576e+08  5.002975e+08  4.765263e+08  4.261566e+08         NaN
+Cost Of Revenue                                     4.433318e+08  4.220286e+08  4.492429e+08  3.426099e+08         NaN
+Total Revenue                                       9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+Operating Revenue                                   9.818894e+08  9.223261e+08  9.257693e+08  7.687665e+08         NaN
+
+info:
+{'address1': '424-426, Shukan Mall', 'address2': '4th Floor Near Visat Petrol Pump Sabarmati', 'city': 'Ahmedabad', 'zip': '380005', 'country': 'India', 'phone': '91 79 4800 6633', 'website': 'https://www.aakashexploration.com', 'industry': 'Oil & Gas Equipment & Services', 'industryKey': 'oil-gas-equipment-services', 'industryDisp': 'Oil & Gas Equipment & Services', 'sector': 'Energy', 'sectorKey': 'energy', 'sectorDisp': 'Energy', 'longBusinessSummary': 'Aakash Exploration Services Limited provides oil and gas field services in India. It offers services using machineries, such as mobile work over rigs, hot oil circulation units, heating units, indirect bath heaters, mobile sucker rod pumping units, utility services for return lines, mobile steaming units, mobile high pressure air compressors, mobile high- and low-pressure pumping units, FRAC/ insulated tanks, and acid pumping units. The company also engages in manufacture of refined petroleum products. In addition, it provides oil enhance recovery, well head maintenance, well head greasing, mold guide on sucker rod, drilling rig, chemical dosing pump, sucker rod pumping unit, and flush by unit. Aakash Exploration Services Limited was incorporated in 2007 and is headquartered in Ahmedabad, India.', 'fullTimeEmployees': 1297, 'companyOfficers': [{'maxAge': 1, 'name': 'Mr. Vipul Navinchandra Haria', 'age': 54, 'title': 'Chairman & MD', 'yearBorn': 1970, 'fiscalYear': 2025, 'totalPay': 4200000, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Hemang Navinbhai Haria', 'age': 52, 'title': 'CFO & Whole Time Director', 'yearBorn': 1972, 'fiscalYear': 2025, 'totalPay': 2400000, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Krunal Pravinbhai Haria', 'age': 42, 'title': 'Whole Time Director', 'yearBorn': 1982, 'fiscalYear': 2025, 'totalPay': 2400000, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Nisha  Agarwal', 'title': 'Company Secretary & Compliance officer', 'fiscalYear': 2025, 'exercisedValue': 0, 'unexercisedValue': 0}], 'compensationAsOfEpochDate': 1767139200, 'executiveTeam': [], 'maxAge': 86400, 'priceHint': 2, 'previousClose': 8.77, 'open': 8.65, 'dayLow': 8.65, 'dayHigh': 8.99, 'regularMarketPreviousClose': 8.77, 'regularMarketOpen': 8.65, 'regularMarketDayLow': 8.65, 'regularMarketDayHigh': 8.99, 'payoutRatio': 0.0, 'beta': -0.16, 'volume': 78199, 'regularMarketVolume': 78199, 'averageVolume': 82922, 'averageVolume10days': 85895, 'averageDailyVolume10Day': 85895, 'bid': 8.8, 'ask': 8.81, 'marketCap': 892012544, 'fiftyTwoWeekLow': 7.06, 'fiftyTwoWeekHigh': 13.79, 'allTimeHigh': 33.8, 'allTimeLow': 0.94, 'priceToSalesTrailing12Months': 0.91216, 'fiftyDayAverage': 9.2604, 'twoHundredDayAverage': 9.27515, 'trailingAnnualDividendRate': 0.0, 'trailingAnnualDividendYield': 0.0, 'currency': 'INR', 'tradeable': False, 'enterpriseValue': 1137645056, 'profitMargins': 0.01381, 'floatShares': 30825625, 'sharesOutstanding': 101250000, 'impliedSharesOutstanding': 101250000, 'bookValue': 6.614, 'priceToBook': 1.332023, 'lastFiscalYearEnd': 1743379200, 'nextFiscalYearEnd': 1774915200, 'mostRecentQuarter': 1759190400, 'earningsQuarterlyGrowth': 1.548, 'netIncomeToCommon': 13504290, 'trailingEps': -0.05, 'lastSplitFactor': '10:1', 'lastSplitDate': 1643846400, 'enterpriseToRevenue': 1.163, 'enterpriseToEbitda': 10.806, '52WeekChange': -0.18266541, 'SandP52WeekChange': 0.12159383, 'quoteType': 'EQUITY', 'currentPrice': 8.81, 'recommendationKey': 'none', 'totalCash': 1978000, 'totalCashPerShare': 0.021, 'ebitda': 105274928, 'totalDebt': 328398016, 'quickRatio': 0.613, 'currentRatio': 0.726, 'totalRevenue': 977912384, 'debtToEquity': 53.68, 'revenuePerShare': 9.626, 'returnOnAssets': 0.01764, 'returnOnEquity': 0.02232, 'grossProfits': 836720960, 'freeCashflow': -184688368, 'operatingCashflow': 33408550, 'earningsGrowth': 1.727, 'revenueGrowth': 0.076, 'grossMargins': 0.85561997, 'ebitdaMargins': 0.107650004, 'operatingMargins': 0.027999999, 'financialCurrency': 'INR', 'symbol': 'AAKASH.NS', 'language': 'en-US', 'region': 'US', 'typeDisp': 'Equity', 'quoteSourceName': 'Free Realtime Quote', 'triggerable': True, 'customPriceAlertConfidence': 'HIGH', 'fiftyDayAverageChange': -0.4503994, 'fiftyDayAverageChangePercent': -0.048637144, 'twoHundredDayAverageChange': -0.46514988, 'twoHundredDayAverageChangePercent': -0.05015012, 'sourceInterval': 15, 'exchangeDataDelayedBy': 15, 'cryptoTradeable': False, 'shortName': 'AAKASH EXPLORATION SER L', 'longName': 'Aakash Exploration Services Limited', 'regularMarketChangePercent': 0.4560999, 'regularMarketPrice': 8.81, 'corporateActions': [], 'regularMarketTime': 1764237087, 'exchange': 'NSI', 'messageBoardId': 'finmb_548707659', 'exchangeTimezoneName': 'Asia/Kolkata', 'exchangeTimezoneShortName': 'IST', 'gmtOffSetMilliseconds': 19800000, 'market': 'in_market', 'esgPopulated': False, 'marketState': 'REGULAR', 'hasPrePostMarketData': False, 'firstTradeDateMilliseconds': 1526355900000, 'regularMarketChange': 0.03999996, 'regularMarketDayRange': '8.65 - 8.99', 'fullExchangeName': 'NSE', 'averageDailyVolume3Month': 82922, 'fiftyTwoWeekLowChange': 1.7500005, 'fiftyTwoWeekLowChangePercent': 0.24787542, 'fiftyTwoWeekRange': '7.06 - 13.79', 'fiftyTwoWeekHighChange': -4.9799995, 'fiftyTwoWeekHighChangePercent': -0.36113122, 'fiftyTwoWeekChangePercent': -18.26654, 'earningsTimestampStart': 1754305140, 'earningsTimestampEnd': 1754654400, 'isEarningsDateEstimate': True, 'epsTrailingTwelveMonths': -0.05, 'trailingPegRatio': None}
+
+insider_purchases:
+       Insider Purchases Last 6m  Shares  Trans
+0                      Purchases       0      0
+1                          Sales    <NA>      0
+2    Net Shares Purchased (Sold)       0      0
+3      Total Insider Shares Held       0   <NA>
+4  % Net Shares Purchased (Sold)    <NA>   <NA>
+5                   % Buy Shares    <NA>   <NA>
+6                  % Sell Shares    <NA>   <NA>
+
+insider_roster_holders:
+Empty DataFrame
+Columns: []
+Index: []
+
+insider_transactions:
+Empty DataFrame
+Columns: []
+Index: []
+
+institutional_holders:
+Empty DataFrame
+Columns: []
+Index: []
+
+isin:
+-
+
+live:
+<bound method TickerBase.live of yfinance.Ticker object <AAKASH.NS>>
+
+major_holders:
+Empty DataFrame
+Columns: []
+Index: []
+
+mutualfund_holders:
+Empty DataFrame
+Columns: []
+Index: []
+
+news:
+[]
+
+option_chain:
+<bound method Ticker.option_chain of yfinance.Ticker object <AAKASH.NS>>
+
+options:
+()
+
+quarterly_balance_sheet:
+                                                   2025-09-30   2025-03-31   2024-09-30   2024-03-31
+Treasury Shares Number                                    NaN          NaN          0.0          0.0
+Ordinary Shares Number                            101250000.0  101250000.0  101250000.0  101250000.0
+Share Issued                                      101250000.0  101250000.0  101250000.0  101250000.0
+Net Debt                                          260378000.0  230495700.0  126433000.0  248862600.0
+Total Debt                                        262356000.0  237283160.0  138707000.0  259780750.0
+...                                                       ...          ...          ...          ...
+Cash Cash Equivalents And Short Term Investments    1978000.0   33183040.0   40629000.0   78411010.0
+Other Short Term Investments                              NaN   29033100.0   28355000.0   70100000.0
+Cash And Cash Equivalents                           1978000.0    4149940.0   12274000.0    8311010.0
+Cash Equivalents                                          NaN          0.0          NaN          0.0
+Cash Financial                                            NaN    4149940.0          NaN    8311010.0
+
+[67 rows x 4 columns]
+
+quarterly_balancesheet:
+                                                   2025-09-30   2025-03-31   2024-09-30   2024-03-31
+Treasury Shares Number                                    NaN          NaN          0.0          0.0
+Ordinary Shares Number                            101250000.0  101250000.0  101250000.0  101250000.0
+Share Issued                                      101250000.0  101250000.0  101250000.0  101250000.0
+Net Debt                                          260378000.0  230495700.0  126433000.0  248862600.0
+Total Debt                                        262356000.0  237283160.0  138707000.0  259780750.0
+...                                                       ...          ...          ...          ...
+Cash Cash Equivalents And Short Term Investments    1978000.0   33183040.0   40629000.0   78411010.0
+Other Short Term Investments                              NaN   29033100.0   28355000.0   70100000.0
+Cash And Cash Equivalents                           1978000.0    4149940.0   12274000.0    8311010.0
+Cash Equivalents                                          NaN          0.0          NaN          0.0
+Cash Financial                                            NaN    4149940.0          NaN    8311010.0
+
+[67 rows x 4 columns]
+
+quarterly_cash_flow:
+Empty DataFrame
+Columns: []
+Index: []
+
+quarterly_cashflow:
+Empty DataFrame
+Columns: []
+Index: []
+
+quarterly_earnings:
+None
+
+quarterly_financials:
+                                                      2025-09-30    2025-03-31    2024-12-31    2024-09-30    2024-06-30
+Tax Effect Of Unusual Items                         0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Tax Rate For Calcs                                  2.552330e-01  2.799940e-01  3.118650e-01  3.762830e-01  2.619110e-01
+Normalized EBITDA                                   8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Income From Continuing Operation Net Minori...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Reconciled Cost Of Revenue                          5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+EBITDA                                              8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+EBIT                                                8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Interest Income                                -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense                                    5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Normalized Income                                   2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income From Continuing And Discontinued Ope...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Total Expenses                                      2.411240e+08  2.516022e+08  2.294200e+08  2.277630e+08  2.437540e+08
+Diluted Average Shares                              9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Basic Average Shares                                9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Diluted EPS                                         3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Basic EPS                                           3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Diluted NI Availto Com Stockholders                 2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Common Stockholders                      2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Net Income                                          2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Including Noncontrolling Interests       2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Continuous Operations                    2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Tax Provision                                       9.510000e+05  1.082360e+06  1.167000e+06  6.600000e+05  4.244000e+06
+Pretax Income                                       3.726000e+06  3.865650e+06  3.742000e+06  1.754000e+06  1.620400e+07
+Other Non Operating Income Expenses                 1.848000e+06 -1.044702e+07  3.126000e+06  3.746000e+06  5.322000e+06
+Net Non Operating Interest Income Expense          -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense Non Operating                      5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Operating Income                                    6.945000e+06  6.143160e+06  4.125000e+06  2.775000e+06  1.630800e+07
+Operating Expense                                   1.821900e+08 -3.768553e+07  1.748410e+08  1.824730e+08  1.895790e+08
+Other Operating Expenses                            8.889700e+07 -2.517840e+08  8.099200e+07  1.049880e+08  1.133070e+08
+Gross Profit                                        1.891350e+08 -3.154237e+07  1.789660e+08  1.852480e+08  2.058870e+08
+Cost Of Revenue                                     5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+Total Revenue                                       2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+Operating Revenue                                   2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+
+quarterly_income_stmt:
+                                                      2025-09-30    2025-03-31    2024-12-31    2024-09-30    2024-06-30
+Tax Effect Of Unusual Items                         0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Tax Rate For Calcs                                  2.552330e-01  2.799940e-01  3.118650e-01  3.762830e-01  2.619110e-01
+Normalized EBITDA                                   8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Income From Continuing Operation Net Minori...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Reconciled Cost Of Revenue                          5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+EBITDA                                              8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+EBIT                                                8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Interest Income                                -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense                                    5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Normalized Income                                   2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income From Continuing And Discontinued Ope...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Total Expenses                                      2.411240e+08  2.516022e+08  2.294200e+08  2.277630e+08  2.437540e+08
+Diluted Average Shares                              9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Basic Average Shares                                9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Diluted EPS                                         3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Basic EPS                                           3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Diluted NI Availto Com Stockholders                 2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Common Stockholders                      2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Net Income                                          2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Including Noncontrolling Interests       2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Continuous Operations                    2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Tax Provision                                       9.510000e+05  1.082360e+06  1.167000e+06  6.600000e+05  4.244000e+06
+Pretax Income                                       3.726000e+06  3.865650e+06  3.742000e+06  1.754000e+06  1.620400e+07
+Other Non Operating Income Expenses                 1.848000e+06 -1.044702e+07  3.126000e+06  3.746000e+06  5.322000e+06
+Net Non Operating Interest Income Expense          -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense Non Operating                      5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Operating Income                                    6.945000e+06  6.143160e+06  4.125000e+06  2.775000e+06  1.630800e+07
+Operating Expense                                   1.821900e+08 -3.768553e+07  1.748410e+08  1.824730e+08  1.895790e+08
+Other Operating Expenses                            8.889700e+07 -2.517840e+08  8.099200e+07  1.049880e+08  1.133070e+08
+Gross Profit                                        1.891350e+08 -3.154237e+07  1.789660e+08  1.852480e+08  2.058870e+08
+Cost Of Revenue                                     5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+Total Revenue                                       2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+Operating Revenue                                   2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+
+quarterly_incomestmt:
+                                                      2025-09-30    2025-03-31    2024-12-31    2024-09-30    2024-06-30
+Tax Effect Of Unusual Items                         0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Tax Rate For Calcs                                  2.552330e-01  2.799940e-01  3.118650e-01  3.762830e-01  2.619110e-01
+Normalized EBITDA                                   8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Income From Continuing Operation Net Minori...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Reconciled Cost Of Revenue                          5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+EBITDA                                              8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+EBIT                                                8.793000e+06  9.889880e+06  7.252000e+06  6.520000e+06  2.162900e+07
+Net Interest Income                                -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense                                    5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Normalized Income                                   2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income From Continuing And Discontinued Ope...  2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Total Expenses                                      2.411240e+08  2.516022e+08  2.294200e+08  2.277630e+08  2.437540e+08
+Diluted Average Shares                              9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Basic Average Shares                                9.250000e+07           NaN  1.030000e+08  1.094000e+08  9.967500e+07
+Diluted EPS                                         3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Basic EPS                                           3.000000e-02           NaN  2.500000e-02  1.000000e-02  1.200000e-01
+Diluted NI Availto Com Stockholders                 2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Common Stockholders                      2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+Net Income                                          2.775000e+06  2.782290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Including Noncontrolling Interests       2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Net Income Continuous Operations                    2.775000e+06  2.783290e+06  2.575000e+06  1.094000e+06  1.196100e+07
+Tax Provision                                       9.510000e+05  1.082360e+06  1.167000e+06  6.600000e+05  4.244000e+06
+Pretax Income                                       3.726000e+06  3.865650e+06  3.742000e+06  1.754000e+06  1.620400e+07
+Other Non Operating Income Expenses                 1.848000e+06 -1.044702e+07  3.126000e+06  3.746000e+06  5.322000e+06
+Net Non Operating Interest Income Expense          -5.067000e+06 -2.887280e+06 -3.510000e+06 -4.766000e+06 -5.425000e+06
+Interest Expense Non Operating                      5.067000e+06  6.024230e+06  3.510000e+06  4.766000e+06  5.425000e+06
+Operating Income                                    6.945000e+06  6.143160e+06  4.125000e+06  2.775000e+06  1.630800e+07
+Operating Expense                                   1.821900e+08 -3.768553e+07  1.748410e+08  1.824730e+08  1.895790e+08
+Other Operating Expenses                            8.889700e+07 -2.517840e+08  8.099200e+07  1.049880e+08  1.133070e+08
+Gross Profit                                        1.891350e+08 -3.154237e+07  1.789660e+08  1.852480e+08  2.058870e+08
+Cost Of Revenue                                     5.893400e+07  2.892878e+08  5.457900e+07  4.529000e+07  5.417500e+07
+Total Revenue                                       2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+Operating Revenue                                   2.480690e+08  2.577454e+08  2.335450e+08  2.305380e+08  2.600620e+08
+
+recommendations:
+Empty DataFrame
+Columns: []
+Index: []
+
+recommendations_summary:
+Empty DataFrame
+Columns: []
+Index: []
+
+revenue_estimate:
+        avg  low  high  numberOfAnalysts
+period                                  
+0q        0    0     0                 0
++1q       0    0     0                 0
+0y        0    0     0                 0
++1y       0    0     0                 0
+
+sec_filings:
+{}
+
+session:
+<curl_cffi.requests.session.Session object at 0x76244d6e90>
+
+splits:
+Date
+2020-03-26 00:00:00+05:30     1.5
+2022-02-03 00:00:00+05:30    10.0
+Name: Stock Splits, dtype: float64
+
+sustainability:
+Empty DataFrame
+Columns: []
+Index: []
+
+ticker:
+AAKASH.NS
+
+ttm_cash_flow:
+                                        2025-09-30
+Free Cash Flow                        -172029600.0
+Capital Expenditure                   -205438150.0
+End Cash Position                        1978930.0
+Beginning Cash Position                 12223000.0
+Changes In Cash                        -10244070.0
+Financing Cash Flow                    129222790.0
+Interest Paid Cff                      -20424230.0
+Net Issuance Payments Of Debt          149647020.0
+Net Long Term Debt Issuance            149647020.0
+Investing Cash Flow                   -172875410.0
+Interest Received Cfi                    2539950.0
+Net Investment Purchase And Sale        30022800.0
+Net PPE Purchase And Sale             -205438150.0
+Operating Cash Flow                     33408550.0
+Taxes Refund Paid                      -18317790.0
+Change In Working Capital              -62099240.0
+Change In Other Current Liabilities     -1038150.0
+Change In Other Current Assets          -2008070.0
+Change In Payable                       26731840.0
+Change In Receivables                  -91094990.0
+Other Non Cash Items                    17884280.0
+Depreciation And Amortization           78106320.0
+Depreciation                            78096230.0
+Gain Loss On Investment Securities      -1567900.0
+Gain Loss On Sale Of PPE                  147270.0
+Net Income From Continuing Operations   18497650.0
+
+ttm_cashflow:
+                                        2025-09-30
+Free Cash Flow                        -172029600.0
+Capital Expenditure                   -205438150.0
+End Cash Position                        1978930.0
+Beginning Cash Position                 12223000.0
+Changes In Cash                        -10244070.0
+Financing Cash Flow                    129222790.0
+Interest Paid Cff                      -20424230.0
+Net Issuance Payments Of Debt          149647020.0
+Net Long Term Debt Issuance            149647020.0
+Investing Cash Flow                   -172875410.0
+Interest Received Cfi                    2539950.0
+Net Investment Purchase And Sale        30022800.0
+Net PPE Purchase And Sale             -205438150.0
+Operating Cash Flow                     33408550.0
+Taxes Refund Paid                      -18317790.0
+Change In Working Capital              -62099240.0
+Change In Other Current Liabilities     -1038150.0
+Change In Other Current Assets          -2008070.0
+Change In Payable                       26731840.0
+Change In Receivables                  -91094990.0
+Other Non Cash Items                    17884280.0
+Depreciation And Amortization           78106320.0
+Depreciation                            78096230.0
+Gain Loss On Investment Securities      -1567900.0
+Gain Loss On Sale Of PPE                  147270.0
+Net Income From Continuing Operations   18497650.0
+
+ttm_financials:
+                                                      2025-09-30
+Tax Effect Of Unusual Items                         1.787574e+06
+Tax Rate For Calcs                                  2.698380e-01
+Normalized EBITDA                                   1.104036e+08
+Total Unusual Items                                 6.624630e+06
+Total Unusual Items Excluding Goodwill              6.624630e+06
+Net Income From Continuing Operation Net Minori...  1.350429e+07
+Reconciled Depreciation                             7.810632e+07
+Reconciled Cost Of Revenue                          4.548258e+08
+EBITDA                                              1.170282e+08
+EBIT                                                3.892188e+07
+Net Interest Income                                -1.728728e+07
+Interest Expense                                    2.042423e+07
+Normalized Income                                   8.667234e+06
+Net Income From Continuing And Discontinued Ope...  1.350429e+07
+Total Expenses                                      9.506522e+08
+Diluted Average Shares                              1.015953e+08
+Basic Average Shares                                1.015953e+08
+Diluted EPS                                        -4.900000e-02
+Basic EPS                                          -4.900000e-02
+Diluted NI Availto Com Stockholders                 1.350429e+07
+Net Income Common Stockholders                      1.350429e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00
+Net Income                                          1.350429e+07
+Net Income Including Noncontrolling Interests       1.350429e+07
+Net Income Continuous Operations                    1.350429e+07
+Tax Provision                                       4.991360e+06
+Pretax Income                                       1.849765e+07
+Other Non Operating Income Expenses                -2.532020e+06
+Net Non Operating Interest Income Expense          -1.728728e+07
+Interest Expense Non Operating                      2.042423e+07
+Operating Income                                    2.726016e+07
+Operating Expense                                   4.958265e+08
+Other Operating Expenses                            1.177602e+07
+Gross Profit                                        5.230866e+08
+Cost Of Revenue                                     4.548258e+08
+Total Revenue                                       9.779124e+08
+Operating Revenue                                   9.779124e+08
+
+ttm_income_stmt:
+                                                      2025-09-30
+Tax Effect Of Unusual Items                         1.787574e+06
+Tax Rate For Calcs                                  2.698380e-01
+Normalized EBITDA                                   1.104036e+08
+Total Unusual Items                                 6.624630e+06
+Total Unusual Items Excluding Goodwill              6.624630e+06
+Net Income From Continuing Operation Net Minori...  1.350429e+07
+Reconciled Depreciation                             7.810632e+07
+Reconciled Cost Of Revenue                          4.548258e+08
+EBITDA                                              1.170282e+08
+EBIT                                                3.892188e+07
+Net Interest Income                                -1.728728e+07
+Interest Expense                                    2.042423e+07
+Normalized Income                                   8.667234e+06
+Net Income From Continuing And Discontinued Ope...  1.350429e+07
+Total Expenses                                      9.506522e+08
+Diluted Average Shares                              1.015953e+08
+Basic Average Shares                                1.015953e+08
+Diluted EPS                                        -4.900000e-02
+Basic EPS                                          -4.900000e-02
+Diluted NI Availto Com Stockholders                 1.350429e+07
+Net Income Common Stockholders                      1.350429e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00
+Net Income                                          1.350429e+07
+Net Income Including Noncontrolling Interests       1.350429e+07
+Net Income Continuous Operations                    1.350429e+07
+Tax Provision                                       4.991360e+06
+Pretax Income                                       1.849765e+07
+Other Non Operating Income Expenses                -2.532020e+06
+Net Non Operating Interest Income Expense          -1.728728e+07
+Interest Expense Non Operating                      2.042423e+07
+Operating Income                                    2.726016e+07
+Operating Expense                                   4.958265e+08
+Other Operating Expenses                            1.177602e+07
+Gross Profit                                        5.230866e+08
+Cost Of Revenue                                     4.548258e+08
+Total Revenue                                       9.779124e+08
+Operating Revenue                                   9.779124e+08
+
+ttm_incomestmt:
+                                                      2025-09-30
+Tax Effect Of Unusual Items                         1.787574e+06
+Tax Rate For Calcs                                  2.698380e-01
+Normalized EBITDA                                   1.104036e+08
+Total Unusual Items                                 6.624630e+06
+Total Unusual Items Excluding Goodwill              6.624630e+06
+Net Income From Continuing Operation Net Minori...  1.350429e+07
+Reconciled Depreciation                             7.810632e+07
+Reconciled Cost Of Revenue                          4.548258e+08
+EBITDA                                              1.170282e+08
+EBIT                                                3.892188e+07
+Net Interest Income                                -1.728728e+07
+Interest Expense                                    2.042423e+07
+Normalized Income                                   8.667234e+06
+Net Income From Continuing And Discontinued Ope...  1.350429e+07
+Total Expenses                                      9.506522e+08
+Diluted Average Shares                              1.015953e+08
+Basic Average Shares                                1.015953e+08
+Diluted EPS                                        -4.900000e-02
+Basic EPS                                          -4.900000e-02
+Diluted NI Availto Com Stockholders                 1.350429e+07
+Net Income Common Stockholders                      1.350429e+07
+Otherunder Preferred Stock Dividend                 0.000000e+00
+Net Income                                          1.350429e+07
+Net Income Including Noncontrolling Interests       1.350429e+07
+Net Income Continuous Operations                    1.350429e+07
+Tax Provision                                       4.991360e+06
+Pretax Income                                       1.849765e+07
+Other Non Operating Income Expenses                -2.532020e+06
+Net Non Operating Interest Income Expense          -1.728728e+07
+Interest Expense Non Operating                      2.042423e+07
+Operating Income                                    2.726016e+07
+Operating Expense                                   4.958265e+08
+Other Operating Expenses                            1.177602e+07
+Gross Profit                                        5.230866e+08
+Cost Of Revenue                                     4.548258e+08
+Total Revenue                                       9.779124e+08
+Operating Revenue                                   9.779124e+08
+
+upgrades_downgrades:
+Empty DataFrame
+Columns: []
+Index: []
+
+ws:
+None

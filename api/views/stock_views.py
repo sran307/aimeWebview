@@ -160,18 +160,18 @@ def getQuotes(request):
             #     info.get('marketCap', -1) > 10000000000
             # ):
             if (
-                info.get('trailingEps', 0) > 0 and
-                info.get('returnOnEquity', 0) > 0.12 and
-                info.get('returnOnCapital', 0) > 0.12 and
-                info.get('totalRevenue', 0) > 0 and
-                info.get('profitMargins', 0) > 0.08 and
-                info.get('operatingMargins', 0) > 0.10 and
-                info.get('earningsQuarterlyGrowth', 0) > 0 and
-                info.get('revenueGrowth', 0) > 0 and
-                info.get('pegRatio', 2) < 1.5 and
-                info.get('debtToEquity', 1) < 0.5 and
-                info.get('beta', 1) < 1.5 and
-                info.get('marketCap', 0) > 20000000000      # 20,000cr
+                info.get('trailingEps', -1) > 0 and
+                info.get('returnOnEquity', -1) > 0.12 and
+                info.get('returnOnCapital', -1) > 0.12 and
+                info.get('totalRevenue', -1) > 0 and
+                info.get('profitMargins', -1) > 0.08 and
+                info.get('operatingMargins', -1) > 0.10 and
+                info.get('earningsQuarterlyGrowth', -1) > 0 and
+                info.get('revenueGrowth', -1) > 0 and
+                info.get('pegRatio', -1) < 1.5 and
+                info.get('debtToEquity', -1) < 0.5 and
+                info.get('beta', -1) < 1.5 and
+                info.get('marketCap', -1) > 20000000000      # 20,000cr
             ):
 
                 stockCodeUpt = StockNames.objects.filter(stockCode=stockCode).update(
@@ -424,222 +424,337 @@ def getHolidays(request):
 
 @api_view(['POST'])
 def GetFundas(request):
-    dataExist = StockCommentary.objects.exists()
-    if dataExist:
-        tableName = 'stock_commentary'
+    # Clear commentary Table
+    if StockCommentary.objects.exists():
         with connection.cursor() as cursor:
-            cursor.execute("TRUNCATE TABLE {};".format(tableName))
+            cursor.execute("TRUNCATE TABLE stock_commentary;")
 
-    stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True)).values()
+    stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True))
+
     for stock in stocks:
-        # START SECTION FOR FETCH DATA FROM YFINANACE
-        yCode = stock['yCode']
-        yStock = yf.Ticker(yCode)
-        info = yStock.info
-        stockId = stock['id']
-        stmt=yStock.cashflow
-        
-        StockProfitRatios.objects.update_or_create(stock=stockId, defaults={
-            'stock' :StockNames.objects.get(pk=stockId),
-            'ebita': info.get('ebitda', -1),
-            'ebitam': info.get('ebitdaMargins', -1),
-            'roe': info.get('returnOnEquity', -1),
-            'roa': info.get('returnOnAssets', -1),
-            'eps': info.get('trailingEps', -1)
-        })
-        StockLeverageRatios.objects.update_or_create(stock=stockId, defaults={
-            'stock' :StockNames.objects.get(pk=stockId),
-            'debtEq': info.get('debtToEquity', -1)/100,
-        })
-        # END SECTION FOR FETCH DATA FROM YFINANACE
+        stock_obj = stock  # Already a model instance
+        yStock = yf.Ticker(stock.yCode)
 
-        # START SECTION FOR FETCH DATA FROM TICKER TAPE
-        slug = stock['stockSlug']
-        url = 'https://www.tickertape.in/'+slug
+        # ---- YFINANCE SECTION ----
+        try:
+            info = yStock.get_info()
+        except:
+            print(f"Yfinance failed for {stock.yCode}")
+            continue
+
+        # Profit Ratios
+        StockProfitRatios.objects.update_or_create(
+            stock=stock_obj,
+            defaults={
+                'ebita': info.get('ebitda'),
+                'ebitam': info.get('ebitdaMargins'),
+                'roe': info.get('returnOnEquity'),
+                'roa': info.get('returnOnAssets'),
+                'eps': info.get('trailingEps')
+            }
+        )
+
+        # Leverage Ratios
+        StockLeverageRatios.objects.update_or_create(
+            stock=stock_obj,
+            defaults={
+                'debtEq': (info.get('debtToEquity') or 0) / 100,
+            }
+        )
+
+        # ---- TICKERTAPE SECTION ----
+        slug = stock.stockSlug
+        url = f"https://www.tickertape.in/{slug}"
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            "User-Agent": "Mozilla/5.0"
         }
 
         try:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()  # Check if the request was successful
+            r = requests.get(url, headers=headers)
+            soup = BeautifulSoup(r.content, "html.parser")
+            script_tag = soup.find("script", id="__NEXT_DATA__", type="application/json")
+            if not script_tag:
+                print(f"TickerTape missing for {stock}")
+                continue
+            data = json.loads(script_tag.string)
+        except Exception as e:
+            print("Error:", e)
+            continue
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+        page = data["props"]["pageProps"]
 
-            script_tag = soup.find('script', id='__NEXT_DATA__', type='application/json')
-            
-            if script_tag:
-                json_content = json.loads(script_tag.string)
-                
-                ratios = json_content.get('props', {}).get('pageProps', {}).get('securityInfo', {}).get('ratios', {})
-                quotes = json_content.get('props', {}).get('pageProps', {}).get('securityQuote', {})
-                holdings = json_content.get('props', {}).get('pageProps', {}).get('securitySummary', {}).get('holdings',{}).get('holdings',{})
-                forecast = json_content.get('props', {}).get('pageProps', {}).get('securitySummary', {}).get('forecast',{})
+        # Save Ratios
+        ratios = page.get("securityInfo", {}).get("ratios", {})
+        quotes = page.get("securityQuote", {})
 
-                # Extract the required attributes
-                created = StockRatios.objects.update_or_create(stock=stock['id'], defaults={
-                    'stock':StockNames.objects.get(pk=stock['id']),
-                    'risk': ratios.get('risk'),
-                    'm3AvgVol': ratios.get('3mAvgVol'),
-                    'wpct_4': ratios.get('4wpct'),
-                    'w52High': ratios.get('52wHigh'),
-                    'w52Low': ratios.get('52wLow'),
-                    'wpct_52': ratios.get('52wpct'),
-                    'beta': ratios.get('beta'),
-                    'bps': ratios.get('bps'),
-                    'divYield': ratios.get('divYield'),
-                    'eps': ratios.get('eps'),
-                    'inddy': ratios.get('inddy'),
-                    'indpb': ratios.get('indpb'),
-                    'indpe': ratios.get('indpe'),
-                    'marketCap': ratios.get('marketCap'),
-                    'mrktCapRank': ratios.get('mrktCapRank'),
-                    'pb': ratios.get('pb'),
-                    'pe': ratios.get('pe'),
-                    'roe': ratios.get('roe'),
-                    'nShareholders': ratios.get('nShareholders'),
-                    'lastPrice': ratios.get('lastPrice'),
-                    'ttmPe': ratios.get('ttmPe'),
-                    'marketCapLabel': ratios.get('marketCapLabel'),
-                    'm12Vol': ratios.get('12mVol'),
-                    'mrktCapf': ratios.get('mrktCapf'),
-                    'apef': ratios.get('apef'),
-                    'pbr': ratios.get('pbr'),
-                    'etfLiq': ratios.get('etfLiq'),
-                    'etfLiqLabel': ratios.get('etfLiqLabel'),
-                    'dayChange' : quotes.get('dyChange'),
-                    'weekChange' : quotes.get('wkChange'),
-                    'monthChange' : quotes.get('mnChange'),
-                    'away52H' : quotes.get('away52wH'),
-                    'away52L' : quotes.get('away52wL'),
-                    'volumeBreakOut' : quotes.get('volBreakout'),
-                    'isCrossedHigh' : quotes.get('crossedHigh'),
-                    'isCrossedLow' : quotes.get('crossedLow')
-                })
+        StockRatios.objects.update_or_create(
+            stock=stock_obj,
+            defaults={
+                'risk': ratios.get('risk'),
+                'm3AvgVol': ratios.get('3mAvgVol'),
+                'wpct_4': ratios.get('4wpct'),
+                'w52High': ratios.get('52wHigh'),
+                'w52Low': ratios.get('52wLow'),
+                'wpct_52': ratios.get('52wpct'),
+                'beta': ratios.get('beta'),
+                'lastPrice': ratios.get('lastPrice'),
+                'dayChange': quotes.get('dyChange'),
+                'weekChange': quotes.get('wkChange'),
+                'monthChange': quotes.get('mnChange'),
+            }
+        )
 
-                # If the record already existed and was updated, print a message
-                if not created:
-                    print("Existing record updated.")
-                else:
-                    print("Data inserted")
-
-                for entry in holdings:
-                    date_str = entry['date'].replace(' ', '')  # Remove any extra spaces
-                    date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S.%fZ').date()
-                    holding = entry['data']
-                    created = StockHoldings.objects.update_or_create(
-                        date=date_obj,
-                        stock=stock['id'],
-                        defaults={
-                            'stock':StockNames.objects.get(pk=stock['id']),
-                            'date':date_obj,
-                            'pmPctT': holding.get('pmPctT'),
-                            'pmPctP': holding.get('pmPctP'),
-                            'plPctT': holding.get('plPctT'),
-                            'uPlPctT': holding.get('uPlPctT'),
-                            'mfPctT': holding.get('mfPctT'),
-                            'isPctT': holding.get('isPctT'),
-                            'diPctT': holding.get('diPctT'),
-                            'othDiPctT': holding.get('othDiPctT'),
-                            'othExInsDiPctT': holding.get('othExInsDiPctT'),
-                            'fiPctT': holding.get('fiPctT'),
-                            'rhPctT': holding.get('rhPctT'),
-                            'othPctT': holding.get('othPctT'),
-                            'rOthPctT': holding.get('rOthPctT'),
-                        }
-                    )
-
-                    if created:
-                        print(f"Data inserted for date {date_obj}")
-                    else:
-                        print(f"Data exists {date_obj}")
-
-                buy = forecast.get('percBuyReco')
-                if buy:
-                    sell = 100-buy
-                else:
-                    buy=0
-                    sell=0
-                forecastInsert = StockForecast.objects.update_or_create(
-                    stock=stock['id'],
-                    defaults={
-                        'stock':StockNames.objects.get(pk=stock['id']),
-                        'total':forecast.get('totalReco'),
-                        'buy':buy,
-                        'sell':sell
-                    }
+        # Commentary - Financial Statements
+        commentary = page.get("commentary", {})
+        for cat, items in commentary.get("financialStatement", {}).items():
+            for i in items:
+                StockCommentary.objects.create(
+                    stock=stock_obj,
+                    title=i.get('title'),
+                    mood=i.get('mood'),
+                    message=i.get('message'),
+                    description=i.get('description'),
+                    tag=i.get('tag'),
+                    itemType=cat,
+                    item='financialStatement'
                 )
 
-                if forecastInsert:
-                    print("inserted")
-                else:
-                    print("updated")
+        # Forecast
+        forecast = page.get("securitySummary", {}).get("forecast", {})
+        buy = forecast.get("percBuyReco") or 0
+        sell = 100 - buy if buy else 0
 
-                commentary = json_content.get('props', {}).get('pageProps', {}).get('commentary', {})
-                financial_statements = commentary['financialStatement']
-                for category, statements in financial_statements.items():
-                    for statement in statements:
-                        StockCommentary.objects.create(
-                            stock=StockNames.objects.get(pk=stock['id']),
-                            title=statement['title'],
-                            mood=statement['mood'],
-                            message=statement['message'],
-                            description=statement['description'],
-                            tag=statement['tag'],
-                            itemType=category,
-                            item='financialStatement'
-                        )
-                financial_statements = commentary['interimFinancialStatement']
-                for category, statements in financial_statements.items():
-                    for statement in statements:
-                        StockCommentary.objects.create(
-                            stock=StockNames.objects.get(pk=stock['id']),
-                            title=statement['title'],
-                            mood=statement['mood'],
-                            message=statement['message'],
-                            description=statement['description'],
-                            tag=statement['tag'],
-                            itemType=category,
-                            item='interimFinancialStatement'
-                        )
+        StockForecast.objects.update_or_create(
+            stock=stock_obj,
+            defaults={
+                'total': forecast.get("totalReco"),
+                'buy': buy,
+                'sell': sell
+            }
+        )
 
-                commentary = json_content.get('props', {}).get('pageProps', {}).get('holdingsCommentary', {})
-                financial_statements = commentary.get("holdings", {})
-                for category, statements in financial_statements.items():
-                    for statement in statements:
-                        StockCommentary.objects.create(
-                            stock=StockNames.objects.get(pk=stock['id']),
-                            title=statement['title'],
-                            mood=statement['mood'],
-                            message=statement['message'],
-                            description=statement['description'],
-                            itemType=category,
-                            item='holdings'
-                        )
+        print(f"Updated: {stock.stockName}")
 
-                commentary = (json_content.get('props', {}).get('pageProps', {}).get('eventsCommentary', {}))
-                financial_statements = commentary.get("corporates",{})
-                for category, statements in financial_statements.items():
-                    for statement in statements:
-                        StockCommentary.objects.create(
-                            stock=StockNames.objects.get(pk=stock['id']),
-                            title=statement['title'],
-                            mood=statement['mood'],
-                            message=statement['message'],
-                            description=statement['description'],
-                            itemType=category,
-                            item='corporates'
-                        )
-                
-            else:
-                return Response({'message': 'Data not Found.'}, status=status.HTTP_404_NOT_FOUND)
+    return Response({'message': 'Fundamentals updated successfully'}, status=200)
 
-        except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
-        # END SECTION FOR FETCH DATA FROM TICKER TAPE
+# def GetFundas(request):
+#     dataExist = StockCommentary.objects.exists()
+#     if dataExist:
+#         tableName = 'stock_commentary'
+#         with connection.cursor() as cursor:
+#             cursor.execute("TRUNCATE TABLE {};".format(tableName))
+
+#     stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True)).values()
+#     for stock in stocks:
+#         # START SECTION FOR FETCH DATA FROM YFINANACE
+#         yCode = stock['yCode']
+#         yStock = yf.Ticker(yCode)
+#         info = yStock.info
+#         stockId = stock['id']
+#         stmt=yStock.cashflow
         
-    return Response({'message': 'Stock Fundamentals Added Successfully.'}, status=status.HTTP_200_OK)
+#         StockProfitRatios.objects.update_or_create(stock=stockId, defaults={
+#             'stock' :StockNames.objects.get(pk=stockId),
+#             'ebita': info.get('ebitda', -1),
+#             'ebitam': info.get('ebitdaMargins', -1),
+#             'roe': info.get('returnOnEquity', -1),
+#             'roa': info.get('returnOnAssets', -1),
+#             'eps': info.get('trailingEps', -1)
+#         })
+#         StockLeverageRatios.objects.update_or_create(stock=stockId, defaults={
+#             'stock' :StockNames.objects.get(pk=stockId),
+#             'debtEq': info.get('debtToEquity', -1)/100,
+#         })
+#         # END SECTION FOR FETCH DATA FROM YFINANACE
+
+#         # START SECTION FOR FETCH DATA FROM TICKER TAPE
+#         slug = stock['stockSlug']
+#         url = 'https://www.tickertape.in/'+slug
+
+#         headers = {
+#             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+#         }
+
+#         try:
+#             response = requests.get(url, headers=headers)
+#             response.raise_for_status()  # Check if the request was successful
+
+#             soup = BeautifulSoup(response.content, 'html.parser')
+
+#             script_tag = soup.find('script', id='__NEXT_DATA__', type='application/json')
+            
+#             if script_tag:
+#                 json_content = json.loads(script_tag.string)
+                
+#                 ratios = json_content.get('props', {}).get('pageProps', {}).get('securityInfo', {}).get('ratios', {})
+#                 quotes = json_content.get('props', {}).get('pageProps', {}).get('securityQuote', {})
+#                 holdings = json_content.get('props', {}).get('pageProps', {}).get('securitySummary', {}).get('holdings',{}).get('holdings',{})
+#                 forecast = json_content.get('props', {}).get('pageProps', {}).get('securitySummary', {}).get('forecast',{})
+
+#                 # Extract the required attributes
+#                 created = StockRatios.objects.update_or_create(stock=stock['id'], defaults={
+#                     'stock':StockNames.objects.get(pk=stock['id']),
+#                     'risk': ratios.get('risk'),
+#                     'm3AvgVol': ratios.get('3mAvgVol'),
+#                     'wpct_4': ratios.get('4wpct'),
+#                     'w52High': ratios.get('52wHigh'),
+#                     'w52Low': ratios.get('52wLow'),
+#                     'wpct_52': ratios.get('52wpct'),
+#                     'beta': ratios.get('beta'),
+#                     'bps': ratios.get('bps'),
+#                     'divYield': ratios.get('divYield'),
+#                     'eps': ratios.get('eps'),
+#                     'inddy': ratios.get('inddy'),
+#                     'indpb': ratios.get('indpb'),
+#                     'indpe': ratios.get('indpe'),
+#                     'marketCap': ratios.get('marketCap'),
+#                     'mrktCapRank': ratios.get('mrktCapRank'),
+#                     'pb': ratios.get('pb'),
+#                     'pe': ratios.get('pe'),
+#                     'roe': ratios.get('roe'),
+#                     'nShareholders': ratios.get('nShareholders'),
+#                     'lastPrice': ratios.get('lastPrice'),
+#                     'ttmPe': ratios.get('ttmPe'),
+#                     'marketCapLabel': ratios.get('marketCapLabel'),
+#                     'm12Vol': ratios.get('12mVol'),
+#                     'mrktCapf': ratios.get('mrktCapf'),
+#                     'apef': ratios.get('apef'),
+#                     'pbr': ratios.get('pbr'),
+#                     'etfLiq': ratios.get('etfLiq'),
+#                     'etfLiqLabel': ratios.get('etfLiqLabel'),
+#                     'dayChange' : quotes.get('dyChange'),
+#                     'weekChange' : quotes.get('wkChange'),
+#                     'monthChange' : quotes.get('mnChange'),
+#                     'away52H' : quotes.get('away52wH'),
+#                     'away52L' : quotes.get('away52wL'),
+#                     'volumeBreakOut' : quotes.get('volBreakout'),
+#                     'isCrossedHigh' : quotes.get('crossedHigh'),
+#                     'isCrossedLow' : quotes.get('crossedLow')
+#                 })
+
+#                 # If the record already existed and was updated, print a message
+#                 if not created:
+#                     print("Existing record updated.")
+#                 else:
+#                     print("Data inserted")
+
+#                 for entry in holdings:
+#                     date_str = entry['date'].replace(' ', '')  # Remove any extra spaces
+#                     date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S.%fZ').date()
+#                     holding = entry['data']
+#                     created = StockHoldings.objects.update_or_create(
+#                         date=date_obj,
+#                         stock=stock['id'],
+#                         defaults={
+#                             'stock':StockNames.objects.get(pk=stock['id']),
+#                             'date':date_obj,
+#                             'pmPctT': holding.get('pmPctT'),
+#                             'pmPctP': holding.get('pmPctP'),
+#                             'plPctT': holding.get('plPctT'),
+#                             'uPlPctT': holding.get('uPlPctT'),
+#                             'mfPctT': holding.get('mfPctT'),
+#                             'isPctT': holding.get('isPctT'),
+#                             'diPctT': holding.get('diPctT'),
+#                             'othDiPctT': holding.get('othDiPctT'),
+#                             'othExInsDiPctT': holding.get('othExInsDiPctT'),
+#                             'fiPctT': holding.get('fiPctT'),
+#                             'rhPctT': holding.get('rhPctT'),
+#                             'othPctT': holding.get('othPctT'),
+#                             'rOthPctT': holding.get('rOthPctT'),
+#                         }
+#                     )
+
+#                     if created:
+#                         print(f"Data inserted for date {date_obj}")
+#                     else:
+#                         print(f"Data exists {date_obj}")
+
+#                 buy = forecast.get('percBuyReco')
+#                 if buy:
+#                     sell = 100-buy
+#                 else:
+#                     buy=0
+#                     sell=0
+#                 forecastInsert = StockForecast.objects.update_or_create(
+#                     stock=stock['id'],
+#                     defaults={
+#                         'stock':StockNames.objects.get(pk=stock['id']),
+#                         'total':forecast.get('totalReco'),
+#                         'buy':buy,
+#                         'sell':sell
+#                     }
+#                 )
+
+#                 if forecastInsert:
+#                     print("inserted")
+#                 else:
+#                     print("updated")
+
+#                 commentary = json_content.get('props', {}).get('pageProps', {}).get('commentary', {})
+#                 financial_statements = commentary['financialStatement']
+#                 for category, statements in financial_statements.items():
+#                     for statement in statements:
+#                         StockCommentary.objects.create(
+#                             stock=StockNames.objects.get(pk=stock['id']),
+#                             title=statement['title'],
+#                             mood=statement['mood'],
+#                             message=statement['message'],
+#                             description=statement['description'],
+#                             tag=statement['tag'],
+#                             itemType=category,
+#                             item='financialStatement'
+#                         )
+#                 financial_statements = commentary['interimFinancialStatement']
+#                 for category, statements in financial_statements.items():
+#                     for statement in statements:
+#                         StockCommentary.objects.create(
+#                             stock=StockNames.objects.get(pk=stock['id']),
+#                             title=statement['title'],
+#                             mood=statement['mood'],
+#                             message=statement['message'],
+#                             description=statement['description'],
+#                             tag=statement['tag'],
+#                             itemType=category,
+#                             item='interimFinancialStatement'
+#                         )
+
+#                 commentary = json_content.get('props', {}).get('pageProps', {}).get('holdingsCommentary', {})
+#                 financial_statements = commentary.get("holdings", {})
+#                 for category, statements in financial_statements.items():
+#                     for statement in statements:
+#                         StockCommentary.objects.create(
+#                             stock=StockNames.objects.get(pk=stock['id']),
+#                             title=statement['title'],
+#                             mood=statement['mood'],
+#                             message=statement['message'],
+#                             description=statement['description'],
+#                             itemType=category,
+#                             item='holdings'
+#                         )
+
+#                 commentary = (json_content.get('props', {}).get('pageProps', {}).get('eventsCommentary', {}))
+#                 financial_statements = commentary.get("corporates",{})
+#                 for category, statements in financial_statements.items():
+#                     for statement in statements:
+#                         StockCommentary.objects.create(
+#                             stock=StockNames.objects.get(pk=stock['id']),
+#                             title=statement['title'],
+#                             mood=statement['mood'],
+#                             message=statement['message'],
+#                             description=statement['description'],
+#                             itemType=category,
+#                             item='corporates'
+#                         )
+                
+#             else:
+#                 return Response({'message': 'Data not Found.'}, status=status.HTTP_404_NOT_FOUND)
+
+#         except requests.exceptions.RequestException as e:
+#             print(f"An error occurred: {e}")
+#         # END SECTION FOR FETCH DATA FROM TICKER TAPE
+        
+#     return Response({'message': 'Stock Fundamentals Added Successfully.'}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
