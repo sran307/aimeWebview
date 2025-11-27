@@ -138,27 +138,42 @@ def getQuotes(request):
             yCode = stock['yCode']
             yStock = yf.Ticker(yCode)
 
-            file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.json")
-            # Write to file
-            with open(file_path, "w") as f:
-                for attr in dir(yStock):
-                    if not attr.startswith("_"):
-                        try:
-                            f.write(f"{attr}:\n{getattr(yStock, attr)}\n\n")
-                        except:
-                            pass
+            # file_path = os.path.join(settings.BASE_DIR, "stock_data", f"{yCode}.json")
+            # # Write to file
+            # with open(file_path, "w") as f:
+            #     for attr in dir(yStock):
+            #         if not attr.startswith("_"):
+            #             try:
+            #                 f.write(f"{attr}:\n{getattr(yStock, attr)}\n\n")
+            #             except:
+            #                 pass
 
-            print("Saved to:", file_path)
+            # print("Saved to:", file_path)
             
             info = yStock.info
+            # if (
+            #     info.get('trailingEps', -1) > 0 and
+            #     info.get('returnOnEquity', -1) > 0 and
+            #     info.get('totalRevenue', -1) > 0 and
+            #     info.get('profitMargins', -1) > 0 and
+            #     (info.get('debtToEquity', -1) / 100) < 1 and
+            #     info.get('marketCap', -1) > 10000000000
+            # ):
             if (
-                info.get('trailingEps', -1) > 0 and
-                info.get('returnOnEquity', -1) > 0 and
-                info.get('totalRevenue', -1) > 0 and
-                info.get('profitMargins', -1) > 0 and
-                (info.get('debtToEquity', -1) / 100) < 1 and
-                info.get('marketCap', -1) > 10000000000
+                info.get('trailingEps', 0) > 0 and
+                info.get('returnOnEquity', 0) > 0.12 and
+                info.get('returnOnCapital', 0) > 0.12 and
+                info.get('totalRevenue', 0) > 0 and
+                info.get('profitMargins', 0) > 0.08 and
+                info.get('operatingMargins', 0) > 0.10 and
+                info.get('earningsQuarterlyGrowth', 0) > 0 and
+                info.get('revenueGrowth', 0) > 0 and
+                info.get('pegRatio', 2) < 1.5 and
+                info.get('debtToEquity', 1) < 0.5 and
+                info.get('beta', 1) < 1.5 and
+                info.get('marketCap', 0) > 20000000000      # 20,000cr
             ):
+
                 stockCodeUpt = StockNames.objects.filter(stockCode=stockCode).update(
                                 industry=info.get('industry', -1),
                                 sector=info.get('sector', -1),
