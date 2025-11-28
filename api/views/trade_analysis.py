@@ -12,6 +12,7 @@ import json
 from pprint import pprint
 from rest_framework import generics, status
 from encoder import hashUsername, hashPassword, baseEncode
+from datetime import datetime, timedelta, date
 
 
 @api_view(['POST'])
@@ -39,7 +40,8 @@ def getTrendySector(request):
                     no=number,
                     week=weekChange,
                     month=monthChange,
-                    perc=((weekChange/number)+(monthChange/number))
+                    perc=((weekChange/number)+(monthChange/number)),
+                    updatedOn = date.today()
                 )
                 print('updated')
         except TrendySector.DoesNotExist:
@@ -48,7 +50,8 @@ def getTrendySector(request):
                 no=1,
                 week=ratio['weekChange'],
                 month=ratio['monthChange'],
-                perc=((ratio['weekChange']+ratio['monthChange']))
+                perc=((ratio['weekChange']+ratio['monthChange'])),
+                updatedOn = date.today()
             )
             print('data inserted')
 

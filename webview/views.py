@@ -15,16 +15,62 @@ def stockAnalyser(request):
 
     max_date = StockNames.objects.aggregate(max_date=Max('strongUpdatedOn'))['max_date']
     if max_date is None:
-        isStrongUpdate = False   # No data available
+        isStrongUpdate = False
     else:
         current_date = date.today()
         diff_days = (current_date - max_date).days
         isStrongUpdate = diff_days < 30
+
+    max_date = StockCodes.objects.aggregate(max_date=Max('lastFetchedOn'))['max_date']
+    if max_date is None:
+        isFetchStockCode = False   # No data available
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isFetchStockCode = diff_days < 30
+
+    max_date = StockNames.objects.aggregate(max_date=Max('sectorUpdatedOn'))['max_date']
+    if max_date is None:
+        isSectorUpdate = False
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isSectorUpdate = diff_days < 30
+
+    max_date = StockProfitRatios.objects.aggregate(max_date=Max('updatedOn'))['max_date']
+    if max_date is None:
+        isFundaUpdate = False
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isFundaUpdate = diff_days < 30
+    
+    max_date = TrendySector.objects.aggregate(max_date=Max('updatedOn'))['max_date']
+    if max_date is None:
+        isTrendyUpdate = False
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isTrendyUpdate = diff_days < 7
+
+    max_date = TradeData.objects.aggregate(max_date=Max('updatedAt'))['max_date']
+    if max_date is None:
+        isDailyUpdate = False
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isDailyUpdate = diff_days < 1
+
     context = {
         'isHolidayLessThan':isHoliday,
         'isStockNotUsed':isStockNotUsed,
         'isSlugEmpty':isSlugEmpty,
-        'isStrongUpdate':isStrongUpdate
+        'isStrongUpdate':isStrongUpdate,
+        'isFetchStockCode':isFetchStockCode,
+        'isSectorUpdate':isSectorUpdate,
+        'isFundaUpdate':isFundaUpdate,
+        'isTrendyUpdate':isTrendyUpdate,
+        'isDailyUpdate':isDailyUpdate
     }
     return render(request, 'stock/index.html', context)
 

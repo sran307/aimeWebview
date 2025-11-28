@@ -53,12 +53,20 @@ def getStockCode(request):
         return Response({'message': 'Failed to fetch stock symbols', 'details': str(e)}, status=status.HTTP_404_NOT_FOUND)
 
     for stock in stocks:
-        try:
-            StockCodes.objects.get(stockCode=stock)
+        obj, created = StockCodes.objects.get_or_create(
+            stockCode=stock,
+            defaults={
+                'isUsed': False,
+                'lastFetchedOn': date.today()
+            }
+        )
+
+        if not created:
+            obj.lastFetchedOn = date.today()
+            obj.save()
             print(f"Stock {stock} already exists in the database.")
-        except StockCodes.DoesNotExist:
-            stock_code = StockCodes(stockCode=stock)
-            stock_code.save()
+        else:
+            print(f"Stock {stock} inserted.")
     return Response({'message': 'Data Fetched Successfully.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
@@ -579,7 +587,8 @@ def GetFundas(request):
                 'ebitam': info.get('ebitdaMargins'),
                 'roe': info.get('returnOnEquity'),
                 'roa': info.get('returnOnAssets'),
-                'eps': info.get('trailingEps')
+                'eps': info.get('trailingEps'),
+                'updatedOn': date.today()
             }
         )
 
@@ -979,7 +988,8 @@ def getSector(request):
                 json_content = json.loads(script_tag.string)
                 gic = json_content.get('props', {}).get('pageProps', {}).get('securityInfo', {}).get('gic', {})
                 StockNames.objects.filter(id=stock['id']).update(
-                    sector=gic.get('sector')
+                    sector=gic.get('sector'),
+                    sectorUpdatedOn=date.today()
                 )
                 print("sector updated")
         except requests.exceptions.RequestException as e:

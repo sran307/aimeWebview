@@ -9,7 +9,7 @@
       <button class="btn btn-lg {% if isHolidayLessThan %}btn-success{% else %}btn-danger{% endif %} w-100 commonFetch" data-path="{% url 'get_holidays' %}" data-title="Fetching Holidays" data-text="Fetching Holidays of Trading Section">Get Holidays</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-primary w-100 commonFetch" data-path="{% url 'get_stock_code' %}" data-title="Fetch Stock Code" data-text="Fetching Stock Codes Of All The Stocks listed.. ">1.Fetch Stock Code</button>
+      <button class="btn btn-lg {% if isFetchStockCode %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_stock_code' %}" data-title="Fetch Stock Code" data-text="Fetching Stock Codes Of All The Stocks listed.. ">1.Fetch Stock Code</button>
     </div>
     <div class="col-md-6 col-lg-3">
       <button class="btn btn-lg {% if isStockNotUsed %} btn-danger {% else %} btn-success {% endif %} w-100 commonFetch" data-path="{% url 'get_stock_name' %}" data-title="Fetching New Stock Names" data-text="Fetching Stock Names corresponding To Code.. ">2.Fetch Stock Name</button>
@@ -22,19 +22,19 @@
       <button class="btn btn-lg {% if isSlugEmpty %} btn-danger {% else %} btn-success {% endif %} w-100 commonFetch" data-path="{% url 'get_slug' %}" data-title="Fetching Stock Codes in Ticker Tape" data-text="Fetching Stock Codes Used in Ticker Tape for get the stock details form Ticker Tape">4.Get Slug</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-primary w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Updating Sector of F&O or Active Stocks" data-text="Fetching All The Sectors">5.Update Sector</button>
+      <button class="btn btn-lg {% if isSectorUpdate %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_sector' %}" data-title="Updating Sector of F&O or Active Stocks" data-text="Fetching All The Sectors">5.Update Sector</button>
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-primary w-100 commonFetch2" data-path="{% url 'get_fundamentals' %}" data-title="Fetching Stock Fundamentals" data-text="Fetching Fundamentals of the stocks">6.Fetch Fundamentals</button>
+      <button class="btn btn-lg {% if isFundaUpdate %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch2" data-path="{% url 'get_fundamentals' %}" data-title="Fetching Stock Fundamentals" data-text="Fetching Fundamentals of the stocks">6.Fetch Fundamentals</button>
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-primary w-100 commonFetch2" data-path="{% url 'get_trending_sector' %}" data-title="Fetching Trending Sector" data-text="Finding Out the Trending Sectors">7.Fetch Trending Sector</button>
+      <button class="btn btn-lg {% if isTrendyUpdate %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch2" data-path="{% url 'get_trending_sector' %}" data-title="Fetching Trending Sector" data-text="Finding Out the Trending Sectors">7.Fetch Trending Sector</button>
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <button class="btn btn-lg btn-info w-100 commonFetch" data-path="{% url 'get_daily_data' %}" data-title="Fetching Daily Stock data" data-text="Fetching Daily data of stocks">8.Fetch Daily Data</button>
+      <button class="btn btn-lg {% if isDailyUpdate %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_daily_data' %}" data-title="Fetching Daily Stock data" data-text="Fetching Daily data of stocks">8.Fetch Daily Data</button>
     </div>
     <div class="col-md-6 col-lg-3">
       <button class="btn btn-lg btn-danger w-100 commonFetch2" data-path="{% url 'data_screen_stocks' %}" data-title="Screening stocks" data-text="Screening Stocks for trading">9.Screen Stocks</button>

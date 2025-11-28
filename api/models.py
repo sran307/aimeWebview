@@ -61,7 +61,7 @@ class StockNames(models.Model):
     isFno = models.BooleanField(default=False, db_column='is_fno')
     stockSlug = models.CharField(max_length=150, null=True, db_column='stock_slug')
     strongUpdatedOn = models.DateField(null=True, blank=True)
-
+    sectorUpdatedOn = models.DateField(null=True, blank=True)
 
     class Meta:
         db_table = 'stock_names'
@@ -124,6 +124,8 @@ class SwingData(models.Model):
 class StockCodes(models.Model):
     stockCode = models.CharField(max_length=50, db_column='stock_code')
     isUsed = models.BooleanField(default=False, db_column='is_used')     
+    lastFetchedOn = models.DateField(null=True, blank=True)
+
     
     class Meta:
         db_table = 'stock_codes'
@@ -206,6 +208,7 @@ class StockProfitRatios(models.Model):
     roce= models.FloatField(null=True, blank=True)
     roa= models.FloatField(null=True, blank=True)
     eps= models.FloatField(null=True, blank=True)
+    updatedOn = models.DateField(null=True, blank=True)
 
     class Meta:
         db_table ='stock_profit_ratios'
@@ -304,6 +307,7 @@ class TrendySector(models.Model):
     week=models.FloatField(null=True)
     month=models.FloatField(null=True)
     perc=models.FloatField(null=True)
+    updatedOn=models.DateField(null=True, blank=True)
 
     class Meta:
         db_table='trendy_sector'

@@ -12,20 +12,23 @@ urlpatterns = [
     path('todo/list/', views.todoList),
     path('todo/update/', views.todoUpdate),
     
+    path('stock/holidays/', stock_views.getHolidays, name='get_holidays'),
     path('stock/codes/', stock_views.getStockCode, name='get_stock_code'),
     path('stock/names/', stock_views.getStockName, name='get_stock_name'),
     path('stock/quotes/', stock_views.getStrongStocks, name='get_strong_stocks'),
+    path('stock/slug/', stock_views.GetSlug, name="get_slug"),
+    path('stock/sector/', stock_views.getSector, name="get_sector"),
+    path('stock/fundas/', stock_views.GetFundas, name="get_fundamentals"),
+    path('trendy/sector/', trade_analysis.getTrendySector, name="get_trending_sector"),
     path('stock/daily/', stock_views.getDailyData, name='get_daily_data'),
+
+
+
     path('stock/screen/', stock_views.dataScreen, name="data_screen_stocks"),
-    path('stock/holidays/', stock_views.getHolidays, name='get_holidays'),
     # path('stock/predict/', stock_ai.getPredictPrice),
     
-    path('stock/fundas/', stock_views.GetFundas, name="get_fundamentals"),
-    path('stock/slug/', stock_views.GetSlug, name="get_slug"),
     path('stock/penny/', stock_views.GetPenny, name='get_penny_stocks'),
-    path('stock/sector/', stock_views.getSector, name="get_sector"),
 
-    path('trendy/sector/', trade_analysis.getTrendySector, name="get_trending_sector"),
     path('swing/analys/', trade_analysis.swingAnalysis, name="get_swing_stocks"),
     path('stock/long/', trade_analysis.getLong, name="get_long_stocks"),
 
