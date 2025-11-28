@@ -60,6 +60,8 @@ class StockNames(models.Model):
     industry = models.CharField(max_length=150, null=True,  db_column='industry')
     isFno = models.BooleanField(default=False, db_column='is_fno')
     stockSlug = models.CharField(max_length=150, null=True, db_column='stock_slug')
+    strongUpdatedOn = models.DateField(null=True, blank=True)
+
 
     class Meta:
         db_table = 'stock_names'

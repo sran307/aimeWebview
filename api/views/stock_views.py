@@ -116,7 +116,7 @@ def getStockName(request):
     return Response({'message': 'Data Fetched Successfully.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-def getQuotes(request):
+def getStrongStocks(request):
     
     """
         THIS FUNCTION IS USED TO TAKE ALL THE STOCKS LISTED IN NSE. BUT I USE A FILTER FOR THIS,
@@ -127,8 +127,10 @@ def getQuotes(request):
         5. DEBT TO EQITY < 1
         6. MARKET CAPITALIZATION > 1000CR
     """
+    current_date = datetime.now().date()
     try:
-        stocks = StockNames.objects.filter(isActive=False).values()
+        # stocks = StockNames.objects.filter(isActive=False).values()
+        stocks = StockNames.objects.all().values()
     except Exception as e:
         return Response({'message': 'Failed to fetch stock symbols', 'details': str(e)}, status=status.HTTP_404_NOT_FOUND)
 
@@ -186,7 +188,8 @@ def getQuotes(request):
                 stockCodeUpt = StockNames.objects.filter(stockCode=stockCode).update(
                                 industry=info.get('industry', -1),
                                 sector=info.get('sector', -1),
-                                isActive=True
+                                isActive=True,
+                                strongUpdatedOn=current_date
                             )
                 print(f"Updated stock: {stock['stockName']}")
             else:
