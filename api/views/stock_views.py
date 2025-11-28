@@ -1050,7 +1050,7 @@ def compute_multibagger_score(stock: StockNames):
         return final_score
 
     except Exception as e:
-        print(f"Updated: {stock.stockName}")
+        print(f"Error: {stock.stockName}")
         print("Error in scoring:", e)
         return 0
 
