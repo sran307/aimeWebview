@@ -990,7 +990,7 @@ def compute_multibagger_score(stock: StockNames):
     MultibaggerScore.objects.all().delete()
     try:
         ratios = stock.ratio_stock_name
-        profits = stock.stock_profit_ratios
+        profits = stock.profit_stock_name
         swing = stock.swing_stock_name
         hold = stock.holding_stock_name
 
