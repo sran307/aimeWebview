@@ -77,6 +77,7 @@ def stockAnalyser(request):
         'isHolidayLessThan':isHoliday,
         'isStockNotUsed':isStockNotUsed,
         'isSlugEmpty':isSlugEmpty,
+        'isStrongUpdate':bool(isStrongUpdate),
         'isFetchStockCode':isFetchStockCode,
         'isSectorUpdate':isSectorUpdate,
         'isFundaUpdate':isFundaUpdate,
@@ -86,5 +87,5 @@ def stockAnalyser(request):
         'lastUpdatedCount1':lastUpdatedCount1,
         'isPennyUpdate':isPennyUpdate
     }
-    return render(request, 'stock/index.html', {'isStrongUpdate':bool(isStrongUpdate)})
+    return render(request, 'stock/index.html', context)
 
