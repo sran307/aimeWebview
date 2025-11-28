@@ -15,8 +15,7 @@
       <button class="btn btn-lg {% if isStockNotUsed %} btn-danger {% else %} btn-success {% endif %} w-100 commonFetch" data-path="{% url 'get_stock_name' %}" data-title="Fetching New Stock Names" data-text="Fetching Stock Names corresponding To Code.. ">2.Fetch Stock Name</button>
     </div>
     <div class="col-md-6 col-lg-3">
-      {{ isStrongUpdate.__class__.__name__ }}
-      <button class="btn btn-lg {% if isStrongUpdate == 'True' %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_strong_stocks' %}" data-title="Selecting Strong Stocks" data-text="This is a basic filteration for select fundamentally strong stocks">3.Fetch Tradable Stocks</button>
+      <button class="btn btn-lg {% if isStrongUpdate is True %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_strong_stocks' %}" data-title="Selecting Strong Stocks" data-text="This is a basic filteration for select fundamentally strong stocks">3.Fetch Tradable Stocks</button>
     </div>
 
      <div class="col-md-6 col-lg-3">
