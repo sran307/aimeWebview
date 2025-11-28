@@ -86,5 +86,5 @@ def stockAnalyser(request):
         'lastUpdatedCount1':lastUpdatedCount1,
         'isPennyUpdate':isPennyUpdate
     }
-    return render(request, 'stock/index.html', context, {'isStrongUpdate':bool(isStrongUpdate)})
+    return render(request, 'stock/index.html', {'isStrongUpdate':bool(isStrongUpdate)})
 
