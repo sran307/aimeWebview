@@ -259,7 +259,7 @@ def getDailyData(request):
     return Response({'message': 'Daily data updated successfully.'}, status=status.HTTP_200_OK)
     
 @api_view(['POST'])  
-def get_swing_data(request):
+def dataScreen(request):
 
     # --- Safe delete instead of TRUNCATE ---
     SwingData.objects.all().delete()
