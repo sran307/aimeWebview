@@ -8,7 +8,7 @@ from .stock_details import stockDetails
 from pprint import pprint
 import yfinance as yf
 from ..serializers import stockNameSerializer
-from ..models import StockNames, TradeData, Holidays, SwingData, StockCodes, StockRatios, StockHoldings, StockForecast, StockCommentary,SwingStocks, StockProfitRatios,StockLeverageRatios
+from ..models import *
 import pandas as pd
 from datetime import datetime, timedelta, date
 import math
