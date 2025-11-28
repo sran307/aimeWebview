@@ -936,7 +936,7 @@ def safe(v, divisor):
     
 @api_view(['POST'])
 def GetPenny(request):
-    # stockData =[]
+    stockData =[]
     # procesQry = """
     #             SELECT
     #                 sn.id,
@@ -989,7 +989,7 @@ def GetPenny(request):
 def compute_multibagger_score(stock: StockNames):
     MultibaggerScore.objects.all().delete()
     try:
-        ratios = stock.stock_ratios
+        ratios = stock.ratio_stock_name
         profits = stock.stock_profit_ratios
         swing = stock.swing_stock_name
         hold = stock.holding_stock_name
