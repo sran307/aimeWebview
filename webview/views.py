@@ -23,7 +23,9 @@ def stockAnalyser(request):
     else:
         current_date = date.today()
         diff_days = (current_date - max_date).days
+        print(diff_days)
         isStrongUpdate = diff_days < 30
+        print(isStrongUpdate)
         lastUpdatedCount1 = StockNames.objects.filter(strongUpdatedOn=max_date).count()
 
     max_date = StockCodes.objects.aggregate(max_date=Max('lastFetchedOn'))['max_date']
