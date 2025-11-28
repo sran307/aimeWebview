@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-6 col-lg-3">
       {{isStrongUpdate}}
-      <button class="btn btn-lg {% if isStrongUpdate %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_strong_stocks' %}" data-title="Selecting Strong Stocks" data-text="This is a basic filteration for select fundamentally strong stocks">3.Fetch Tradable Stocks</button>
+      <button class="btn btn-lg {% if isStrongUpdate == 'True' %} btn-success {% else %} btn-danger {% endif %} w-100 commonFetch" data-path="{% url 'get_strong_stocks' %}" data-title="Selecting Strong Stocks" data-text="This is a basic filteration for select fundamentally strong stocks">3.Fetch Tradable Stocks</button>
     </div>
 
      <div class="col-md-6 col-lg-3">
