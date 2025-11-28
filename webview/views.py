@@ -73,7 +73,7 @@ def stockAnalyser(request):
         current_date = date.today()
         diff_days = (current_date - max_date).days
         isPennyUpdate = diff_days < 30
-
+    print(bool(isStrongUpdate))
     context = {
         'isHolidayLessThan':isHoliday,
         'isStockNotUsed':isStockNotUsed,
