@@ -21,16 +21,15 @@ urlpatterns = [
     path('stock/fundas/', stock_views.GetFundas, name="get_fundamentals"),
     path('trendy/sector/', trade_analysis.getTrendySector, name="get_trending_sector"),
     path('stock/daily/', stock_views.getDailyData, name='get_daily_data'),
-
-
-
     path('stock/screen/', stock_views.dataScreen, name="data_screen_stocks"),
-    # path('stock/predict/', stock_ai.getPredictPrice),
-    
     path('stock/penny/', stock_views.GetPenny, name='get_penny_stocks'),
-
     path('swing/analys/', trade_analysis.swingAnalysis, name="get_swing_stocks"),
     path('stock/long/', trade_analysis.getLong, name="get_long_stocks"),
+
+
+
+    
+
 
     path('stock/52low/', trade_analysis.get52Low, name="get_52_low"),
     path('stock/52high/', trade_analysis.get52High, name="get_52_high"),

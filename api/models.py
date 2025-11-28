@@ -326,6 +326,8 @@ class LongStocks(models.Model):
     five_yr_roe= models.FloatField(null=True)
     away_from= models.FloatField(null=True)
     pe= models.FloatField(null=True)
+    score = models.FloatField(default=0)
+    recommendation = models.CharField(max_length=20, default="Hold")
 
     class Meta:
         db_table='long_stocks'
@@ -373,3 +375,18 @@ class mfNames(models.Model):
     
     def __str__(self):
         return self.mfName
+
+class MultibaggerScore(models.Model):
+    stock = models.OneToOneField(StockNames, on_delete=models.CASCADE, related_name="mb_score")
+
+    score = models.FloatField(default=0)          # Final Score 0–100
+    fundamentals = models.FloatField(default=0)   # 0–100
+    technicals = models.FloatField(default=0)     # 0–100
+    momentum = models.FloatField(default=0)       # 0–100
+    promoter = models.FloatField(default=0)       # 0–100
+    sector = models.FloatField(default=0)         # 0–100
+
+    updatedOn = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.stock.stockName} → {self.score}"

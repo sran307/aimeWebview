@@ -15,12 +15,16 @@ def stockAnalyser(request):
     isSlugEmpty = StockNames.objects.filter(stockSlug__isnull=True).exists()
 
     max_date = StockNames.objects.aggregate(max_date=Max('strongUpdatedOn'))['max_date']
+    lastUpdateDate = max_date
+    
     if max_date is None:
         isStrongUpdate = False
+        lastUpdatedCount1=0
     else:
         current_date = date.today()
         diff_days = (current_date - max_date).days
         isStrongUpdate = diff_days < 30
+        lastUpdatedCount1 = StockNames.objects.filter(strongUpdatedOn=max_date).count()
 
     max_date = StockCodes.objects.aggregate(max_date=Max('lastFetchedOn'))['max_date']
     if max_date is None:
@@ -62,6 +66,14 @@ def stockAnalyser(request):
         diff_days = (current_date - max_date).days
         isDailyUpdate = diff_days < 1
 
+    max_date = MultibaggerScore.objects.aggregate(max_date=Max('updatedOn'))['max_date']
+    if max_date is None:
+        isPennyUpdate = False
+    else:
+        current_date = date.today()
+        diff_days = (current_date - max_date).days
+        isPennyUpdate = diff_days < 30
+
     context = {
         'isHolidayLessThan':isHoliday,
         'isStockNotUsed':isStockNotUsed,
@@ -71,7 +83,10 @@ def stockAnalyser(request):
         'isSectorUpdate':isSectorUpdate,
         'isFundaUpdate':isFundaUpdate,
         'isTrendyUpdate':isTrendyUpdate,
-        'isDailyUpdate':isDailyUpdate
+        'isDailyUpdate':isDailyUpdate,
+        'lastUpdateDate':lastUpdateDate,
+        'lastUpdatedCount1':lastUpdatedCount1,
+        'isPennyUpdate':isPennyUpdate
     }
     return render(request, 'stock/index.html', context)
 

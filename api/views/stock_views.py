@@ -566,7 +566,8 @@ def GetFundas(request):
         with connection.cursor() as cursor:
             cursor.execute("TRUNCATE TABLE stock_commentary;")
 
-    stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True))
+    # stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True))
+    stocks = StockNames.objects.all()
 
     for stock in stocks:
         stock_obj = stock  # Already a model instance
@@ -927,45 +928,130 @@ def GetSlug(request):
         
     return Response({'message': 'Slug Added Successfully.'}, status=status.HTTP_200_OK)
 
+def safe(v, divisor):
+    """Avoid zero/None errors"""
+    if v is None or divisor == 0:
+        return 0
+    return (v / divisor) * 100
+    
 @api_view(['POST'])
 def GetPenny(request):
-    stockData =[]
-    procesQry = """
-                SELECT
-                    sn.id,
-                    sn.stock_name
-                FROM
-                    stock_names AS sn
-                LEFT JOIN stock_ratios sr ON sr.stock = sn.id
-                LEFT JOIN stock_holdings sh ON sh.stock = sn.id
-                WHERE
-                    sr.w52High <= 100
-                    AND sh.date =(
-                        SELECT
-                            MAX(date)
-                        FROM
-                            stock_holdings
-                        WHERE
-                            stock = sh.stock)
-                    AND sh.pmPctT > 50
-                    AND m3AvgVol >10000;
-                """
-    with connection.cursor() as cursor:
-        cursor.execute(procesQry)
-        rows = cursor.fetchall()
+    # stockData =[]
+    # procesQry = """
+    #             SELECT
+    #                 sn.id,
+    #                 sn.stock_name
+    #             FROM
+    #                 stock_names AS sn
+    #             LEFT JOIN stock_ratios sr ON sr.stock = sn.id
+    #             LEFT JOIN stock_holdings sh ON sh.stock = sn.id
+    #             WHERE
+    #                 sr.w52High <= 100
+    #                 AND sh.date =(
+    #                     SELECT
+    #                         MAX(date)
+    #                     FROM
+    #                         stock_holdings
+    #                     WHERE
+    #                         stock = sh.stock)
+    #                 AND sh.pmPctT > 50
+    #                 AND m3AvgVol >10000;
+    #             """
+    # with connection.cursor() as cursor:
+    #     cursor.execute(procesQry)
+    #     rows = cursor.fetchall()
 
-        for data in rows:
+    stocks = StockNames.objects.all()
+    for stock in stocks:
+        compute_multibagger_score(stock)
+        mb = MultibaggerScore.objects.filter(stock=stock).first()
+
+        if mb:
             stock_data = {
-                        'id': data[0],
-                        'stockName': data[1],
-                    }
+                'id': stock.id,
+                'stockName': stock.stockName,
+                'score': mb.score,
+                'fundamentals': mb.fundamentals,
+                'technicals': mb.technicals,
+                'momentum': mb.momentum,
+                'promoter': mb.promoter,
+                'sector': mb.sector,
+            }
             stockData.append(stock_data)
-            
+
     data = {
-        'items':stockData
+        'items': stockData
     }
+
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
+
+def compute_multibagger_score(stock: StockNames):
+    MultibaggerScore.objects.all().delete()
+    try:
+        ratios = stock.stock_ratios
+        profits = stock.stock_profit_ratios
+        swing = stock.swing_stock_name
+        hold = stock.holding_stock_name
+
+        # ---------- FUNDAMENTALS ----------
+        f_eps = 100 if ratios.eps > 0 else 0
+        f_roe = safe(ratios.roe, 15)      # 15% = good benchmark
+        f_de = 100 if ratios.debtEq < 1 else 30
+        f_mc = safe(ratios.marketCap, 2000)
+
+        fundamentals = (f_eps + f_roe + f_de + f_mc) / 4
+
+        # ---------- TECHNICALS ----------
+        t_trend = 100 if swing.ema5 > swing.ema20 else 40
+        t_close = safe(swing.close, swing.ema20)
+        t_gap = 100 if swing.close > swing.sma50 else 50
+
+        technicals = (t_trend + t_close + t_gap) / 3
+
+        # ---------- MOMENTUM ----------
+        momentum = safe(swing.volume, swing.vol20 * 1.5)
+
+        # ---------- PROMOTER HOLDING ----------
+        if hold.pmPctP and hold.pmPctT:
+            promoter = safe(hold.pmPctT - hold.pmPctP, 10)
+        else:
+            promoter = 20
+
+        # ---------- SECTOR ----------
+        try:
+            sector_data = TrendySector.objects.get(sector=stock.sector)
+            sector = safe(sector_data.perc, 5)
+        except:
+            sector = 40
+
+        # ---------- WEIGHTED SCORE ----------
+        final_score = (
+            fundamentals * 0.25 +
+            technicals * 0.20 +
+            momentum * 0.20 +
+            promoter * 0.20 +
+            sector * 0.15
+        )
+
+        # Save to DB
+        MultibaggerScore.objects.update_or_create(
+            stock=stock,
+            defaults={
+                "score": final_score,
+                "fundamentals": fundamentals,
+                "technicals": technicals,
+                "momentum": momentum,
+                "promoter": promoter,
+                "sector": sector
+            }
+        )
+
+        return final_score
+
+    except Exception as e:
+        print("Error in scoring:", e)
+        return 0
 
 @api_view(['POST'])
 def getSector(request):
