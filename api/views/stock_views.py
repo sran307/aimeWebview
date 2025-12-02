@@ -989,21 +989,26 @@ def GetPenny(request):
 def compute_multibagger_score(stock: StockNames):
     MultibaggerScore.objects.all().delete()
     try:
-        ratios = stock.ratio_stock_name
+        ratios = stock.ratio_stock_name.first()
+        levRatio = stock.lvr_stock_name.first()
+        if not ratios:
+            return
         profits = stock.profit_stock_name
         swing = stock.swing_stock_name
         hold = stock.holding_stock_name
-
+        if not swing:
+            return
+        eps_value = ratios.eps or 0
+        ema5_value = swing.ema5 or 0
         # ---------- FUNDAMENTALS ----------
-        f_eps = 100 if ratios.eps > 0 else 0
+        f_eps = 100 if eps_value > 0 else 0
         f_roe = safe(ratios.roe, 15)      # 15% = good benchmark
-        f_de = 100 if ratios.debtEq < 1 else 30
+        f_de = 100 if levRatio.debtEq < 1 else 30
         f_mc = safe(ratios.marketCap, 2000)
 
         fundamentals = (f_eps + f_roe + f_de + f_mc) / 4
-
         # ---------- TECHNICALS ----------
-        t_trend = 100 if swing.ema5 > swing.ema20 else 40
+        t_trend = 100 if swing.ema5_value > swing.ema20 else 40
         t_close = safe(swing.close, swing.ema20)
         t_gap = 100 if swing.close > swing.sma50 else 50
 
