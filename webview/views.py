@@ -48,7 +48,7 @@ def stockAnalyser(request):
     else:
         current_date = date.today()
         diff_days = (current_date - max_date).days
-        isFundaUpdate = diff_days < 30
+        isFundaUpdate = diff_days < 7
     
     max_date = TrendySector.objects.aggregate(max_date=Max('updatedOn'))['max_date']
     if max_date is None:
@@ -89,3 +89,18 @@ def stockAnalyser(request):
     }
     return render(request, 'stock/index.html', context)
 
+def stockScanner(request):
+    return render(request, "stock/stock_scanner.html")
+def scannerAPI(request):
+    filter_type = request.GET.get("filter")
+
+    if filter_type == "penny":
+        return getPenny(request)
+
+    if filter_type == "52low":
+        return get52Low(request)
+
+    if filter_type == "52high":
+        return get52High(request)
+
+    return Response({'data': []}, status=200)

@@ -675,7 +675,7 @@ def GetFundas(request):
 
         print(f"Updated: {stock.stockName}")
 
-    return Response({'message': 'Fundamentals updated successfully'}, status=200)
+    return Response({'message': 'Stocks Fundamentals added.'}, status=status.HTTP_200_OK)
 
 # def GetFundas(request):
 #     dataExist = StockCommentary.objects.exists()
@@ -934,7 +934,7 @@ def safe(v, divisor):
         return 0
     return (v / divisor) * 100
     
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def GetPenny(request):
     stockData =[]
     # procesQry = """

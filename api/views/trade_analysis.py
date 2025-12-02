@@ -16,6 +16,7 @@ from datetime import datetime, timedelta, date
 from api.services.swing_scoring import compute_ranks_for_date
 from django.db import transaction
 
+from django.db.models import Subquery, OuterRef
 
 @api_view(['POST'])
 def getTrendySector(request):
@@ -66,7 +67,7 @@ def getTrendySector(request):
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def swingAnalysis(request):
     updated = compute_ranks_for_date()
     max_date = SwingStocks.objects.aggregate(max_date=Max('date'))['max_date']
@@ -197,18 +198,20 @@ def fetch_results(url):
     json_content = json.loads(script_tag.string)
     return json_content.get('props', {}).get('initialReduxState', {}).get('screenerSessionData', {}).get('screenedResults', {})
 
-
+@api_view(['GET'])
 @transaction.atomic
 def getLong(request):
-    # Clear table
-    LongStocks.objects.all().delete()
 
+    # Clear old records
+    LongStocks.objects.all().delete()
     all_new_entries = []
 
-    # --------------------------
-    # SCR0026 (Gems)
-    # --------------------------
-    results_1 = fetch_results('https://www.tickertape.in/screener/equity/prebuilt/SCR0026')
+    # -------------------------------
+    # SCR0026 — "Gems"
+    # -------------------------------
+    results_1 = fetch_results(
+        'https://www.tickertape.in/screener/equity/prebuilt/SCR0026'
+    )
 
     for r in results_1:
         code = r.get('stock', {}).get('info', {}).get('ticker')
@@ -218,8 +221,10 @@ def getLong(request):
             stock = StockNames.objects.get(stockCode=code)
         except StockNames.DoesNotExist:
             continue
+
         score = calculate_long_score(ratios)
         recommendation = get_recommendation(score)
+
         all_new_entries.append(LongStocks(
             stock=stock,
             score=score,
@@ -232,10 +237,12 @@ def getLong(request):
             item='gems'
         ))
 
-    # --------------------------
-    # SCR0005 (52 Week Low)
-    # --------------------------
-    results_2 = fetch_results('https://www.tickertape.in/screener/equity/prebuilt/SCR0005')
+    # -------------------------------
+    # SCR0005 — 52 Week Low
+    # -------------------------------
+    results_2 = fetch_results(
+        'https://www.tickertape.in/screener/equity/prebuilt/SCR0005'
+    )
 
     for r in results_2:
         code = r.get('stock', {}).get('info', {}).get('ticker')
@@ -255,43 +262,63 @@ def getLong(request):
             item='52low'
         ))
 
-    # Bulk insert (FAST)
+    # -------------------------------
+    # Bulk insert
+    # -------------------------------
     LongStocks.objects.bulk_create(all_new_entries)
 
-    # --------------------------
-    # Fetch market price for each stock
-    # --------------------------
-    long_stocks = LongStocks.objects.values('stock_id')
+    # -------------------------------
+    # Fetch LongStocks with prices
+    # -------------------------------
+    long_stocks = list(
+        LongStocks.objects.select_related('stock').values(
+            'id',
+            'stock_id',
+            'score',
+            'recommendation'
+        )
+    )
 
     stock_ids = [ls['stock_id'] for ls in long_stocks]
 
-    prices = (
+    # -------------------------------
+    # Latest close price using Subquery
+    # -------------------------------
+    latest_close_subquery = (
         TradeData.objects
-        .filter(stock_id__in=stock_ids)
-        .order_by('stock_id', '-date')
-        .distinct('stock_id')
-        .values('stock_id', 'close')
+        .filter(stock_id=OuterRef('pk'))
+        .order_by('-date')
+        .values('close')[:1]
     )
 
-    price_map = {p['stock_id']: round(p['close'], 2) for p in prices}
+    price_lookup = {
+        s['id']: s['close']
+        for s in StockNames.objects.filter(id__in=stock_ids)
+        .annotate(close=Subquery(latest_close_subquery))
+        .values('id', 'close')
+    }
 
-    # Prepare response
+    # -------------------------------
+    # Build final response
+    # -------------------------------
     stockData = []
-    stock_list = StockNames.objects.in_bulk(stock_ids)
 
-    for sid in stock_ids:
-        s = stock_list[sid]
+    for ls in long_stocks:
+        sid = ls['stock_id']
+        stock = StockNames.objects.get(id=sid)
+
         stockData.append({
-            'id': sid,
-            'stockName': f"{s.stockCode}:{s.stockName}",
-            'amount': price_map.get(sid, 0),
-            'score': long_stock.score,
-            'recommendation': long_stock['recommendation'],
+            "id": sid,
+            "stockName": f"{stock.stockCode}:{stock.stockName}",
+            "amount": round(price_lookup.get(sid, 0) or 0, 2),
+            "score": ls['score'],
+            "recommendation": ls['recommendation'],
         })
 
-    encodedData = baseEncode({'items': stockData})
+    encodedData = baseEncode({"items": stockData})
 
     return Response({'data': encodedData}, status=200)
+
 # def getLong(request):
 #     dataExist = LongStocks.objects.exists()
 #     if dataExist:
@@ -490,55 +517,186 @@ def get_recommendation(score):
         return "Sell"
 
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def get52Low(request):
           
-    lstocks = StockRatios.objects.filter(w52Low__lt=500).order_by('away52L').values()
-    stockData=[]
+#     lstocks = StockRatios.objects.filter(w52Low__lt=500).order_by('away52L').values()
+#     stockData=[]
 
-    for lstock in lstocks:
-        stock_instance = StockNames.objects.filter(id=lstock.get('stock_id')).values()
-        for stock in stock_instance:
-            amount = lstock.get('w52Low')
-            if amount:
-                close_value = round(amount, 2)
-            else:
-                close_value = 0
-            stock_data = {
-                'id': stock['id'],
-                'stockName': stock['stockCode']+':'+stock['stockName'],
-                'amount': close_value,
-            }
-        stockData.append(stock_data)
+#     for lstock in lstocks:
+#         stock_instance = StockNames.objects.filter(id=lstock.get('stock_id')).values()
+#         for stock in stock_instance:
+#             amount = lstock.get('w52Low')
+#             if amount:
+#                 close_value = round(amount, 2)
+#             else:
+#                 close_value = 0
+#             stock_data = {
+#                 'id': stock['id'],
+#                 'stockName': stock['stockCode']+':'+stock['stockName'],
+#                 'amount': close_value,
+#             }
+#         stockData.append(stock_data)
+
+#     data = {
+#         'items':stockData
+#     }
+#     encodedData = baseEncode(data)
+#     return Response({'data': encodedData}, status=200)
+
+    stocks = StockRatios.objects.filter(
+        away52L__gt=0,
+        away52L__lt=7,
+        w52Low__lt=1000
+    ).select_related('stock')
+
+    results = []
+
+    for r in stocks:
+        s = r.stock
+        
+        # Profit ratios
+        pr = getattr(s, 'profit_stock_name', None)
+        if not pr: 
+            continue
+
+        # Leverage
+        lr = getattr(s, 'leverage_stock_name', None)
+        if not lr: 
+            continue
+
+        # Forecast
+        fr = getattr(s, 'forecast_stock_name', None)
+
+        # --- Rule 1: Fundamentals ---
+        if pr.eps <= 0 or pr.roe < 12 or lr.debtEq > 1:
+            continue
+
+        # --- Rule 2: Trend ---
+        if r.dayChange < 1:                  # buyers not entered yet
+            continue
+        if r.weekChange < -2:
+            continue
+        if r.monthChange < -10 or r.monthChange > -2:
+            continue
+
+        # --- Rule 3: Beta ---
+        if r.beta < 0.8 or r.beta > 1.5:
+            continue
+
+        # --- Rule 4: Forecast ---
+        if fr and fr.buy < 55:
+            continue
+
+        # --- SCORE SYSTEM ---
+        score = 0
+
+        trendScore = (r.dayChange * 2) + r.weekChange + abs(r.monthChange)
+        fundaScore = min(pr.roe, 20)
+        forecastScore = fr.buy if fr else 0
+        bottomScore = max(7 - r.away52L, 0) * 4
+
+        finalScore = trendScore + fundaScore + forecastScore + bottomScore
+
+        results.append({
+            'id': s.id,
+            'stock': f"{s.stockCode}: {s.stockName}",
+            'lastPrice': r.lastPrice,
+            '52low': r.w52Low,
+            'away52L': r.away52L,
+            'dayChange': r.dayChange,
+            'weekChange': r.weekChange,
+            'monthChange': r.monthChange,
+            'score': round(finalScore, 2)
+        })
+
+    results = sorted(results, key=lambda x: x['score'], reverse=True)
 
     data = {
-        'items':stockData
+        'items':results
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def get52High(request):
-    hstocks = StockRatios.objects.filter(w52High__lt=500).order_by('away52H').values()
+    # hstocks = StockRatios.objects.filter(w52High__lt=500).order_by('away52H').values()
     stockData=[]
 
-    for hstock in hstocks:
-        stock_instance = StockNames.objects.filter(id=hstock.get('stock_id')).values()
-        for stock in stock_instance:
-            amount = hstock.get('w52High')
-            if amount:
-                close_value = round(amount, 2)
-            else:
-                close_value = 0
-            stock_data = {
-                'id': stock['id'],
-                'stockName': stock['stockCode']+':'+stock['stockName'],
-                'amount': close_value,
-            }
-        stockData.append(stock_data)
+    # for hstock in hstocks:
+    #     stock_instance = StockNames.objects.filter(id=hstock.get('stock_id')).values()
+    #     for stock in stock_instance:
+    #         amount = hstock.get('w52High')
+    #         if amount:
+    #             close_value = round(amount, 2)
+    #         else:
+    #             close_value = 0
+    #         stock_data = {
+    #             'id': stock['id'],
+    #             'stockName': stock['stockCode']+':'+stock['stockName'],
+    #             'amount': close_value,
+    #         }
+    #     stockData.append(stock_data)
+    stocks = StockNames.objects.all()
+    for stock in stocks:
+        ratios = StockRatios.objects.filter(stock=stock).first()
+        if not ratios:
+            continue 
+
+        decision = isTradeable52High(stock, ratios)
+
+        stockData.append({
+            "id": stock.id,
+            "stockName": stock.stockName,
+            "close": ratios.lastPrice,
+            "decision": decision,
+        })
 
     data = {
         'items':stockData
     }
     encodedData = baseEncode(data)
     return Response({'data': encodedData}, status=200)
+
+def isTradeable52High(stock, ratios):
+    """
+    stock = StockNames object
+    ratios = StockRatios object
+    """
+
+    try:
+        close = ratios.close
+        high = ratios.high
+        low = ratios.low
+        prev_high = ratios.w52High
+        volume = ratios.volume
+        avg_vol = ratios.avg20Vol
+
+        # ---- 1. Price breakout ----
+        price_breakout = close > prev_high
+
+        # ---- 2. Volume breakout ----
+        vol_breakout = volume >= (avg_vol * 1.5 if avg_vol else 0)
+
+        # ---- 3. Wick strength (buyers support) ----
+        buyers_wick = close > (low + (high - low) * 0.40)
+
+        # ---- 4. Fundamentals ----
+        fundamentals = (
+            (ratios.eps > 0) +
+            (ratios.roe >= 12) +
+            (ratios.debtEq <= 1)
+        )
+        fundamentals_ok = fundamentals >= 2   # at least 2 conditions true
+
+        # ---- Decision ----
+        if price_breakout and vol_breakout and buyers_wick and fundamentals_ok:
+            return "ENTRY"
+
+        if price_breakout and buyers_wick:
+            return "WAIT"     # breakout but no volume
+
+        return "AVOID"
+
+    except Exception as e:
+        return f"ERROR: {str(e)}"

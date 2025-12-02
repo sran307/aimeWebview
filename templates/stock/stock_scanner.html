@@ -1,0 +1,123 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Stock Analyser{% endblock %}
+
+{% block content %}
+    <style>
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+<div class="container py-4">
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h4 class="mb-3">📈 Stock Scanner</h4>
+
+            <!-- Filter Dropdown -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Choose Scanner</label>
+                    <select id="scannerFilter" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="penny">Penny Stocks</option>
+                        <option value="swing">Swing Stocks</option>
+                        <option value="long">Long Stocks</option>
+                        <option value="52low">52 Week Low</option>
+                        <option value="khigh">52 Week High</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loader -->
+            <div class="loader" id="loader"></div>
+
+            <!-- Results -->
+            <div id="results" class="row g-3"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+    $("#scannerFilter").change(function () {
+        let type = $(this).val();
+
+        if (!type) {
+            $("#results").html("");
+            return;
+        }
+
+        $("#loader").show();
+        $("#results").html("");
+
+        let apiUrl = "";
+
+        if (type === "penny") apiUrl = "/api/stock/penny/";
+        if (type === "swing") apiUrl = "/api/swing/analys/";
+        if (type === "long") apiUrl = "/api/stock/long/";
+        if (type === "52low") apiUrl = "/api/stock/52low/";
+        if (type === "khigh") apiUrl = "/api/stock/52high/";
+
+        $.ajax({
+            url: apiUrl,
+            method: "GET",
+            success: function (response) {
+                $("#loader").hide();
+
+                var result = atob(response.data); // your encodedData output
+                let data = JSON.parse(result);
+                
+                if (!data.items.length) {
+                    $("#results").html(`<p class="text-muted">No stocks found.</p>`);
+                    return;
+                }
+
+                let html = "";
+                data.items.forEach(function (item) {
+                    html += `
+                        <div class="col-md-4">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body">
+                                    <h6 class="fw-bold">${item.stockName}</h6>
+                                    <p class="text-secondary small mb-1">Value</p>
+                                    <h5 class="text-primary">₹${item.amount}</h5>
+                                    ${item.score ? `<h5 class="text-primary">${item.score}</h5>` : ''}
+                                    ${item.recommendation ? `<h5 class="text-primary">${item.recommendation}</h5>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                $("#results").html(html);
+            },
+
+            error: function () {
+                $("#loader").hide();
+                $("#results").html(`<p class="text-danger">Error loading data.</p>`);
+            }
+        });
+
+    });
+});
+</script>
+
+{% endblock %}
