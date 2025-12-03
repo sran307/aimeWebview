@@ -220,7 +220,7 @@ def getDailyData(request):
             break
         
     for x in range(6):
-        start_date = end_date - timedelta(days=8+x)
+        start_date = end_date - timedelta(days=30+x)
         sDate = Holidays.objects.filter(holiday=start_date)
         if not sDate.exists():
             break
@@ -240,7 +240,8 @@ def getDailyData(request):
         with connection.cursor() as cursor:
             cursor.execute("TRUNCATE TABLE {};".format(tableName))
         
-        stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True))
+        # stocks = StockNames.objects.filter(Q(isActive=True) | Q(isFno=True))
+        stocks = StockNames.objects.all()
         for stock in stocks:
             ticker_symbol = stock.yCode
 
@@ -991,15 +992,15 @@ def compute_multibagger_score(stock: StockNames):
     try:
         ratios = stock.ratio_stock_name.first()
         levRatio = stock.lvr_stock_name.first()
+        trData = stock.stock_name.first()
         if not ratios:
             return
         profits = stock.profit_stock_name
-        swing = stock.swing_stock_name
+        swing = stock.swing_stock_name.first()
         hold = stock.holding_stock_name
         if not swing:
             return
         eps_value = ratios.eps or 0
-        ema5_value = swing.ema5 or 0
         # ---------- FUNDAMENTALS ----------
         f_eps = 100 if eps_value > 0 else 0
         f_roe = safe(ratios.roe, 15)      # 15% = good benchmark
@@ -1008,14 +1009,22 @@ def compute_multibagger_score(stock: StockNames):
 
         fundamentals = (f_eps + f_roe + f_de + f_mc) / 4
         # ---------- TECHNICALS ----------
-        t_trend = 100 if swing.ema5_value > swing.ema20 else 40
+        t_trend = 100 if swing.ema5 > swing.ema20 else 40
         t_close = safe(swing.close, swing.ema20)
         t_gap = 100 if swing.close > swing.sma50 else 50
 
         technicals = (t_trend + t_close + t_gap) / 3
 
         # ---------- MOMENTUM ----------
-        momentum = safe(swing.volume, swing.vol20 * 1.5)
+        vol20 = (
+            TradeData.objects
+                .filter(stock=stock)
+                .order_by('-date')
+                .values_list('volume', flat=True)[:20]
+        )
+
+        vol20_avg = sum(vol20) / len(vol20) if vol20 else 0
+        momentum = safe(trData.volume, vol20_avg * 1.5)
 
         # ---------- PROMOTER HOLDING ----------
         if hold.pmPctP and hold.pmPctT:
