@@ -64,12 +64,14 @@ def monthlyBudget(request):
         current_month = date.today().month
     month = Months.objects.get(id=current_month)
 
-    months = Months.objects.all()
+    months = get_financial_year_months(Months.objects.all())
     finYears = FinancialYear.objects.all()
    
     
-    days = calendar.monthrange(int(finYear.year), current_month)[1]
-    dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
+    # days = calendar.monthrange(int(finYear.year), current_month)[1]
+    # dates = [date(int(finYear.year), current_month, d) for d in range(1, days + 1)]
+    # first_date = dates[0]
+    dates, first_date = get_month_dates(finYear, current_month)
 
     existing_data = monthlyData.objects.filter(finYear=finYear.id, month__id=current_month)
     data_dict = {(d.item_id, d.datedOn, d.valueType): d.amount for d in existing_data}
@@ -114,7 +116,8 @@ def monthlyBudget(request):
         'totalEarning' : totalEarning,
         'overall_earnings' : overall_earnings,
         'expectedBalance':overall_earnings-overall_expected_total,
-        'actualBalance':overall_earnings-overall_actual_total
+        'actualBalance':overall_earnings-overall_actual_total,
+        'first_date':first_date
 
         }
     return render(request, "budget/monthlySheet.html", context)
@@ -333,3 +336,33 @@ def loanTrans(request):
         form = LoanTransForm()
 
     return render(request, 'budget/loan_form.html', {'form': form})
+
+
+def get_financial_year_months(months_queryset):
+    months = list(months_queryset)
+    # Apr (4) → Dec (12), then Jan (1) → Mar (3)
+    return (
+        [m for m in months if 4 <= m.id <= 12] +
+        [m for m in months if 1 <= m.id <= 3]
+    )
+
+
+def get_month_dates(finYear, month_id):
+    fy_year = int(finYear.year)       # example: 2025
+    start_year = fy_year              # 2025
+    end_year = fy_year + 1            # 2026
+
+    # Jan/Feb/Mar belong to next year
+    if month_id in [1, 2, 3]:
+        actual_year = end_year        # 2026
+    else:
+        actual_year = start_year      # 2025
+
+    # Days in the month
+    days = calendar.monthrange(actual_year, month_id)[1]
+
+    # List of dates
+    dates = [date(actual_year, month_id, d) for d in range(1, days + 1)]
+    first_date = dates[0]
+
+    return dates, first_date
