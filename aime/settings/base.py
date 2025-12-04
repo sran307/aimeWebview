@@ -1,5 +1,6 @@
 from pathlib import Path
 import environ
+import os
 
 # Base directory (3 levels up from this file)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
