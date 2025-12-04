@@ -71,7 +71,7 @@ class monthlyData(models.Model):
     month=models.ForeignKey(Months, null=True, blank=True, on_delete=models.CASCADE, related_name="monthids") 
     item=models.ForeignKey(Items, null=True, blank=True, on_delete=models.CASCADE, related_name="items") 
     datedOn=models.DateField(null=True)
-    amount = models.PositiveIntegerField()
+    amount = models.IntegerField()
     valueType = models.CharField(max_length=10, choices=VALUE_TYPE_CHOICES, default='MD', null=True)
     
     def __int__(self):

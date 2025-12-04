@@ -144,10 +144,13 @@ def save_monthly_data(request):
             finYear_id=year_id,
             month_id=month_id,
             item_id=item_id,
-            datedOn=date,
-            defaults={"amount": value or 0},
-            valueType=valueType
+            valueType=valueType,
+            defaults={
+                "datedOn": date,
+                "amount": value or 0,
+            }
         )
+
         return JsonResponse({"status": "ok", "created": created})
 
 def debtManager(request):
