@@ -8,9 +8,28 @@
    <div class="d-flex flex-column flex-nowrap overflow-auto gap-2 p-2">
        <button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:add_item_modal' %}">Add Expense/Earning Items</button>
        <a href="{% url 'budgetManager:monthlyBudget' %}" class="btn btn-primary">Monthly Budget</a>
-       <a href="{% url 'budgetManager:debtManager' %}" class="btn btn-primary">Debt Manager</a>
        <a href="{% url 'budgetManager:loanManager' %}" class="btn btn-primary">Loan Manager</a>
+       <a href="{% url 'budgetManager:debtManager' %}" class="btn btn-primary">Debt Manager</a>
     </div>
-
+    <div class="table-responsive">
+        <table class="table table-bordered table-dark text-center">
+            <thead>
+                <tr>
+                    <td>Sl No</td>
+                    <td>Item</td>
+                    <td>Category</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in expenseItems %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.desc }}</td>
+                    <td>{% if item.isExpensive %} Expense {% else %}  Earnings {% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

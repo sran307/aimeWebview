@@ -10,33 +10,24 @@
 
 {% block content %}
 <div class="container-fluid px-2">
+    <div class="table-responsive">
     <table class="table table-dark table-bordered table-sm text-center align-middle">
         <tbody>
             <tr>
-                <td colspan="5">DEBT GIVEN</td>
+                <td colspan="4">DEBT GIVEN</td>
                 <td><button class="btn btn-primary open-form-btn" data-path="{% url 'budgetManager:debt_create' %}">Add
                         Debt</button></td>
-                <td colspan="4">DEBT TAKEN</td>
                 <td><a class="btn btn-warning" href="{% url 'budgetManager:budgetManager' %}">Back</a></td>
             </tr>
             <tr>
                 <td colspan="2">Total Amount given : </td>
                 <td colspan="2">Total Amount Get</td>
                 <td colspan="2">Amount To Get</td>
-                <td colspan="2">Total Amount Taken : </td>
-                <td colspan="2">Total Amount Paid</td>
-                <td>Balance For Pay</td>
             </tr>
             <tr>
                 <td>Sl.no</td>
                 <td>Date</td>
                 <td>TO</td>
-                <td>Amount</td>
-                <td>Is Paid</td>
-                <td>Paid On</td>
-
-                <td>Date</td>
-                <td>From</td>
                 <td>Amount</td>
                 <td>Is Paid</td>
                 <td>Paid On</td>
@@ -63,5 +54,6 @@
 
         </tbody>
     </table>
+    </div>
 </div>
 {% endblock %}

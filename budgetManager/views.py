@@ -45,8 +45,10 @@ def budgetManager(request):
             endDate=date(current_year + 1, 3, 31)
         )
         print(f"🌱 Created initial Financial Year: {fy.yearDesc}")
+    
+    expenseItems = Items.objects.all()
 
-    return render(request, "budget/index.html")
+    return render(request, "budget/index.html",{'expenseItems':expenseItems})
 
 def monthlyBudget(request):
     earnings = Items.objects.filter(isExpensive=False)
