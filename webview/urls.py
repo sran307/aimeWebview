@@ -7,5 +7,9 @@ urlpatterns = [
 
     path('scanner/', views.stockScanner, name="stockScanner"),
     path('scanner/api/', views.scannerAPI, name="scannerAPI"),
+    path('stock/api/ai/', views.groq_analysis, name="groq_analysis"),
+
+    path('stock/analysis/ai/<str:stockName>', views.analysisWithAi, name="analysisWithAi")
+
 
 ]

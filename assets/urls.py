@@ -18,5 +18,6 @@ urlpatterns = [
     path('divident/', views.dividentManager, name="dividentManager"),
     path("add-dividend/", views.addDividend, name="addDividend"),
 
+    path('longstock/analysis/ai/<int:stockId>/<int:detId>', views.longAnalysisWithAi, name="longAnalysisWithAi")
 
 ]

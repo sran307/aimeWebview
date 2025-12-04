@@ -209,5 +209,42 @@ $(function () {
             }
         });
     })
-})
+
+
+    $("#scannerFilter").change(function () {
+        let type = $(this).val();
+
+        if (!type) {
+            $("#results").html("");
+            return;
+        }
+
+        $("#loader").show();
+        $("#results").html("");
+
+        let apiUrl = "/scanner/api/";
+
+        // if (type === "penny") apiUrl = "/api/stock/penny/";
+        // if (type === "swing") apiUrl = "/api/swing/analys/";
+        // if (type === "long") apiUrl = "/api/stock/long/";
+        // if (type === "52low") apiUrl = "/api/stock/52low/";
+        // if (type === "khigh") apiUrl = "/api/stock/52high/";
+
+        $.ajax({
+            url: apiUrl,
+            method: "GET",
+            data:{filter:type},
+            success: function (response) {
+                $("#loader").hide();
+                $("#results").html(response);
+            },
+
+            error: function () {
+                $("#loader").hide();
+                $("#results").html(`<p class="text-danger">Error loading data.</p>`);
+            }
+        });
+
+    });
+});
 

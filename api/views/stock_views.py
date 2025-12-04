@@ -997,8 +997,10 @@ def compute_multibagger_score(stock: StockNames):
             return
         profits = stock.profit_stock_name
         swing = stock.swing_stock_name.first()
-        hold = stock.holding_stock_name
+        hold = stock.holding_stock_name.first()
         if not swing:
+            return
+        if not hold:
             return
         eps_value = ratios.eps or 0
         # ---------- FUNDAMENTALS ----------

@@ -1,0 +1,25 @@
+<div class="row">
+    {% if not items %}
+        <p class="text-muted">No stocks found.</p>
+    {% endif %}
+
+    
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>slNo</th>
+                        <th>Stock Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ forloop.counter}}</td>
+                        <td><button class="btn btn-link open-form-btn" data-path="{% url 'analysisWithAi' item.id %}" type="button">{{ item.stockName }}</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>

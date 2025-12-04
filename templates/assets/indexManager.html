@@ -47,7 +47,7 @@
                     {% endif %}
                 ">
                     <td>{{ forloop.counter }}</td>
-                    <td>{% if transType == 'OPTION' %}{{ stock.optionName }} {% elif transType == 'MF' %} {{ stock.mfName }} {% else %} {{ stock.stock }} {% endif %}</td>
+                    <td><button class="btn btn-link open-form-btn" type="button" {% if transType == 'LONG' %} data-path="{% url 'assets:longAnalysisWithAi' stock.stock.id stock.id %}" {% endif %}>{% if transType == 'OPTION' %}{{ stock.optionName }} {% elif transType == 'MF' %} {{ stock.mfName }} {% else %} {{ stock.stock }} {% endif %}</button></td>
                     <td>{{ stock.purchasedOn | date:'d-m-Y' }}</td>
                     <td>{{ stock.purchasedQty |floatformat:3 }}</td>
                     <td>{{ stock.purchasedAmnt|floatformat:3 }}</td>

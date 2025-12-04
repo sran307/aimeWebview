@@ -12,6 +12,8 @@ from pprint import pprint
 from .forms import *
 from django.db.models import Sum
 from decimal import Decimal
+import requests
+from django.conf import settings
 
 def assets(request):
     selected_year_id = request.GET.get('year') 
@@ -341,3 +343,73 @@ def clearData(request):
     total_deleted = deleted_count + deleted_empty_count
     print(f"{total_deleted} empty transactions deleted.")
     return JsonResponse({'status': 'success', 'message':'cache cleared Successfully.'})
+
+def longAnalysisWithAi(request, stockId, detId):
+    aiResult = groq_long_analysis(stockId)
+    context = {
+        "aiResult":aiResult
+    }
+    return render(request, 'stock/stockDetails.html', context)
+
+def groq_long_analysis(stock, detId):
+    # stock ="Adani green energy"
+    stock = StockNames.objects.filter(id=stock).first()
+    stockDet = stockDetails.objects.filter(id=detId).first()
+    prompt = f"""
+        You are an expert stock market analyst specializing in Indian equities.
+
+        I have picked the following stock for long-term investment and now I want to make a wise decision based on the current situation.
+
+        Stock details:
+        - Name: {stock.stockName}
+        - Code: {stock.stockCode}
+        - Purchased on: {stockDet.purchasedOn}
+        - Purchased price: ₹{stockDet.purchasedAmnt}
+        - Quantity: {stockDet.purchasedQty}
+        - Current price: check it  # if available
+
+        Please provide analysis with clear headings:
+
+        1. **Long-Term Hold Assessment**  
+        - Is it wise to hold this stock for the long term? Why or why not?
+
+        2. **Current Action Recommendation**  
+        - What action should I take now? (Hold, Add More, Partial Exit, Full Exit)  
+        - Suggested entry/exit price levels if relevant.
+
+        3. **Future Outlook if Held**  
+        - Expected growth or risk if I continue holding.  
+        - Potential price range for the next 1–3 years (concise estimation).
+
+        Be **accurate, concise, and actionable**, avoid generic disclaimers or vague statements. Format your response with **headings** for clarity.
+        """
+
+    groq_api_key = settings.GROQ_API_KEY
+    groq_api_url = settings.GROQ_API_URL
+    url = groq_api_url
+    headers = {"Authorization": f"Bearer {groq_api_key}"}
+    data = {
+        "model": "llama-3.1-8b-instant",
+        "messages": [
+            {"role": "user", "content": prompt}
+        ]
+    }
+
+    r = requests.post(url, json=data, headers=headers)
+
+    # Try parsing JSON
+    try:
+        response_json = r.json()
+    except Exception:
+        return JsonResponse({"error": "Invalid JSON from Groq"}, status=500)
+
+    # Check for error from Groq API
+    if "error" in response_json:
+        return JsonResponse({"error": response_json["error"]}, status=500)
+
+    # Validate response structure
+    if "choices" not in response_json or not response_json["choices"]:
+        return JsonResponse({"error": "Groq returned no choices"}, status=500)
+
+    result = response_json["choices"][0]["message"]["content"]
+    return result
