@@ -145,8 +145,8 @@ def save_monthly_data(request):
             month_id=month_id,
             item_id=item_id,
             valueType=valueType,
+            datedOn= date,
             defaults={
-                "datedOn": date,
                 "amount": value or 0,
             }
         )
