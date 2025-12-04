@@ -345,7 +345,7 @@ def clearData(request):
     return JsonResponse({'status': 'success', 'message':'cache cleared Successfully.'})
 
 def longAnalysisWithAi(request, stockId, detId):
-    aiResult = groq_long_analysis(stockId)
+    aiResult = groq_long_analysis(stockId, detId)
     context = {
         "aiResult":aiResult
     }
