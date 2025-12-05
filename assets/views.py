@@ -445,7 +445,7 @@ def groq_option_analysis():
 
         Input Data Format (User Provides):
             - NIFTY previous close: {nifty_data['previous_close']}
-            - SGX/GIFT NIFTY: {nifty_data['sgx_change']}
+            - SGX/GIFT NIFTY: {nifty_data['sgx_nifty']}
             - Pre-market change (%): {nifty_data['pre_market_change']}
             - Sector sentiment: Banking: {nifty_data['sector_sentiment']['BANK']}, IT: {nifty_data['sector_sentiment']['IT']}, Auto: {nifty_data['sector_sentiment']['AUTO']}
             - India VIX: {nifty_data['vix']}
