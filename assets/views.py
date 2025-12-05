@@ -509,7 +509,7 @@ def fetch_nifty_data():
     data = {}
 
     # 1️⃣ Fetch full index list (DataFrame)
-    df = safe_call(nse_index())  # this is a pandas DataFrame)
+    df = nse_index() # this is a pandas DataFrame)
     # print(df.head())
 
     # Find NIFTY 50 row
