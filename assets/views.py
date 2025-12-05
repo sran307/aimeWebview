@@ -426,7 +426,7 @@ def optionAnalysisWithAi(request):
 
 def groq_option_analysis():
     nifty_data = fetch_nifty_data()
-    print(nifty_data)
+    pprint(nifty_data)
 
     prompt = f"""
         You are an options analyst specialized in the Indian stock market.  
