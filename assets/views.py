@@ -578,7 +578,7 @@ def fetch_nifty_data():
 
     # 6️⃣ Return EVERYTHING
     data["nifty_raw"] = nifty_row.to_dict()
-    data["all_indices"] = df.to_dict(orient="records")
+    # data["all_indices"] = df.to_dict(orient="records")
 
     return data
 
