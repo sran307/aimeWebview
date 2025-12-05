@@ -16,6 +16,7 @@ from django.db.models import Sum
 from decimal import Decimal
 import requests
 from django.conf import settings
+import time
 
 def assets(request):
     selected_year_id = request.GET.get('year') 
