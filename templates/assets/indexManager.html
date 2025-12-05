@@ -17,6 +17,7 @@
             <a class="btn btn-info float-end me-2 mb-1 text-nowrap" href="{% url 'assets:transManager' transType %}">Goto Transactions</a>
             <button class="btn btn-primary float-end mb-1 common-get ms-2 me-2 text-nowrap" data-path="{% url 'assets:process' transType 'N' %}">Process</button>
             <button class="btn btn-primary float-end mb-1 common-get text-nowrap" data-path="{% url 'assets:process' transType 'A' %}">ReProcess</button>
+            {% if transType == 'OPTION' %} <button class="btn btn-success open-form-btn" data-path="{% url 'assets:optionAnalysisWithAi' %}">Get Option</button>{% endif %}
         </div>
 
         <table class="table table-bordered">

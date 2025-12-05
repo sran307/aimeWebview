@@ -1,3 +1,5 @@
+from nsepython import nse_index, nse_preopen, indiavix, nse_get_index_quote
+import yfinance as yf
 from django.shortcuts import render
 from .models import *
 from budgetManager.models import *
@@ -413,3 +415,179 @@ def groq_long_analysis(stock, detId):
 
     result = response_json["choices"][0]["message"]["content"]
     return result
+
+def optionAnalysisWithAi(request):
+    aiResult = groq_option_analysis()
+    context = {
+        "aiResult":aiResult
+    }
+    return render(request, 'stock/stockDetails.html', context)
+
+def groq_option_analysis():
+    nifty_data = fetch_nifty_data()
+    print(nifty_data)
+
+    prompt = f"""
+        You are an options analyst specialized in the Indian stock market.  
+        Your task is to recommend a safe, long-only NIFTY option trade based on
+        pre-market data.  
+        Focus on risk-controlled, conservative strategies suitable for beginners.
+
+        Always follow these rules:
+        - Only suggest LONG trades (BUY CE or BUY PE). No selling or shorting.
+        - Never suggest naked risky trades. Stick to ATM or slightly OTM only.
+        - Avoid suggesting weekly expiry trades if volatility is extremely high.
+        - Avoid suggesting trades during major events (Budget, RBI policy, Fed decision).
+        - Only give a trade when data clearly supports direction; otherwise suggest NO TRADE.
+        - Risk per trade must not exceed 1-2% of account.
+        - Maintain accuracy, discipline, and safety.
+
+        Input Data Format (User Provides):
+            - NIFTY previous close: {nifty_data['previous_close']}
+            - SGX/GIFT NIFTY: {nifty_data['sgx_change']}
+            - Pre-market change (%): {nifty_data['pre_market_change']}
+            - Sector sentiment: Banking: {nifty_data['sector_sentiment']['BANK']}, IT: {nifty_data['sector_sentiment']['IT']}, Auto: {nifty_data['sector_sentiment']['AUTO']}
+            - India VIX: {nifty_data['vix']}
+            - Major global cues: Positive  # You can hardcode or fetch from an API
+            - Support & resistance levels: Support: {nifty_data['support']}, Resistance: {nifty_data['resistance']}
+
+        Your Output Format:
+        1. Pre-market bias: Bullish / Bearish / Neutral
+        2. Reason for bias (3–5 bullet points)
+        3. Suggested trade (LONG ONLY):
+        - Buy NIFTY CE or Buy NIFTY PE
+        - Strike (ATM or nearest OTM only)
+        - Expiry (Weekly or Monthly — choose safer one)
+        4. Entry zone (premium range)
+        5. Stop-loss (premium based)
+        6. Safe target (premium based)
+        7. Risk level: Low / Medium / High
+        8. When to stay out: Mention if NO TRADE is safer.
+
+        If direction is unclear → Output "NO TRADE — Market not giving a clear bias."
+        Never hallucinate data. Only read and interpret the user input.
+
+    """
+    groq_api_key = settings.GROQ_API_KEY
+    groq_api_url = settings.GROQ_API_URL
+    url = groq_api_url
+    headers = {"Authorization": f"Bearer {groq_api_key}"}
+    data = {
+        "model": "llama-3.1-8b-instant",
+        "messages": [
+            {"role": "user", "content": prompt}
+        ]
+    }
+
+    r = requests.post(url, json=data, headers=headers)
+
+    # Try parsing JSON
+    try:
+        response_json = r.json()
+    except Exception:
+        return JsonResponse({"error": "Invalid JSON from Groq"}, status=500)
+
+    # Check for error from Groq API
+    if "error" in response_json:
+        return JsonResponse({"error": response_json["error"]}, status=500)
+
+    # Validate response structure
+    if "choices" not in response_json or not response_json["choices"]:
+        return JsonResponse({"error": "Groq returned no choices"}, status=500)
+
+    result = response_json["choices"][0]["message"]["content"]
+    return result
+
+from nsepython import nse_index, nse_preopen, indiavix
+import pandas as pd
+
+def fetch_nifty_data():
+    import pandas as pd
+    from nsepython import nse_index, nse_preopen, indiavix
+
+    data = {}
+
+    # 1️⃣ Fetch full index list (DataFrame)
+    df = safe_call(nse_index())  # this is a pandas DataFrame)
+    # print(df.head())
+
+    # Find NIFTY 50 row
+    nifty_row = df[df["indexName"] == "NIFTY 50"].iloc[0]
+
+    # Helper to convert numeric strings like "26,033.75"
+    def to_float(val):
+        if val is None:
+            return None
+        try:
+            return float(str(val).replace(",", ""))
+        except:
+            return None
+
+    data["nifty_spot"] = to_float(nifty_row["last"])
+    data["previous_close"] = to_float(nifty_row["previousClose"])
+    data["nifty_high"] = to_float(nifty_row["high"])
+    data["nifty_low"] = to_float(nifty_row["low"])
+    data["nifty_change"] = to_float(nifty_row["percChange"])
+
+    # 2️⃣ Pre-open / SGX Nifty change
+    preopen = safe_call(nse_preopen())
+    sgx_nifty_change = None
+
+    try:
+        for idx in preopen.get("indices", []):
+            if idx.get("symbol") == "NIFTY":
+                sgx_nifty_change = idx.get("change")
+                break
+    except:
+        sgx_nifty_change = None
+
+    data["sgx_nifty"] = sgx_nifty_change
+
+    if data["previous_close"] and sgx_nifty_change:
+        data["pre_market_change"] = round(
+            (sgx_nifty_change / data["previous_close"]) * 100, 2
+        )
+    else:
+        data["pre_market_change"] = None
+
+    # 3️⃣ India VIX
+    vix = safe_call(indiavix())
+    data["vix"] = vix
+
+    # 4️⃣ Sector sentiment (Bank, IT, Auto)
+    sectors = ["NIFTY BANK", "NIFTY IT", "NIFTY AUTO"]
+    sector_sentiment = {}
+
+    for sector in sectors:
+        row = df[df["indexName"] == sector]
+        if not row.empty:
+            r = row.iloc[0]
+            change = to_float(r["percChange"])
+            sector_sentiment[sector.split()[-1]] = "Green" if change > 0 else "Red"
+        else:
+            sector_sentiment[sector.split()[-1]] = None
+
+    data["sector_sentiment"] = sector_sentiment
+
+    # 5️⃣ Support & Resistance (±1%)
+    if data["nifty_spot"]:
+        spot = data["nifty_spot"]
+        data["support"] = round(spot * 0.995, 2)
+        data["resistance"] = round(spot * 1.005, 2)
+    else:
+        data["support"] = data["resistance"] = None
+
+    # 6️⃣ Return EVERYTHING
+    data["nifty_raw"] = nifty_row.to_dict()
+    data["all_indices"] = df.to_dict(orient="records")
+
+    return data
+
+def safe_call(func, *args, retries=3, delay=2):
+    for attempt in range(retries):
+        try:
+            return func(*args)
+        except Exception as e:
+            print(f"NSE error: {e}. Retrying {attempt+1}/{retries}...")
+            time.sleep(delay)
+    return None
