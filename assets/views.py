@@ -503,8 +503,6 @@ from nsepython import nse_index, nse_preopen, indiavix
 import pandas as pd
 
 def fetch_nifty_data():
-    import pandas as pd
-    from nsepython import nse_index, nse_preopen, indiavix
 
     data = {}
 
@@ -531,7 +529,7 @@ def fetch_nifty_data():
     data["nifty_change"] = to_float(nifty_row["percChange"])
 
     # 2️⃣ Pre-open / SGX Nifty change
-    preopen = safe_call(nse_preopen())
+    preopen = nse_preopen()
     sgx_nifty_change = None
 
     try:
@@ -552,7 +550,7 @@ def fetch_nifty_data():
         data["pre_market_change"] = None
 
     # 3️⃣ India VIX
-    vix = safe_call(indiavix())
+    vix = indiavix()
     data["vix"] = vix
 
     # 4️⃣ Sector sentiment (Bank, IT, Auto)
