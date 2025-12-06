@@ -6,23 +6,21 @@
         <tr>
             <th>Ticker</th>
             <th>Min Price</th>
+            <th>Recent Max Price</th>
+            <th>Growth Factor</th>
             <th>Min Date</th>
-            <th>Target Price</th>
-            <th>Target Date</th>
-            <th>Time (Years)</th>
-            <th>Current Price</th>
+            <th>current Date</th>
         </tr>
     </thead>
     <tbody>
     {% for stock in stocks %}
         <tr>
             <td><a href="https://www.nseindia.com/get-quotes/equity?symbol={{ stock.ticker }}" target="_blank">{{ stock.ticker }}</a></td>
-            <td>{{ stock.min_price }}</td>
+            <td>{{ stock.recent_min }}</td>
+            <td>{{ stock.recent_max }}</td>
+            <td>{{ stock.growth_factor }}</td>
             <td>{{ stock.min_date }}</td>
-            <td>{{ stock.target_price }}</td>
-            <td>{{ stock.target_date }}</td>
-            <td>{{ stock.time_taken_years }}</td>
-            <td>{{ stock.current_price }}</td>
+            <td>{{ stock.current_date }}</td>
         </tr>
     {% endfor %}
     </tbody>
