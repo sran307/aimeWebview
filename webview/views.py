@@ -219,14 +219,14 @@ def fetch_multibaggers_view(request):
     # You can pass tickers from DB instead of static list
     all_codes = list(StockNames.objects.values_list('yCode', flat=True))
     tickers = random.sample(all_codes, 10)
-    results = get_recent_boomers(tickers, target_growth=10, max_years=3, min_target_price=20)
+    results = get_recent_boomers(tickers, years=2, min_growth=3, min_target_price=10)
     context = {
         'stocks': results
     }
     # Return JSON for AJAX
     return render(request, "stock/multibagger.html", context)
 
-def get_recent_boomers(tickers, years=2, min_growth=3, min_target_price=20):
+def get_recent_boomers(tickers, years=2, min_growth=3, min_target_price=10):
     """
     Find stocks that grew rapidly in the last `years` years.
     """
