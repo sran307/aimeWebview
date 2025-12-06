@@ -1,0 +1,32 @@
+<h2>Fast Multibagger Stocks</h2>
+
+{% if stocks %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Min Price</th>
+            <th>Min Date</th>
+            <th>Target Price</th>
+            <th>Target Date</th>
+            <th>Time (Years)</th>
+            <th>Current Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for stock in stocks %}
+        <tr>
+            <td><a href="https://www.nseindia.com/get-quotes/equity?symbol={{ stock.ticker }}" target="_blank">{{ stock.ticker }}</a></td>
+            <td>{{ stock.min_price }}</td>
+            <td>{{ stock.min_date }}</td>
+            <td>{{ stock.target_price }}</td>
+            <td>{{ stock.target_date }}</td>
+            <td>{{ stock.time_taken_years }}</td>
+            <td>{{ stock.current_price }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No fast multibaggers found in your watchlist.</p>
+{% endif %}
