@@ -11,6 +11,8 @@ from datetime import datetime, timedelta, date
 from api.views.trade_analysis import *
 from api.views.stock_views import *
 from django.conf import settings
+from django.db.models import Count
+import random
 
 
 def home(request):
@@ -215,7 +217,8 @@ def groq_analysis(stock):
 
 def fetch_multibaggers_view(request):
     # You can pass tickers from DB instead of static list
-    tickers = list(StockNames.objects.values_list('yCode', flat=True))
+    all_codes = list(StockNames.objects.values_list('code', flat=True))
+    tickers = random.sample(all_codes, 10)
     results = get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20)
     context = {
         'stocks': results
