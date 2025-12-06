@@ -486,6 +486,7 @@ def groq_option_analysis():
 
     r = requests.post(url, json=data, headers=headers)
 
+    print(r)
     # Try parsing JSON
     try:
         response_json = r.json()
