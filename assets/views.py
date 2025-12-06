@@ -392,7 +392,8 @@ def groq_long_analysis(stock, detId):
     url = groq_api_url
     headers = {"Authorization": f"Bearer {groq_api_key}"}
     data = {
-        "model": "llama-3.1-8b-instant",
+        # "model": "llama-3.1-8b-instant",
+        "model": "llama-4-8b-instant",
         "messages": [
             {"role": "user", "content": prompt}
         ]
