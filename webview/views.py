@@ -214,18 +214,28 @@ def groq_analysis(stock):
     return result
 
 
-
 def fetch_multibaggers_view(request):
+    booming_stocks = BoomingStock.objects.all().order_by('-growth_factor')
+    return render(request, "stock/multibagger.html", {"stocks": booming_stocks})
+
+def fetch_multibaggers(request):
     # You can pass tickers from DB instead of static list
     all_codes = list(StockNames.objects.values_list('yCode', flat=True))
     # tickers = random.sample(all_codes, 10)
     tickers = all_codes
     results = get_recent_boomers(tickers, years=2, min_growth=3, min_target_price=10)
-    context = {
-        'stocks': results
-    }
-    # Return JSON for AJAX
-    return render(request, "stock/multibagger.html", context)
+    for stock in results:
+        BoomingStock.objects.update_or_create(
+            ticker=stock['ticker'],
+            defaults={
+                'recent_min': stock['recent_min'],
+                'min_date': stock['min_date'],
+                'current_price': stock['recent_max'],
+                'current_date': stock['current_date'],
+                'growth_factor': stock['growth_factor']
+            }
+        )
+    return Response({'message': 'Data Fetched Successfully.'}, status=status.HTTP_200_OK)
 
 def get_recent_boomers(tickers, years=1, min_growth=3, min_target_price=10):
     """

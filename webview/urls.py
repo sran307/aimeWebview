@@ -10,7 +10,9 @@ urlpatterns = [
     path('stock/api/ai/', views.groq_analysis, name="groq_analysis"),
 
     path('stock/analysis/ai/<str:stockName>', views.analysisWithAi, name="analysisWithAi"),
-    path('fetch-multibaggers/', views.fetch_multibaggers_view, name='fetch_multibaggers'),
+    path('fetch-multibaggers/view/', views.fetch_multibaggers_view, name='fetch_multibaggers_view'),
+
+    path('fetch-multibaggers/', views.fetch_multibaggers, name='fetch_multibaggers'),
 
 
 ]
