@@ -219,58 +219,48 @@ def fetch_multibaggers_view(request):
     # You can pass tickers from DB instead of static list
     all_codes = list(StockNames.objects.values_list('yCode', flat=True))
     tickers = random.sample(all_codes, 10)
-    results = get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20)
+    results = get_recent_boomers(tickers, target_growth=10, max_years=3, min_target_price=20)
     context = {
         'stocks': results
     }
     # Return JSON for AJAX
     return render(request, "stock/multibagger.html", context)
 
-def get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20):
+def get_recent_boomers(tickers, years=2, min_growth=3, min_target_price=20):
     """
-    Scans list of tickers and returns fast multibagger stocks.
-    
-    :param tickers: list of ticker symbols (e.g., ["RELIANCE.NS"])
-    :param target_growth: minimum multiple of growth (default 10x)
-    :param max_years: maximum years to reach target
-    :param min_target_price: minimum target price
-    :return: list of dictionaries with stock info
+    Find stocks that grew rapidly in the last `years` years.
     """
     results = []
+
+    # Calculate start date
+    start_date = datetime.now() - timedelta(days=365*years)
 
     for ticker in tickers:
         try:
             stock = yf.Ticker(ticker)
-            hist = stock.history(period="max")['Close']
+            hist = stock.history(start=start_date)['Close']
 
-            # Skip if no data
             if hist.empty:
                 continue
 
-            min_price = hist.min()
-            min_date = hist.idxmin()
+            recent_min = hist.min()
+            recent_max = hist[-1]  # current/latest price
+            growth_factor = recent_max / recent_min
 
-            target_price = max(min_price * target_growth, min_target_price)
-            after_min = hist[min_date:]
-            target_dates = after_min[after_min >= target_price]
-
-            if not target_dates.empty:
-                target_date = target_dates.index[0]
-                time_taken = (target_date - min_date).days / 365
-                if time_taken <= max_years:
-                    results.append({
-                        "ticker": ticker,
-                        "min_price": round(min_price, 2),
-                        "target_price": round(target_price, 2),
-                        "time_taken_years": round(time_taken, 2),
-                        "min_date": min_date.date(),
-                        "target_date": target_date.date(),
-                        "current_price": round(hist[-1], 2)
-                    })
+            if growth_factor >= min_growth and recent_max >= min_target_price:
+                results.append({
+                    "ticker": ticker,
+                    "recent_min": round(recent_min, 2),
+                    "recent_max": round(recent_max, 2),
+                    "growth_factor": round(growth_factor, 2),
+                    "min_date": hist.idxmin().date(),
+                    "current_date": hist.index[-1].date()
+                })
         except Exception as e:
             print(f"Error processing {ticker}: {e}")
             continue
 
-    # Sort by growth speed (fastest first)
-    results.sort(key=lambda x: x["time_taken_years"])
+    # Sort by growth factor descending
+    results.sort(key=lambda x: x["growth_factor"], reverse=True)
     return results
+
