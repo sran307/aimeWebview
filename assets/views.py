@@ -474,6 +474,7 @@ def groq_option_analysis():
     groq_api_key = settings.GROQ_API_KEY
     groq_api_url = settings.GROQ_API_URL
     groq_ai_modal = settings.GROQ_AI_MODAL
+    print(groq_ai_modal)
     url = groq_api_url
     headers = {"Authorization": f"Bearer {groq_api_key}"}
     data = {
