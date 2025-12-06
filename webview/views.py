@@ -217,7 +217,7 @@ def groq_analysis(stock):
 
 def fetch_multibaggers_view(request):
     # You can pass tickers from DB instead of static list
-    all_codes = list(StockNames.objects.values_list('code', flat=True))
+    all_codes = list(StockNames.objects.values_list('yCode', flat=True))
     tickers = random.sample(all_codes, 10)
     results = get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20)
     context = {
