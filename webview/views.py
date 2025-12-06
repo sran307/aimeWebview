@@ -1,3 +1,5 @@
+import yfinance as yf
+import pandas as pd
 import requests
 import base64
 import json
@@ -208,3 +210,64 @@ def groq_analysis(stock):
 
     result = response_json["choices"][0]["message"]["content"]
     return result
+
+
+
+def fast_multibaggers_view(request):
+    # You can pass tickers from DB instead of static list
+    tickers = list(StockNames.objects.values_list('yCode', flat=True))
+    results = get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20)
+    context = {
+        'stocks': results
+    }
+    # Return JSON for AJAX
+    return render(request, "stock/multibagger.html", context)
+
+def get_fast_multibaggers(tickers, target_growth=10, max_years=3, min_target_price=20):
+    """
+    Scans list of tickers and returns fast multibagger stocks.
+    
+    :param tickers: list of ticker symbols (e.g., ["RELIANCE.NS"])
+    :param target_growth: minimum multiple of growth (default 10x)
+    :param max_years: maximum years to reach target
+    :param min_target_price: minimum target price
+    :return: list of dictionaries with stock info
+    """
+    results = []
+
+    for ticker in tickers:
+        try:
+            stock = yf.Ticker(ticker)
+            hist = stock.history(period="max")['Close']
+
+            # Skip if no data
+            if hist.empty:
+                continue
+
+            min_price = hist.min()
+            min_date = hist.idxmin()
+
+            target_price = max(min_price * target_growth, min_target_price)
+            after_min = hist[min_date:]
+            target_dates = after_min[after_min >= target_price]
+
+            if not target_dates.empty:
+                target_date = target_dates.index[0]
+                time_taken = (target_date - min_date).days / 365
+                if time_taken <= max_years:
+                    results.append({
+                        "ticker": ticker,
+                        "min_price": round(min_price, 2),
+                        "target_price": round(target_price, 2),
+                        "time_taken_years": round(time_taken, 2),
+                        "min_date": min_date.date(),
+                        "target_date": target_date.date(),
+                        "current_price": round(hist[-1], 2)
+                    })
+        except Exception as e:
+            print(f"Error processing {ticker}: {e}")
+            continue
+
+    # Sort by growth speed (fastest first)
+    results.sort(key=lambda x: x["time_taken_years"])
+    return results
